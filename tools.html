@@ -87,7 +87,29 @@ Track assignments and submission dates.
 
 </footer>
 
+<script>
 
+function calculateGPA(){
+
+let grade1 = document.getElementById("grade1").value;
+let grade2 = document.getElementById("grade2").value;
+
+let points = {
+"A":4,
+"B":3,
+"C":2,
+"D":1,
+"F":0
+};
+
+let gpa = (points[grade1] + points[grade2]) / 2;
+
+document.getElementById("result").innerHTML =
+"Your GPA: " + gpa.toFixed(2);
+
+}
+
+</script>
 </body>
 
 </html>
