@@ -214,3 +214,29 @@ input{
         grid-template-columns:repeat(2,1fr);
     }
 }
+
+/* Dark Mode */
+
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode nav{
+    background:#0F7A35;
+}
+
+.dark-mode .card,
+.dark-mode .announcement,
+.dark-mode .day{
+    background:#1f1f1f;
+    color:white;
+}
+
+.dark-mode footer{
+    background:#0F7A35;
+}
+
+.dark-mode a{
+    color:white;
+}
