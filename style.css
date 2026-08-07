@@ -156,3 +156,61 @@ input{
     border:1px solid #ddd;
     font-size:16px;
 }
+
+.calendar{
+    padding:60px 8%;
+}
+
+.calendar h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#16A34A;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.day-name{
+    background:#16A34A;
+    color:white;
+    text-align:center;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.day{
+    background:white;
+    min-height:110px;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+.day h3{
+    margin-bottom:10px;
+    color:#16A34A;
+}
+
+.day p{
+    font-size:14px;
+}
+
+.empty{
+    background:transparent;
+    box-shadow:none;
+}
+
+.highlight{
+    border:3px solid #16A34A;
+    background:#ECFDF5;
+}
+
+@media(max-width:768px){
+    .calendar-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
