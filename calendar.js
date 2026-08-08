@@ -276,3 +276,12 @@ window.addEventListener("click", function(event) {
 // Start calendar
 
 renderCalendar();
+
+document.getElementById("todayButton").addEventListener("click", function () {
+
+    currentDate = new Date();
+    currentDate.setDate(1);
+
+    renderCalendar();
+
+});
