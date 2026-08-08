@@ -245,6 +245,17 @@ document.getElementById("nextMonth")
 
     });
 
+// Today button
+
+document.getElementById("todayButton")
+    .addEventListener("click", function() {
+
+        currentDate = new Date();
+        currentDate.setDate(1);
+
+        renderCalendar();
+
+    });
 
 // Close popup when clicking outside
 
