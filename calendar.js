@@ -41,7 +41,8 @@ const events = [
 
 // Current month being displayed
 
-let currentDate = new Date(2026, 8, 1);
+let currentDate = new Date();
+currentDate.setDate(1);
 
 
 // Calendar elements
