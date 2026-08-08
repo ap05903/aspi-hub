@@ -111,6 +111,12 @@ function renderCalendar() {
         day.innerHTML =
             `<span class="day-number">${previousMonthDays - i}</span>`;
 
+        day.addEventListener("click", function () {
+
+    showDateEvents(dateString);
+
+});
+
         calendarGrid.appendChild(day);
 
     }
@@ -188,6 +194,57 @@ function renderCalendar() {
 
 }
 
+function showDateEvents(dateString) {
+
+    const selectedEvents =
+        events.filter(event => event.date === dateString);
+
+
+    const dateParts =
+        dateString.split("-");
+
+    const formattedDate =
+        `${dateParts[2]} / ${dateParts[1]} / ${dateParts[0]}`;
+
+
+    document.getElementById("eventTitle").textContent =
+        `📅 ${formattedDate}`;
+
+
+    const timeElement =
+        document.getElementById("eventTime");
+
+    const descriptionElement =
+        document.getElementById("eventDescription");
+
+
+    if (selectedEvents.length === 0) {
+
+        timeElement.textContent =
+            "No events scheduled";
+
+        descriptionElement.textContent =
+            "You have no scheduled events for this date.";
+
+    } else {
+
+        timeElement.innerHTML =
+            selectedEvents
+                .map(event => `🕐 ${event.time} — ${event.title}`)
+                .join("<br>");
+
+        descriptionElement.innerHTML =
+            selectedEvents
+                .map(event => `• ${event.description}`)
+                .join("<br>");
+
+    }
+
+
+    document.getElementById("eventModal").style.display =
+        "flex";
+
+}
 
 // Show event popup
 
