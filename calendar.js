@@ -186,7 +186,11 @@ function renderCalendar() {
             day.appendChild(eventElement);
 
         });
+day.addEventListener("click", function () {
 
+    showDateEvents(dateString);
+
+});
 
         calendarGrid.appendChild(day);
 
