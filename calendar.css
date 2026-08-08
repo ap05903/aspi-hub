@@ -167,3 +167,23 @@
 .dark-mode .close-button {
     color: white;
 }
+
+/* Force calendar popup dark mode */
+
+body.dark-mode .event-modal-content {
+    background-color: #1f1f1f !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .event-modal-content h2 {
+    color: #22C55E !important;
+}
+
+body.dark-mode .event-modal-content p {
+    color: #ffffff !important;
+}
+
+body.dark-mode .close-button {
+    color: #ffffff !important;
+    background: transparent !important;
+}
