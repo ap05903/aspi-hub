@@ -205,3 +205,49 @@ body.dark-mode .close-button {
 #todayButton:hover {
     background: #DCFCE7;
 }
+
+/* =========================
+   CALENDAR LEGEND
+   ========================= */
+
+.calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 15px 0 20px;
+    padding: 12px 0;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-color.assignment {
+    background: #16A34A;
+}
+
+.legend-color.quiz {
+    background: #F59E0B;
+}
+
+.legend-color.lab {
+    background: #2563EB;
+}
+
+.legend-color.exam {
+    background: #DC2626;
+}
+
+.legend-color.campus {
+    background: #9333EA;
+}
