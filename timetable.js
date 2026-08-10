@@ -1,12 +1,18 @@
 // ========================================
 // ASPI HUB TIMETABLE
-// Full timetable: Set 1 - Set 11
-// Semester 1, Academic Session 2026/2027
+// CORRECTED FROM ORIGINAL EXCEL
+// SETS 1-3
 // ========================================
 
 const timetableData = {
+
+    // ========================================
+    // SET 1
+    // ========================================
+
     "Set 1": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -18,72 +24,84 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
                 "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
                 null,
                 null
             ],
-            "tues": [
+
+            tues: [
                 null,
                 "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
-                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
-                null,
                 null
             ],
-            "wed": [
+
+            wed: [
                 null,
                 "LLA-MS SOFEA (MF2)",
-                null,
+                "LLA-MS SOFEA (MF2)",
+                "STATISTICS- MS NURUL AIN (BGP)",
                 "STATISTICS- MS NURUL AIN (BGP)",
                 null,
-                null,
+                "LOGICAL REASONING-MS SHAMIM (K1)",
                 "LOGICAL REASONING-MS SHAMIM (K1)",
                 null,
-                null,
                 null
             ],
-            "thurs": [
+
+            thurs: [
                 null,
                 "PHYS LAB/TUT -DR IZZAH (MF1)",
-                null,
+                "PHYS LAB/TUT -DR IZZAH (MF1)",
+                "BIO LAB/TUT - DR IKHWAN (MB 2)",
                 "BIO LAB/TUT - DR IKHWAN (MB 2)",
                 null,
-                null,
                 "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
+                "RESEARCH SKILLS - MS FARAH (BGP)",
                 "STATISTICS- MS NURUL AIN (K1)",
-                null
+                "STATISTICS- MS NURUL AIN (K1)"
             ],
-            "fri": [
+
+            fri: [
                 null,
                 "LOGICAL REASONING- MS SHAMIM (K1)",
+                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
                 "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
                 null,
                 null,
                 null,
-                null,
                 "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
                 null
             ]
         }
     },
 
+
+    // ========================================
+    // SET 2
+    // ========================================
+
     "Set 2": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -95,72 +113,84 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
-                null,
                 "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
                 null,
                 null
             ],
-            "tues": [
+
+            tues: [
                 null,
                 "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
                 null
             ],
-            "wed": [
+
+            wed: [
                 null,
                 "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
+                "LOGICAL REASONING- MS SHAMIM (K2)",
+                "LLA-MS SOFEA (K1)",
                 "LLA-MS SOFEA (K1)",
                 null,
                 null,
-                null,
                 "STATISTICS- MS NURUL AIN (K3)",
-                null,
+                "STATISTICS- MS NURUL AIN (K3)",
                 null
             ],
-            "thurs": [
+
+            thurs: [
                 null,
                 "BIO LAB/TUT - DR EELING (MB 1)",
-                null,
+                "BIO LAB/TUT - DR EELING (MB 1)",
                 "STATISTICS- MS NURUL AIN (K1)",
-                null,
+                "STATISTICS- MS NURUL AIN (K1)",
                 null,
                 "LOGICAL REASONING- MS SHAMIM (K1)",
                 "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
-                null,
+                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
                 null
             ],
-            "fri": [
+
+            fri: [
                 "PHYS LAB/TUT -DR IZZAH (MF 2)",
-                null,
+                "PHYS LAB/TUT -DR IZZAH (MF 2)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
                 "RESEARCH SKILLS - MS FARAH (BGP)",
                 null,
                 null,
                 null,
-                null,
                 "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
                 null
             ]
         }
     },
+
+
+    // ========================================
+    // SET 3
+    // ========================================
 
     "Set 3": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -172,72 +202,83 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
-                null,
                 "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
                 null,
                 null
             ],
-            "tues": [
+
+            tues: [
                 null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
                 null
             ],
-            "wed": [
+
+            wed: [
                 null,
                 "BIO LAB/TUT - DR MONA (MB 1)",
-                null,
+                "BIO LAB/TUT - DR MONA (MB 1)",
+                "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
                 "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
                 null,
-                null,
                 "LLA-MS SOFEA (MF1)",
-                null,
+                "LLA-MS SOFEA (MF1)",
                 null,
                 null
             ],
-            "thurs": [
+
+            thurs: [
                 null,
                 "STATISTICS- MS NURUL AIN (K1)",
-                null,
+                "STATISTICS- MS NURUL AIN (K1)",
+                "PHYS LAB/TUT -EN AFIQ (MF2)",
                 "PHYS LAB/TUT -EN AFIQ (MF2)",
                 null,
-                null,
                 "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
+                "RESEARCH SKILLS - MS FARAH (BGP)",
                 "LOGICAL REASONING- MS SHAMIM (K2)",
-                null
+                "LOGICAL REASONING- MS SHAMIM (K2)"
             ],
-            "fri": [
+
+            fri: [
                 "STATISTICS- MS NURUL AIN (K2)",
-                null,
+                "STATISTICS- MS NURUL AIN (K2)",
+                "LOGICAL REASONING- MS SHAMIM (K1)",
                 "LOGICAL REASONING- MS SHAMIM (K1)",
                 null,
                 null,
                 null,
-                null,
                 "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
                 null
             ]
         }
     },
+
+        // ========================================
+    // SET 4
+    // ========================================
 
     "Set 4": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -249,149 +290,84 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
-                null,
                 null
             ],
-            "wed": [
+
+            wed: [
                 null,
-                "LLA-MS SOFEA (MF2)",
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
+                "STATISTICS- MS NURUL AIN (K3)",
+                "STATISTICS- MS NURUL AIN (K3)",
+                "BIO LAB/TUT - DR IKHWAN (MB 2)",
                 "BIO LAB/TUT - DR IKHWAN (MB 2)",
                 null,
-                "PHYS LAB/TUT -DR IZZAH (MF1)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "CHEM LAB/TUTORIAL- DR HAIDAH (MK 1)",
+                "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
+                "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
+                "LOGICAL REASONING- MS SHAMIM (K1)",
                 null
             ],
-            "fri": [
+
+            thurs: [
                 null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
+                "LLA-MS SOFEA (K2)",
+                "LLA-MS SOFEA (K2)",
+                "LOGICAL REASONING- MS SHAMIM (K3)",
+                "LOGICAL REASONING- MS SHAMIM (K3)",
+                null,
+                "STATISTICS- MS NURUL AIN (K2)",
                 "STATISTICS- MS NURUL AIN (K2)",
                 null,
+                null
+            ],
+
+            fri: [
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "PHYS LAB/TUT - MR AFIQ (MF2)",
+                "PHYS LAB/TUT - MR AFIQ (MF2)",
                 null,
                 null,
                 null,
                 "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
                 null
             ]
         }
     },
+
+
+    // ========================================
+    // SET 5
+    // ========================================
 
     "Set 5": {
-        "times": [
-            "8.00-9.00",
-            "9.00-10.00",
-            "10.00-11.00",
-            "11.00-12.00",
-            "12.00-1.00",
-            "1.00-2.00",
-            "2.00-3.00",
-            "3.00-4.00",
-            "4.00-5.00",
-            "5.00-6.00"
-        ],
-        "days": {
-            "mon": [
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "wed": [
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                "LLA-MS SOFEA (MF1)",
-                null,
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF2)",
-                null,
-                "BIO LAB/TUT - DR EE LING (MB 1)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null
-            ],
-            "fri": [
-                null,
-                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
-                "STATISTICS- MS NURUL AIN (K2)",
-                null,
-                null,
-                null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
-                null
-            ]
-        }
-    },
 
-    "Set 6": {
-        "times": [
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -403,226 +379,350 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "wed": [
-                null,
-                "LLA-MS SOFEA (MF2)",
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "BIO LAB/TUT - DR MONA (MB 1)",
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF1)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
-                null
-            ],
-            "fri": [
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                "STATISTICS- MS NURUL AIN (K2)",
-                null,
-                null,
-                null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
-                null
-            ]
-        }
-    },
 
-    "Set 7": {
-        "times": [
-            "8.00-9.00",
-            "9.00-10.00",
-            "10.00-11.00",
-            "11.00-12.00",
-            "12.00-1.00",
-            "1.00-2.00",
-            "2.00-3.00",
-            "3.00-4.00",
-            "4.00-5.00",
-            "5.00-6.00"
-        ],
-        "days": {
-            "mon": [
+        days: {
+
+            mon: [
                 null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
-                null,
                 null
             ],
-            "wed": [
+
+            wed: [
                 null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                null,
-                "LLA-MS SOFEA (MF1)",
-                null,
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF2)",
+                "STATISTICS-MS AIN AFIQAH (K1)",
+                "STATISTICS-MS AIN AFIQAH (K1)",
+                "PHYS LAB/TUT - MR AFIQ (MF1)",
+                "PHYS LAB/TUT - MR AFIQ (MF1)",
                 null,
                 "BIO LAB/TUT - DR IKHWAN (MB 2)",
+                "BIO LAB/TUT - DR IKHWAN (MB 2)",
                 null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
                 null
             ],
-            "fri": [
-                null,
-                "STATISTICS- MS NURUL AIN (K2)",
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                null,
-                null,
-                null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
-                null
-            ]
-        }
-    },
 
-        "Set 8": {
-        "times": [
-            "8.00-9.00",
-            "9.00-10.00",
-            "10.00-11.00",
-            "11.00-12.00",
-            "12.00-1.00",
-            "1.00-2.00",
-            "2.00-3.00",
-            "3.00-4.00",
-            "4.00-5.00",
-            "5.00-6.00"
-        ],
-        "days": {
-            "mon": [
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
-                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "wed": [
-                null,
-                "LLA-MS SOFEA (MF2)",
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "BIO LAB/TUT - DR EE LING (MB 1)",
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF1)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
+            thurs: [
                 null,
                 "CHEM LAB/TUTORIAL- DR HAIDAH (MK 1)",
+                "CHEM LAB/TUTORIAL- DR HAIDAH (MK 1)",
+                "LLA-MS SOFEA (MB1)",
+                "LLA-MS SOFEA (MB1)",
+                null,
+                "LOGICAL REASONING - MR HAFIZUL (K3)",
+                "STATISTICS- MS AIN AFIQAH (K4)",
+                null,
                 null
             ],
-            "fri": [
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                "STATISTICS- MS NURUL AIN (K2)",
-                null,
+
+            fri: [
+                "LOGICAL REASONING- MR HAFIZUL (MF 1)",
+                "LOGICAL REASONING- MR HAFIZUL (MF 1)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
                 null,
                 null,
                 null,
                 "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
                 null
             ]
         }
     },
+
+
+    // ========================================
+    // SET 6
+    // ========================================
+
+    "Set 6": {
+
+        times: [
+            "8.00-9.00",
+            "9.00-10.00",
+            "10.00-11.00",
+            "11.00-12.00",
+            "12.00-1.00",
+            "1.00-2.00",
+            "2.00-3.00",
+            "3.00-4.00",
+            "4.00-5.00",
+            "5.00-6.00"
+        ],
+
+        days: {
+
+            mon: [
+                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            wed: [
+                null,
+                "LOGICAL REASONING- MR HAFIZUL (K4)",
+                "LOGICAL REASONING- MR HAFIZUL (K4)",
+                "RESEARCH SKILLS -DR SUGANTHY (K4)",
+                "RESEARCH SKILLS -DR SUGANTHY (K4)",
+                null,
+                null,
+                "STATISTICS-MS AIN AFIQAH (K4)",
+                "STATISTICS-MS AIN AFIQAH (K4)",
+                null
+            ],
+
+            thurs: [
+                null,
+                "PHYS LAB/TUT - EN AFIQ (MB2)",
+                "PHYS LAB/TUT - EN AFIQ (MB2)",
+                "CHEM LAB/TUTORIAL- DR PREMA (MK1)",
+                "CHEM LAB/TUTORIAL- DR PREMA (MK1)",
+                null,
+                "LLA-MS SOFEA (MB 2)",
+                "LLA-MS SOFEA (MB 2)",
+                "BIO LAB/TUT - DR MONA (MB 2)",
+                "BIO LAB/TUT - DR MONA (MB 2)"
+            ],
+
+            fri: [
+                "STATISTICS- MS AIN AFIQAH (MK 1)",
+                "STATISTICS- MS AIN AFIQAH (MK 1)",
+                null,
+                "LOGICAL REASONING - MR HAFIZUL (MK1)",
+                "LOGICAL REASONING - MR HAFIZUL (MK1)",
+                null,
+                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
+                null
+            ]
+        }
+    },
+
+
+    // ========================================
+    // SET 7
+    // ========================================
+
+    "Set 7": {
+
+        times: [
+            "8.00-9.00",
+            "9.00-10.00",
+            "10.00-11.00",
+            "11.00-12.00",
+            "12.00-1.00",
+            "1.00-2.00",
+            "2.00-3.00",
+            "3.00-4.00",
+            "4.00-5.00",
+            "5.00-6.00"
+        ],
+
+        days: {
+
+            mon: [
+                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ EN AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ EN AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            wed: [
+                null,
+                "LLA-MS ATHIRAH (MF1)",
+                "LLA-MS ATHIRAH (MF1)",
+                "STATISTICS- MS AIN AFIQAH (K2)",
+                "STATISTICS- MS AIN AFIQAH (K2)",
+                null,
+                null,
+                "LOGICAL REASONING- MR HAFIZUL (K2)",
+                "LOGICAL REASONING- MR HAFIZUL (K2)",
+                null
+            ],
+
+            thurs: [
+                null,
+                "STATISTICS- MS AIN AFIQAH (K4)",
+                "STATISTICS- MS AIN AFIQAH (K4)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                null,
+                "CHEM LAB/TUTORIAL- DR SUGANTHY(MK 1)",
+                "CHEM LAB/TUTORIAL- DR SUGANTHY(MK 1)",
+                "PHYS LAB/TUT -DR IZZAH (MF 2)",
+                "PHYS LAB/TUT -DR IZZAH (MF 2)"
+            ],
+
+            fri: [
+                "BIO LAB/TUT - DR EELING (MB 1)",
+                "BIO LAB/TUT - DR EELING (MB 1)",
+                "PENAAKULAN MANTIK-EN HAFIZUL (MF1)",
+                "PENAAKULAN MANTIK-EN HAFIZUL (MF1)",
+                null,
+                null,
+                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
+                null
+            ]
+        }
+    },
+
+        // ========================================
+    // SET 8
+    // ========================================
+
+    "Set 8": {
+
+        times: [
+            "8.00-9.00",
+            "9.00-10.00",
+            "10.00-11.00",
+            "11.00-12.00",
+            "12.00-1.00",
+            "1.00-2.00",
+            "2.00-3.00",
+            "3.00-4.00",
+            "4.00-5.00",
+            "5.00-6.00"
+        ],
+
+        days: {
+
+            mon: [
+                null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MADAM NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MADAM NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/DR SUGY/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                null,
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            wed: [
+                null,
+                "BIO LAB/TUT - PN NISA (MB 2)",
+                "BIO LAB/TUT - PN NISA (MB 2)",
+                "LLA - MS ATHIRAH (MB1)",
+                "LLA - MS ATHIRAH (MB1)",
+                null,
+                "LOGICAL REASONING - MR HAFIZUL (K2)",
+                "CHEM LAB/TUTORIAL - DR HAIDAH (MK 2)",
+                "CHEM LAB/TUTORIAL - DR HAIDAH (MK 2)",
+                null
+            ],
+
+            thurs: [
+                null,
+                "PHYS LAB/TUT - DR FARHAH (MF2)",
+                "PHYS LAB/TUT - DR FARHAH (MF2)",
+                "STATISTICS - MS AIN AFIQAH (K4)",
+                "STATISTICS - MS AIN AFIQAH (K4)",
+                null,
+                null,
+                "LOGICAL REASONING - MR HAFIZUL (K3)",
+                "LOGICAL REASONING - MR HAFIZUL (K3)",
+                null
+            ],
+
+            fri: [
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
+                "STATISTICS - MS AIN AFIQAH (K2)",
+                "STATISTICS - MS AIN AFIQAH (K2)",
+                null,
+                null,
+                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
+                null
+            ]
+        }
+    },
+
+
+    // ========================================
+    // SET 9
+    // ========================================
 
     "Set 9": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -634,72 +734,84 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
+                null
+            ],
+
+            wed: [
+                null,
+                "STATISTICS - MS NADIAH (MK1)",
+                "STATISTICS - MS NADIAH (MK1)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                null,
+                "LLA - MS ATHIRAH (MB1)",
+                "LLA - MS ATHIRAH (MB1)",
                 null,
                 null
             ],
-            "wed": [
+
+            thurs: [
                 null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                "LLA-MS SOFEA (MF1)",
-                null,
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "BIO LAB/TUT - DR MONA (MB 1)",
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF2)",
-                null,
-                null,
+                "CHEM LAB/TUTORIAL - DR PREMA (MK2)",
+                "CHEM LAB/TUTORIAL - DR PREMA (MK2)",
+                "RESEARCH SKILLS - MS FARAH (BGP)",
                 "RESEARCH SKILLS - MS FARAH (BGP)",
                 null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null
+                "PHYS LAB/TUT - DR AZAH (MF1)",
+                "PHYS LAB/TUT - DR AZAH (MF1)",
+                "BIO LAB/TUT - PN NISA (MB 1)",
+                "BIO LAB/TUT - PN NISA (MB 1)"
             ],
-            "fri": [
+
+            fri: [
+                "STATISTICS - MS NADIAH (K4)",
+                "STATISTICS - MS NADIAH (K4)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
                 null,
-                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
-                "STATISTICS- MS NURUL AIN (K2)",
                 null,
                 null,
-                null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
                 null
             ]
         }
     },
+
+
+    // ========================================
+    // SET 10
+    // ========================================
 
     "Set 10": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -711,72 +823,84 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ EN AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ EN AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
+                null
+            ],
+
+            wed: [
+                null,
+                "RESEARCH SKILLS - DR PREMA (BGP)",
+                "RESEARCH SKILLS - DR PREMA (BGP)",
+                "PHYS LAB/TUT - DR AZAH (MF2)",
+                "PHYS LAB/TUT - DR AZAH (MF2)",
+                null,
+                "STATISTICS - MS NADIAH (BGP)",
+                "STATISTICS - MS NADIAH (BGP)",
                 null,
                 null
             ],
-            "wed": [
+
+            thurs: [
                 null,
-                "LLA-MS SOFEA (MF2)",
+                "LLA - MS ATHIRAH (BGP)",
+                "LLA - MS ATHIRAH (BGP)",
+                "CHEM LAB/TUTORIAL - DR SUGANTHY (MK2)",
+                "CHEM LAB/TUTORIAL - DR SUGANTHY (MK2)",
                 null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
-                null,
+                "LOGICAL REASONING - DR MAHIRAH (K4)",
+                "STATISTICS - MS NADIAH (MF2)",
+                "STATISTICS - MS NADIAH (MF2)",
                 null
             ],
-            "thurs": [
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF1)",
-                null,
-                "BIO LAB/TUT - DR IKHWAN (MB 2)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "CHEM LAB/TUTORIAL- DR CHIN (MK 1)",
-                null
-            ],
-            "fri": [
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                "STATISTICS- MS NURUL AIN (K2)",
+
+            fri: [
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "BIO LAB/TUT - PN NISA (MB2)",
+                "BIO LAB/TUT - PN NISA (MB2)",
                 null,
                 null,
                 null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
                 null
             ]
         }
     },
 
+
+    // ========================================
+    // SET 11
+    // ========================================
+
     "Set 11": {
-        "times": [
+
+        times: [
             "8.00-9.00",
             "9.00-10.00",
             "10.00-11.00",
@@ -788,228 +912,140 @@ const timetableData = {
             "4.00-5.00",
             "5.00-6.00"
         ],
-        "days": {
-            "mon": [
+
+        days: {
+
+            mon: [
                 null,
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                null,
+                null
+            ],
+
+            tues: [
+                null,
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
+                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
                 null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
-                null,
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                null,
-                null
-            ],
-            "tues": [
-                null,
-                "BIO LECTURE - DR IKHWAN/DR EE LING/ DR MONA/MS NISA (AUDITORIUM)",
-                null,
-                "CHEM LECTURE - DR CHIN/DR TEH/DR HAIDAH/DR PREMA/ DR SUGY (AUDITORIUM)",
-                null,
-                null,
                 "PHYSIC LECTURE - DR AZAH/DR FARHAH/DR IZZAH/ MR AFIQ (AUDITORIUM)",
                 null,
+                null
+            ],
+
+            wed: [
+                null,
+                "RESEARCH SKILLS - DR PREMA (BGP)",
+                "RESEARCH SKILLS - DR PREMA (BGP)",
+                "CHEM LAB/TUTORIAL - DR PREMA (MK2)",
+                "CHEM LAB/TUTORIAL - DR PREMA (MK2)",
+                null,
+                "PHYS LAB/TUT - DR FARHAH (MF2)",
+                "PHYS LAB/TUT - DR FARHAH (MF2)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                null
+            ],
+
+            thurs: [
+                null,
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "LOGICAL REASONING - DR MAHIRAH (K3)",
+                "STATISTICS - MS NADIAH (K2)",
+                "STATISTICS - MS NADIAH (K2)",
+                null,
+                "LLA - MS ATHIRAH (MB1)",
+                "LLA - MS ATHIRAH (MB1)",
                 null,
                 null
             ],
-            "wed": [
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K2)",
-                null,
-                "LLA-MS SOFEA (MF1)",
-                null,
-                null,
-                "STATISTICS- MS NURUL AIN (BGP)",
-                null,
-                null,
-                null
-            ],
-            "thurs": [
-                null,
-                "BIO LAB/TUT - DR EE LING (MB 1)",
-                null,
-                "PHYS LAB/TUT -DR IZZAH (MF2)",
-                null,
-                null,
-                "RESEARCH SKILLS - MS FARAH (BGP)",
-                null,
-                "CHEM LAB/TUTORIAL- DR TEH (MK 2)",
-                null
-            ],
-            "fri": [
-                null,
-                "LOGICAL REASONING- MS SHAMIM (K1)",
-                "STATISTICS- MS NURUL AIN (K2)",
+
+            fri: [
+                "BIO LAB/TUT - PN NISA (MB2)",
+                "BIO LAB/TUT - PN NISA (MB2)",
+                "STATISTICS - MS NADIAH (K4)",
+                "STATISTICS - MS NADIAH (K4)",
                 null,
                 null,
                 null,
-                null,
-                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA(AUDITORIUM)",
-                null,
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
+                "JATI DIRI - DR ELMI AZLINA / MS SUHAINA (AUDITORIUM)",
                 null
             ]
         }
-    }
+    },
+
+    // ========================================
+// FINISH TIMETABLE DATA
+// ========================================
+
 };
 
-// ========================================
-// CURRENT SET
-// ========================================
-
-let currentSet = "Set 1";
-
 
 // ========================================
-// PAGE ELEMENTS
+// TIMETABLE SETTINGS
 // ========================================
 
-const setSelect =
-    document.getElementById("setSelect");
+const dayNames = [
+    "mon",
+    "tues",
+    "wed",
+    "thurs",
+    "fri"
+];
 
-const selectedSetText =
-    document.getElementById("selectedSetText");
-
-const timetableBody =
-    document.getElementById("timetableBody");
-
-
-// ========================================
-// DETECT CLASS TYPE
-// ========================================
-
-function getClassType(text) {
-
-    const value = text.toUpperCase();
-
-    if (
-        value.includes("LAB") ||
-        value.includes("TUTORIAL") ||
-        value.includes("TUT")
-    ) {
-        return "lab";
-    }
-
-    if (value.includes("RESEARCH")) {
-        return "research";
-    }
-
-    if (value.includes("JATI DIRI")) {
-        return "activity";
-    }
-
-    return "lecture";
-}
+const dayLabels = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+];
 
 
 // ========================================
-// GET SUBJECT NAME
+// GET ELEMENTS
 // ========================================
 
-function getSubject(text) {
+const timetableContainer =
+    document.getElementById("timetable");
 
-    const value = text.toUpperCase();
-
-    if (value.includes("CHEM")) {
-        return "Chemistry";
-    }
-
-    if (value.includes("PHYS")) {
-        return "Physics";
-    }
-
-    if (value.includes("BIO")) {
-        return "Biology";
-    }
-
-    if (value.includes("LLA")) {
-        return "LLA";
-    }
-
-    if (
-        value.includes("LOGICAL") ||
-        value.includes("MANTIK")
-    ) {
-        return "Logical Reasoning";
-    }
-
-    if (value.includes("STATISTICS")) {
-        return "Statistics";
-    }
-
-    if (value.includes("RESEARCH")) {
-        return "Research Skills";
-    }
-
-    if (value.includes("JATI DIRI")) {
-        return "Jati Diri";
-    }
-
-    return text;
-}
+const setSelector =
+    document.getElementById("setSelector");
 
 
 // ========================================
-// CREATE CLASS CARD
+// CREATE SET SELECTOR
 // ========================================
 
-function createClassCard(text, time) {
+function createSetSelector() {
 
-    const card =
-        document.createElement("div");
+    if (!setSelector) {
+        console.warn("setSelector not found.");
+        return;
+    }
 
-    const classType =
-        getClassType(text);
+    setSelector.innerHTML = "";
 
-    card.className =
-        `class-card ${classType}`;
+    Object.keys(timetableData).forEach(setName => {
 
+        const option =
+            document.createElement("option");
 
-    const subject =
-        document.createElement("div");
+        option.value = setName;
+        option.textContent = setName;
 
-    subject.className =
-        "class-subject";
+        setSelector.appendChild(option);
 
-    subject.textContent =
-        getSubject(text);
+    });
 
-
-    const details =
-        document.createElement("div");
-
-    details.className =
-        "class-details";
-
-    details.textContent =
-        text;
-
-
-    card.appendChild(subject);
-
-    card.appendChild(details);
-
-
-    // Click class
-
-    card.addEventListener(
-        "click",
-        function () {
-
-            alert(
-                getSubject(text) +
-                "\n\n" +
-                "Time: " +
-                time +
-                "\n\n" +
-                text
-            );
-
-        }
-    );
-
-
-    return card;
 }
 
 
@@ -1017,142 +1053,247 @@ function createClassCard(text, time) {
 // RENDER TIMETABLE
 // ========================================
 
-function renderTimetable() {
+function renderTimetable(setName) {
 
-    const data =
-        timetableData[currentSet];
-
-
-    // Safety check
-
-    if (!data) {
-
-        timetableBody.innerHTML = `
-            <tr>
-                <td
-                    colspan="6"
-                    style="
-                        padding:30px;
-                        text-align:center;
-                    "
-                >
-                    Timetable data for
-                    ${currentSet}
-                    is not available.
-                </td>
-            </tr>
-        `;
-
+    if (!timetableContainer) {
+        console.warn("Timetable container not found.");
         return;
     }
 
+    const data =
+        timetableData[setName];
 
-    // Clear old timetable
+    if (!data) {
+        console.warn("No timetable found for:", setName);
+        return;
+    }
 
-    timetableBody.innerHTML = "";
-
-
-    // Update selected set
-
-    selectedSetText.textContent =
-        currentSet;
-
-
-    // Days
-
-    const dayNames = [
-
-        ["mon", "Monday"],
-
-        ["tues", "Tuesday"],
-
-        ["wed", "Wednesday"],
-
-        ["thurs", "Thursday"],
-
-        ["fri", "Friday"]
-
-    ];
+    timetableContainer.innerHTML = "";
 
 
-    // Create every time row
+    // ========================================
+    // TABLE
+    // ========================================
 
-    data.times.forEach(
-        function (time, index) {
+    const table =
+        document.createElement("table");
+
+    table.className =
+        "timetable-table";
 
 
-            const row =
-                document.createElement("tr");
+    // ========================================
+    // HEADER
+    // ========================================
+
+    const thead =
+        document.createElement("thead");
+
+    const headerRow =
+        document.createElement("tr");
 
 
-            // =================================
-            // TIME COLUMN
-            // =================================
+    const timeHeader =
+        document.createElement("th");
 
-            const timeCell =
+    timeHeader.textContent =
+        "Time";
+
+    timeHeader.className =
+        "time-header";
+
+    headerRow.appendChild(timeHeader);
+
+
+    dayLabels.forEach(day => {
+
+        const th =
+            document.createElement("th");
+
+        th.textContent = day;
+
+        th.className =
+            "day-header";
+
+        headerRow.appendChild(th);
+
+    });
+
+
+    thead.appendChild(headerRow);
+
+    table.appendChild(thead);
+
+
+    // ========================================
+    // BODY
+    // ========================================
+
+    const tbody =
+        document.createElement("tbody");
+
+
+    data.times.forEach((time, index) => {
+
+        const row =
+            document.createElement("tr");
+
+
+        // Time column
+
+        const timeCell =
+            document.createElement("td");
+
+        timeCell.textContent =
+            time;
+
+        timeCell.className =
+            "time-cell";
+
+        row.appendChild(timeCell);
+
+
+        // Day columns
+
+        dayNames.forEach(dayName => {
+
+            const cell =
                 document.createElement("td");
 
-            timeCell.className =
-                "time-cell";
-
-            timeCell.textContent =
-                time;
-
-            row.appendChild(timeCell);
+            cell.className =
+                "class-cell";
 
 
-            // =================================
-            // DAY COLUMNS
-            // =================================
-
-            dayNames.forEach(
-                function (day) {
+            const classText =
+                data.days[dayName][index];
 
 
-                    const cell =
-                        document.createElement("td");
+            // ========================================
+            // BREAK
+            // ========================================
 
-                    cell.className =
-                        "class-cell";
+            if (index === 5) {
+
+                cell.classList.add("break-cell");
+
+                cell.textContent =
+                    "BREAK";
+
+            }
 
 
-                    const classText =
-                        data.days[day[0]][index];
+            // ========================================
+            // CLASS
+            // ========================================
+
+            else if (classText) {
+
+                cell.classList.add("has-class");
+
+                const classDiv =
+                    document.createElement("div");
+
+                classDiv.className =
+                    "class-content";
 
 
-                    // Empty period
+                // Split subject from lecturer/room
+                // when possible
 
-                    if (!classText) {
+                const separatorIndex =
+                    classText.indexOf(" - ");
 
-                        cell.classList.add(
-                            "empty-cell"
+
+                if (separatorIndex !== -1) {
+
+                    const subject =
+                        classText.substring(
+                            0,
+                            separatorIndex
                         );
 
-                    }
+                    const details =
+                        classText.substring(
+                            separatorIndex + 3
+                        );
 
 
-                    // Class exists
+                    const subjectElement =
+                        document.createElement("strong");
 
-                    else {
-
-                        const card =
-                            createClassCard(
-                                classText,
-                                time
-                            );
-
-                        cell.appendChild(card);
-
-                    }
+                    subjectElement.textContent =
+                        subject;
 
 
-                    row.appendChild(cell);
+                    const detailsElement =
+                        document.createElement("span");
+
+                    detailsElement.textContent =
+                        details;
+
+
+                    classDiv.appendChild(
+                        subjectElement
+                    );
+
+                    classDiv.appendChild(
+                        detailsElement
+                    );
+
+                } else {
+
+                    classDiv.textContent =
+                        classText;
 
                 }
+
+
+                cell.appendChild(classDiv);
+
+            }
+
+
+            // ========================================
+            // EMPTY
+            // ========================================
+
+            else {
+
+                cell.classList.add("empty-cell");
+
+            }
+
+
+            row.appendChild(cell);
+
+        });
+
+
+        tbody.appendChild(row);
+
+    });
+
+
+    table.appendChild(tbody);
+
+    timetableContainer.appendChild(table);
+
+}
+
+
+// ========================================
+// SET SELECTOR CHANGE
+// ========================================
+
+if (setSelector) {
+
+    setSelector.addEventListener(
+        "change",
+        function () {
+
+            renderTimetable(
+                this.value
             );
-
-
-            timetableBody.appendChild(row);
 
         }
     );
@@ -1161,24 +1302,40 @@ function renderTimetable() {
 
 
 // ========================================
-// SET SELECTOR
+// START WITH SET 1
 // ========================================
 
-setSelect.addEventListener(
-    "change",
-    function () {
+createSetSelector();
 
-        currentSet =
-            this.value;
+if (setSelector) {
 
-        renderTimetable();
+    setSelector.value =
+        "Set 1";
+
+}
+
+renderTimetable("Set 1");
+
+
+// ========================================
+// OPTIONAL: MOBILE SET BUTTONS
+// ========================================
+
+function switchTimetableSet(setName) {
+
+    if (!timetableData[setName]) {
+        return;
+    }
+
+    if (setSelector) {
+
+        setSelector.value =
+            setName;
 
     }
-);
 
+    renderTimetable(setName);
 
-// ========================================
-// START TIMETABLE
-// ========================================
+}
 
-renderTimetable();
+    
