@@ -79,6 +79,9 @@ body.dark-mode .day-name {
     font-size:13px;
     color:white;
     cursor:pointer;
+
+    /* Default event colour */
+    background:#9333EA;
 }
 
 .assignment{
