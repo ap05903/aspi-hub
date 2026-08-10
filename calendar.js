@@ -72,7 +72,7 @@ const events = [
         date: "2026-08-17",
         title: "Mid-sem break",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "gambatehhh guyss"
     },
 
@@ -80,7 +80,7 @@ const events = [
         date: "2026-08-18",
         title: "Mid-sem break",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "study hard,play hard!!!"
     },
 
@@ -88,7 +88,7 @@ const events = [
         date: "2026-08-19",
         title: "Mid-sem break",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "5 dayss to mid-sem exam"
     },
 
@@ -96,7 +96,7 @@ const events = [
         date: "2026-08-20",
         title: "Mid-sem break",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "4 dayss to mid-sem exam"
     },
 
@@ -104,7 +104,7 @@ const events = [
         date: "2026-08-21",
         title: "Mid-sem break",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "3 dayss to mid-sem exam"
     },
 
@@ -112,7 +112,7 @@ const events = [
         date: "2026-08-24",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "examination",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -120,7 +120,7 @@ const events = [
         date: "2026-08-25",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "examination",
+        type: "exam",
         description: "subject tba"
     },
     
@@ -128,7 +128,7 @@ const events = [
         date: "2026-08-26",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "examination",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -136,7 +136,7 @@ const events = [
         date: "2026-08-27",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "examination",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -144,7 +144,7 @@ const events = [
         date: "2026-08-28",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "examination",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -152,7 +152,7 @@ const events = [
         date: "2026-08-31",
         title: "Malaysia National Day",
         time: "All day.",
-        type: "holiday",
+        type: "holidays",
         description: "I LUV MALAYSIA <3"
     }
     
