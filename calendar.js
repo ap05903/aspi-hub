@@ -66,8 +66,96 @@ const events = [
         time: "According to set.",
         type: "quiz",
         description: "Physical test."
-    }
+    },
 
+    {
+        date: "2026-08-17",
+        title: "Mid-sem break",
+        time: "All day.",
+        type: "holiday",
+        description: "gambatehhh guysss"
+    },
+
+    {
+        date: "2026-08-18",
+        title: "Mid-sem break",
+        time: "All day.",
+        type: "holiday",
+        description: "study hard,play hard!!!"
+    },
+
+    {
+        date: "2026-08-19",
+        title: "Mid-sem break",
+        time: "All day.",
+        type: "holiday",
+        description: "5 dayss to mid-sem exam"
+    },
+
+    {
+        date: "2026-08-20",
+        title: "Mid-sem break",
+        time: "All day.",
+        type: "holiday",
+        description: "4 dayss to mid-sem exam"
+    },
+
+    {
+        date: "2026-08-21",
+        title: "Mid-sem break",
+        time: "All day.",
+        type: "holiday",
+        description: "3 dayss to mid-sem exam"
+    },
+
+    {
+        date: "2026-08-24",
+        title: "Mid-sem Exam",
+        time: "All day.",
+        type: exam",
+        description: "subject tba"
+    },
+
+    {
+        date: "2026-08-25",
+        title: "Mid-sem Exam",
+        time: "All day.",
+        type: exam",
+        description: "subject tba"
+    },
+    
+{
+        date: "2026-08-26",
+        title: "Mid-sem Exam",
+        time: "All day.",
+        type: exam",
+        description: "subject tba"
+    },
+
+    {
+        date: "2026-08-27",
+        title: "Mid-sem Exam",
+        time: "All day.",
+        type: exam",
+        description: "subject tba"
+    },
+
+    {
+        date: "2026-08-28",
+        title: "Mid-sem Exam",
+        time: "All day.",
+        type: exam",
+        description: "subject tba"
+    },
+
+    {
+        date: "2026-08-31",
+        title: "Malaysia National Day",
+        time: "All day.",
+        type: holiday",
+        description: "I LUV MALAYSIA <3"
+    },
+    
 ];
 
 
