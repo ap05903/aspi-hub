@@ -1,124 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>ASPI Hub - Timetable</title>
+
+    <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet" href="timetable.css">
 </head>
 
+
 <body>
 
-    <div class="timetable-page">
 
-        <!-- HEADER -->
-        <div class="timetable-top">
+<nav>
 
-            <div>
-                <h1>📚 Class Timetable</h1>
-                <p>ASPI UKM · Semester 1 · Academic Session 2026/2027</p>
-            </div>
+    <div class="logo">
+        🎓 ASPI Hub
+    </div>
 
-            <div class="set-selector">
-                <label for="setSelect">Your Set</label>
+    <ul>
 
-                <select id="setSelect">
-                    <option value="Set 1">Set 1</option>
-                    <option value="Set 2">Set 2</option>
-                    <option value="Set 3">Set 3</option>
-                    <option value="Set 4">Set 4</option>
-                    <option value="Set 5">Set 5</option>
-                    <option value="Set 6">Set 6</option>
-                    <option value="Set 7">Set 7</option>
-                    <option value="Set 8">Set 8</option>
-                    <option value="Set 9">Set 9</option>
-                    <option value="Set 10">Set 10</option>
-                    <option value="Set 11">Set 11</option>
-                </select>
-            </div>
+        <li>
+            <a href="index.html">
+                Home
+            </a>
+        </li>
+
+        <li>
+            <a href="resources.html">
+                Resources
+            </a>
+        </li>
+
+        <li>
+            <a href="tools.html">
+                Tools
+            </a>
+        </li>
+
+        <li>
+            <a href="calendar.html">
+                Calendar
+            </a>
+        </li>
+
+        <li>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+        </li>
+
+    </ul>
+
+    <button onclick="toggleDarkMode()">
+        🌙 Dark Mode
+    </button>
+
+</nav>
+
+
+
+<main class="timetable-page">
+
+
+    <!-- TIMETABLE HEADER -->
+
+    <section class="timetable-heading">
+
+        <div>
+
+            <p class="eyebrow">
+                Semester 1 · Academic Session 2026/2027
+            </p>
+
+            <h1>
+                📚 Class Timetable
+            </h1>
+
+            <p class="timetable-subtitle">
+                Choose your set to view your weekly timetable.
+            </p>
 
         </div>
 
 
-        <!-- CURRENT SET -->
-        <div class="selected-set">
-            <span>Currently viewing:</span>
-            <strong id="selectedSetText">Set 1</strong>
+        <!-- SET SELECTOR -->
+
+        <div class="set-selector">
+
+            <label for="setSelect">
+                Your Set
+            </label>
+
+            <select id="setSelect">
+
+                <option value="Set 1">
+                    Set 1
+                </option>
+
+                <option value="Set 2">
+                    Set 2
+                </option>
+
+                <option value="Set 3">
+                    Set 3
+                </option>
+
+                <option value="Set 4">
+                    Set 4
+                </option>
+
+                <option value="Set 5">
+                    Set 5
+                </option>
+
+                <option value="Set 6">
+                    Set 6
+                </option>
+
+                <option value="Set 7">
+                    Set 7
+                </option>
+
+                <option value="Set 8">
+                    Set 8
+                </option>
+
+                <option value="Set 9">
+                    Set 9
+                </option>
+
+                <option value="Set 10">
+                    Set 10
+                </option>
+
+                <option value="Set 11">
+                    Set 11
+                </option>
+
+            </select>
+
         </div>
 
+    </section>
 
-        <!-- TIMETABLE -->
-        <div class="timetable-wrapper">
 
-            <table id="timetable">
+
+    <!-- CURRENT SET -->
+
+    <section class="current-set-card">
+
+        <span>
+            Currently viewing:
+        </span>
+
+        <strong id="selectedSetText">
+            Set 1
+        </strong>
+
+    </section>
+
+
+
+    <!-- TIMETABLE -->
+
+    <section class="timetable-card">
+
+        <div class="timetable-scroll">
+
+            <table class="timetable-table">
 
                 <thead>
 
                     <tr>
-                        <th class="time-header">Time</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
+
+                        <th class="time-header">
+                            Time
+                        </th>
+
+                        <th>
+                            Monday
+                        </th>
+
+                        <th>
+                            Tuesday
+                        </th>
+
+                        <th>
+                            Wednesday
+                        </th>
+
+                        <th>
+                            Thursday
+                        </th>
+
+                        <th>
+                            Friday
+                        </th>
+
                     </tr>
 
                 </thead>
 
+
                 <tbody id="timetableBody">
-                    <!-- JavaScript generates timetable -->
+
+                    <!-- timetable.js creates everything here -->
+
                 </tbody>
 
             </table>
 
         </div>
 
+    </section>
 
-        <!-- LEGEND -->
-        <div class="timetable-legend">
 
-            <div class="legend-title">
-                Class types
-            </div>
 
-            <div class="legend-items">
+    <!-- LEGEND -->
 
-                <span>
-                    <i class="legend-box lecture"></i>
-                    Lecture
-                </span>
+    <section class="timetable-legend">
 
-                <span>
-                    <i class="legend-box lab"></i>
-                    Lab / Tutorial
-                </span>
+        <strong>
+            Class Types
+        </strong>
 
-                <span>
-                    <i class="legend-box research"></i>
-                    Research
-                </span>
 
-                <span>
-                    <i class="legend-box activity"></i>
-                    Activity
-                </span>
+        <div class="legend-items">
 
-            </div>
+
+            <span>
+
+                <i class="legend-dot lecture-dot"></i>
+
+                Lecture
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot lab-dot"></i>
+
+                Lab / Tutorial
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot research-dot"></i>
+
+                Research
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot reasoning-dot"></i>
+
+                Logical Reasoning
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot statistics-dot"></i>
+
+                Statistics
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot lla-dot"></i>
+
+                LLA
+
+            </span>
+
+
+            <span>
+
+                <i class="legend-dot activity-dot"></i>
+
+                Jati Diri
+
+            </span>
+
 
         </div>
 
-
-        <!-- MOBILE NOTE -->
-        <div class="mobile-note">
-            💡 Swipe left or right to view the full timetable on smaller screens.
-        </div>
-
-    </div>
+    </section>
 
 
-    <script src="timetable.js"></script>
+
+    <p class="mobile-help">
+
+        💡 On phone or tablet, swipe left or right
+        across the timetable.
+
+    </p>
+
+
+</main>
+
+
+
+<footer>
+
+    <p>
+        © 2026 ASPI Hub | Built for ASPI Students
+    </p>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<script src="timetable.js"></script>
+
 
 </body>
+
 </html>
