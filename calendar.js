@@ -112,7 +112,7 @@ const events = [
         date: "2026-08-24",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "exam",
+        type: "examination",
         description: "subject tba"
     },
 
@@ -120,7 +120,7 @@ const events = [
         date: "2026-08-25",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "exam",
+        type: "examination",
         description: "subject tba"
     },
     
@@ -128,7 +128,7 @@ const events = [
         date: "2026-08-26",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "exam",
+        type: "examination",
         description: "subject tba"
     },
 
@@ -136,7 +136,7 @@ const events = [
         date: "2026-08-27",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "exam",
+        type: "examination",
         description: "subject tba"
     },
 
@@ -144,7 +144,7 @@ const events = [
         date: "2026-08-28",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: "exam",
+        type: "examination",
         description: "subject tba"
     },
 
