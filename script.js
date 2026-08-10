@@ -13,3 +13,31 @@ window.onload = function () {
         document.body.classList.add("dark-mode");
     }
 }
+
+// ========================================
+// ASPI HUB WELCOME INTRO
+// ========================================
+
+window.addEventListener("load", function () {
+
+    const welcomeScreen =
+        document.getElementById("welcomeScreen");
+
+    if (!welcomeScreen) {
+        return;
+    }
+
+    setTimeout(function () {
+
+        welcomeScreen.classList.add("hide");
+
+    }, 2500);
+
+
+    setTimeout(function () {
+
+        welcomeScreen.remove();
+
+    }, 3300);
+
+});
