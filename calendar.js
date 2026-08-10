@@ -112,7 +112,7 @@ const events = [
         date: "2026-08-24",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: exam",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -120,7 +120,7 @@ const events = [
         date: "2026-08-25",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: exam",
+        type: "exam",
         description: "subject tba"
     },
     
@@ -128,7 +128,7 @@ const events = [
         date: "2026-08-26",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: exam",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -136,7 +136,7 @@ const events = [
         date: "2026-08-27",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: exam",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -144,7 +144,7 @@ const events = [
         date: "2026-08-28",
         title: "Mid-sem Exam",
         time: "All day.",
-        type: exam",
+        type: "exam",
         description: "subject tba"
     },
 
@@ -152,7 +152,7 @@ const events = [
         date: "2026-08-31",
         title: "Malaysia National Day",
         time: "All day.",
-        type: holiday",
+        type: "holiday",
         description: "I LUV MALAYSIA <3"
     }
     
