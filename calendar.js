@@ -154,7 +154,7 @@ const events = [
         time: "All day.",
         type: holiday",
         description: "I LUV MALAYSIA <3"
-    },
+    }
     
 ];
 
