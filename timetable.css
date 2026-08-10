@@ -1,0 +1,417 @@
+/* ========================================
+   ASPI HUB TIMETABLE
+   ======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7f6;
+    color: #1f2937;
+}
+
+
+/* ========================================
+   MAIN PAGE
+   ======================================== */
+
+.timetable-page {
+    max-width: 1500px;
+    margin: auto;
+    padding: 30px;
+}
+
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.timetable-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 20px;
+}
+
+.timetable-top h1 {
+    margin: 0 0 8px;
+    color: #166534;
+}
+
+.timetable-top p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+/* ========================================
+   SET SELECTOR
+   ======================================== */
+
+.set-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.set-selector label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #166534;
+}
+
+.set-selector select {
+    min-width: 150px;
+    padding: 12px 14px;
+    border: 2px solid #16A34A;
+    border-radius: 9px;
+    background: white;
+    color: #1f2937;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+}
+
+.set-selector select:focus {
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+
+/* ========================================
+   CURRENT SET
+   ======================================== */
+
+.selected-set {
+    background: #dcfce7;
+    border-left: 5px solid #16A34A;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border-radius: 7px;
+}
+
+.selected-set span {
+    color: #166534;
+}
+
+.selected-set strong {
+    color: #15803d;
+    margin-left: 5px;
+}
+
+
+/* ========================================
+   TABLE
+   ======================================== */
+
+.timetable-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+#timetable {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    background: white;
+}
+
+
+/* HEADER */
+
+#timetable thead th {
+    background: #16A34A;
+    color: white;
+    padding: 16px 10px;
+    text-align: center;
+    font-size: 14px;
+    border: 1px solid #15803D;
+}
+
+#timetable thead .time-header {
+    background: #166534;
+    min-width: 125px;
+}
+
+
+/* TIME CELLS */
+
+.time-cell {
+    background: #f0fdf4;
+    color: #166534;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px 8px;
+    border: 1px solid #d1d5db;
+    white-space: nowrap;
+}
+
+
+/* NORMAL EMPTY CELL */
+
+.class-cell {
+    min-width: 180px;
+    height: 80px;
+    padding: 6px;
+    border: 1px solid #d1d5db;
+    vertical-align: top;
+    background: white;
+}
+
+
+/* EMPTY */
+
+.empty-cell {
+    background: #fafafa;
+}
+
+
+/* ========================================
+   CLASS CARD
+   ======================================== */
+
+.class-card {
+    height: 100%;
+    min-height: 66px;
+    padding: 9px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.15s ease,
+                box-shadow 0.15s ease;
+}
+
+.class-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* SUBJECT */
+
+.class-subject {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    line-height: 1.25;
+}
+
+
+/* DETAILS */
+
+.class-details {
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+
+/* ========================================
+   CLASS TYPES
+   ======================================== */
+
+.lecture {
+    background: #dcfce7;
+    border-left: 4px solid #16A34A;
+    color: #14532d;
+}
+
+.lab {
+    background: #dbeafe;
+    border-left: 4px solid #2563EB;
+    color: #1e3a8a;
+}
+
+.research {
+    background: #f3e8ff;
+    border-left: 4px solid #9333EA;
+    color: #581c87;
+}
+
+.activity {
+    background: #fef3c7;
+    border-left: 4px solid #F59E0B;
+    color: #78350f;
+}
+
+
+/* ========================================
+   LEGEND
+   ======================================== */
+
+.timetable-legend {
+    margin-top: 20px;
+    padding: 18px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.legend-title {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #166534;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-items span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+}
+
+.legend-box {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.legend-box.lecture {
+    background: #16A34A;
+}
+
+.legend-box.lab {
+    background: #2563EB;
+}
+
+.legend-box.research {
+    background: #9333EA;
+}
+
+.legend-box.activity {
+    background: #F59E0B;
+}
+
+
+/* ========================================
+   MOBILE NOTE
+   ======================================== */
+
+.mobile-note {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    background: #dcfce7;
+    border-radius: 8px;
+    color: #166534;
+    font-size: 13px;
+}
+
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body.dark-mode {
+    background: #111827;
+    color: #f9fafb;
+}
+
+body.dark-mode .timetable-top h1 {
+    color: #4ade80;
+}
+
+body.dark-mode .timetable-top p {
+    color: #9ca3af;
+}
+
+body.dark-mode .set-selector label {
+    color: #4ade80;
+}
+
+body.dark-mode .set-selector select {
+    background: #1f2937;
+    color: white;
+    border-color: #22c55e;
+}
+
+body.dark-mode .selected-set {
+    background: #14532d;
+    border-color: #22c55e;
+}
+
+body.dark-mode .selected-set span,
+body.dark-mode .selected-set strong {
+    color: #bbf7d0;
+}
+
+body.dark-mode #timetable {
+    background: #1f2937;
+}
+
+body.dark-mode #timetable thead th {
+    background: #166534;
+    border-color: #15803d;
+}
+
+body.dark-mode #timetable thead .time-header {
+    background: #14532d;
+}
+
+body.dark-mode .time-cell {
+    background: #172b1d;
+    color: #bbf7d0;
+    border-color: #374151;
+}
+
+body.dark-mode .class-cell {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+body.dark-mode .empty-cell {
+    background: #111827;
+}
+
+body.dark-mode .timetable-legend {
+    background: #1f2937;
+}
+
+body.dark-mode .legend-title {
+    color: #4ade80;
+}
+
+body.dark-mode .mobile-note {
+    background: #14532d;
+    color: #bbf7d0;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .timetable-page {
+        padding: 15px;
+    }
+
+    .timetable-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .timetable-top h1 {
+        font-size: 24px;
+    }
+
+    .set-selector select {
+        width: 100%;
+    }
+
+    .mobile-note {
+        display: block;
+    }
+
+}
