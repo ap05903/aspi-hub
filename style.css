@@ -255,3 +255,24 @@ nav button{
 nav button:hover{
     transform:scale(1.05);
 }
+
+.card button{
+    margin-top:18px;
+    background:#16A34A;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#15803D;
+    transform:translateY(-2px);
+}
+
+.card a{
+    text-decoration:none;
+}
