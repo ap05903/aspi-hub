@@ -73,7 +73,7 @@ const events = [
         title: "Mid-sem break",
         time: "All day.",
         type: "holiday",
-        description: "gambatehhh guysss"
+        description: "gambatehhh guyss"
     },
 
     {
