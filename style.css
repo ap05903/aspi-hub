@@ -276,3 +276,24 @@ nav button:hover{
 .card a{
     text-decoration:none;
 }
+
+.calendar-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+
+    background: #16A34A;
+    color: white;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.calendar-link:hover {
+    background: #15803D;
+    transform: translateY(-2px);
+}
