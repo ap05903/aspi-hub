@@ -118,10 +118,10 @@ const events = [
 
     {
         date: "2026-08-25",
-        title: "Mid-sem Exam",
+        title: "The Prophet Muhammad's Birthday",
         time: "All day.",
-        type: "exam",
-        description: "subject tba"
+        type: "holidays",
+        description: "Public Holiday"
     },
     
 {
