@@ -1,87 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASPI Hub Timetable</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASPI Hub - Timetable</title>
+
+    <link rel="stylesheet" href="timetable.css">
 </head>
 
 <body>
 
-<nav>
+    <div class="timetable-page">
 
-<div class="logo">🎓 ASPI Hub</div>
+        <!-- HEADER -->
+        <div class="timetable-top">
 
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="resources.html">Resources</a></li>
-<li><a href="tools.html">Tools</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-  <li><a href="calendar.html">Calendar</a></li>
-</ul>
+            <div>
+                <h1>📚 Class Timetable</h1>
+                <p>ASPIpintar UKM · Semester 1 · Academic Session 2026/2027</p>
+            </div>
 
-<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  
-</nav>
+            <div class="set-selector">
+                <label for="setSelect">Your Set</label>
 
+                <select id="setSelect">
+                    <option value="Set 1">Set 1</option>
+                    <option value="Set 2">Set 2</option>
+                    <option value="Set 3">Set 3</option>
+                    <option value="Set 4">Set 4</option>
+                    <option value="Set 5">Set 5</option>
+                    <option value="Set 6">Set 6</option>
+                    <option value="Set 7">Set 7</option>
+                    <option value="Set 8">Set 8</option>
+                    <option value="Set 9">Set 9</option>
+                    <option value="Set 10">Set 10</option>
+                    <option value="Set 11">Set 11</option>
+                </select>
+            </div>
 
-<header class="hero">
-
-<h1>📅 My Timetable</h1>
-
-<p>Stay organised with your weekly classes.</p>
-
-</header>
-
-
-<section class="features">
-
-<div class="card">
-<h2>Monday</h2>
-<p>9:00 AM - Programming</p>
-<p>11:00 AM - Mathematics</p>
-<p>2:00 PM - Tutorial</p>
-</div>
+        </div>
 
 
-<div class="card">
-<h2>Tuesday</h2>
-<p>10:00 AM - Database</p>
-<p>1:00 PM - Lecture</p>
-</div>
+        <!-- CURRENT SET -->
+        <div class="selected-set">
+            <span>Currently viewing:</span>
+            <strong id="selectedSetText">Set 1</strong>
+        </div>
 
 
-<div class="card">
-<h2>Wednesday</h2>
-<p>9:00 AM - Physics</p>
-<p>3:00 PM - Group Study</p>
-</div>
+        <!-- TIMETABLE -->
+        <div class="timetable-wrapper">
+
+            <table id="timetable">
+
+                <thead>
+
+                    <tr>
+                        <th class="time-header">Time</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="timetableBody">
+                    <!-- JavaScript generates timetable -->
+                </tbody>
+
+            </table>
+
+        </div>
 
 
-<div class="card">
-<h2>Thursday</h2>
-<p>11:00 AM - Project Work</p>
-</div>
+        <!-- LEGEND -->
+        <div class="timetable-legend">
+
+            <div class="legend-title">
+                Class types
+            </div>
+
+            <div class="legend-items">
+
+                <span>
+                    <i class="legend-box lecture"></i>
+                    Lecture
+                </span>
+
+                <span>
+                    <i class="legend-box lab"></i>
+                    Lab / Tutorial
+                </span>
+
+                <span>
+                    <i class="legend-box research"></i>
+                    Research
+                </span>
+
+                <span>
+                    <i class="legend-box activity"></i>
+                    Activity
+                </span>
+
+            </div>
+
+        </div>
 
 
-<div class="card">
-<h2>Friday</h2>
-<p>10:00 AM - Revision</p>
-</div>
+        <!-- MOBILE NOTE -->
+        <div class="mobile-note">
+            💡 Swipe left or right to view the full timetable on smaller screens.
+        </div>
 
-</section>
+    </div>
 
 
-<footer>
+    <script src="timetable.js"></script>
 
-<p>© 2026 ASPI Hub | Built for ASPI Students</p>
-
-</footer>
-
-<script src="script.js"></script>
-  
 </body>
-
 </html>
