@@ -297,3 +297,217 @@ nav button:hover{
     background: #15803D;
     transform: translateY(-2px);
 }
+
+/* ========================================
+   ASPI HUB WELCOME INTRO
+   ======================================== */
+
+.welcome-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #14532d,
+            #16a34a,
+            #22c55e
+        );
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 99999;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+
+/* Hide intro */
+
+.welcome-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* Center content */
+
+.welcome-content {
+    text-align: center;
+    color: white;
+
+    padding: 30px;
+
+    animation:
+        welcomeAppear 0.8s ease forwards;
+}
+
+
+/* Graduation cap */
+
+.welcome-icon {
+    font-size: 75px;
+
+    margin-bottom: 20px;
+
+    animation:
+        capBounce 1.2s ease;
+}
+
+
+/* Welcome text */
+
+.welcome-content h1 {
+    font-size:
+        clamp(36px, 7vw, 70px);
+
+    margin: 0;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+
+.welcome-content h1 span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #dcfce7;
+}
+
+
+/* Subtitle */
+
+.welcome-content p {
+    margin-top: 18px;
+
+    font-size:
+        clamp(15px, 2vw, 20px);
+
+    opacity: 0;
+
+    animation:
+        subtitleAppear
+        0.7s ease
+        0.7s forwards;
+}
+
+
+/* Loading line */
+
+.welcome-loader {
+    width: 220px;
+    height: 4px;
+
+    margin:
+        30px auto 0;
+
+    background:
+        rgba(255,255,255,0.25);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.welcome-loader-bar {
+    width: 0;
+    height: 100%;
+
+    background: white;
+
+    border-radius: 20px;
+
+    animation:
+        welcomeLoading
+        2.3s ease forwards;
+}
+
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes welcomeAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes subtitleAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes capBounce {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-50px)
+            rotate(-15deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            translateY(8px)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+}
+
+
+@keyframes welcomeLoading {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
