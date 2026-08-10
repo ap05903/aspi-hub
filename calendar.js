@@ -154,6 +154,14 @@ const events = [
         time: "All day.",
         type: "holidays",
         description: "I LUV MALAYSIA <3"
+    },
+
+    {
+        date: "2026-08-15",
+        title: "PPAP Voting Day",
+        time: "2PM-5PM",
+        type: "event",
+        description: "UNDI ASPIrasi!!!<3"
     }
     
 ];
