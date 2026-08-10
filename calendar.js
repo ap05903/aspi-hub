@@ -5,35 +5,67 @@
 const events = [
 
     {
-        date: "2026-09-20",
-        title: "Research Assignment",
-        time: "11:59 PM",
-        type: "assignment",
-        description: "Submit your Research proposal."
-    },
-
-    {
-        date: "2026-09-24",
-        title: "Chemistry Quiz",
-        time: "2:00 PM",
+        date: "2026-08-10",
+        title: "LLA Quiz 1",
+        time: "4:00PM-6:00PM",
         type: "quiz",
-        description: "Chemistry Chapter 1–3 assessment."
+        description: "Physical test"
     },
 
     {
-        date: "2026-09-28",
-        title: "Physics Lab",
+        date: "2026-08-11",
+        title: "Bio Quiz 2",
         time: "9:00 AM",
-        type: "lab",
-        description: "Physics laboratory session."
+        type: "quiz",
+        description: "Biology Chapter 2&3 assessment.(Physical)"
     },
 
     {
-        date: "2026-11-10",
-        title: "Final Examination",
-        time: "9:00 AM",
-        type: "exam",
-        description: "Final examination period begins."
+        date: "2026-08-11",
+        title: "LR Quiz 1",
+        time: "8:00 PM",
+        type: "quiz",
+        description: "LR Chapter 1&2 assessment.(online)"
+    },
+
+    {
+        date: "2026-08-11",
+        title: "Physics Quiz 2 ",
+        time: "8:20PM-9.45PM",
+        type: "quiz",
+        description: "Physics Chapter 3&4 assessment.(Online)"
+    },
+
+    {
+        date: "2026-08-13",
+        title: "Chemistry Quiz 2",
+        time: "8:00PM-10:00PM",
+        type: "quiz",
+        description: "Chemistry Chapter 2&3 assessment.(Online)"
+    },
+
+    {
+        date: "2026-08-14",
+        title: "Research Quiz 1",
+        time: "According to set.",
+        type: "quiz",
+        description: "Physical test."
+    },
+
+    {
+        date: "2026-08-13",
+        title: "Research Quiz 1",
+        time: "According to set.",
+        type: "quiz",
+        description: "Physical test."
+    },
+
+    {
+        date: "2026-08-12",
+        title: "Research Quiz 1",
+        time: "According to set.",
+        type: "quiz",
+        description: "Physical test."
     }
 
 ];
