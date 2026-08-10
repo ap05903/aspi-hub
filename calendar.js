@@ -30,7 +30,7 @@ const events = [
 
     {
         date: "2026-08-12",
-        title: "Physics Quiz 2 ",
+        title: "Physics Quiz 2",
         time: "8:20PM-9.45PM",
         type: "quiz",
         description: "Physics Chapter 3&4 assessment.(Online)"
