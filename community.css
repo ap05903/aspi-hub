@@ -1,0 +1,297 @@
+/* ========================================
+   ASPI HUB COMMUNITY
+   ======================================== */
+
+.community-hero {
+    text-align: center;
+    padding: 70px 20px;
+    background: linear-gradient(135deg, #16A34A, #22C55E);
+    color: white;
+}
+
+.community-hero h1 {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+.community-hero p {
+    font-size: 18px;
+}
+
+
+/* ========================================
+   MAIN PAGE
+   ======================================== */
+
+.community-page {
+    width: min(1000px, 92%);
+    margin: 40px auto 70px;
+}
+
+
+/* ========================================
+   CREATE POST
+   ======================================== */
+
+.create-post-card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.create-post-card h2 {
+    color: #16A34A;
+    margin-bottom: 18px;
+}
+
+.create-post-card input,
+.create-post-card textarea,
+.create-post-card select {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.create-post-card input {
+    margin-bottom: 12px;
+}
+
+.create-post-card textarea {
+    min-height: 130px;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+.post-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    align-items: center;
+}
+
+#publishPost {
+    background: #16A34A;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#publishPost:hover {
+    background: #15803D;
+}
+
+
+/* ========================================
+   FILTER BUTTONS
+   ======================================== */
+
+.community-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.filter-btn {
+    border: 1px solid #d1d5db;
+    background: white;
+    padding: 10px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.filter-btn:hover {
+    border-color: #16A34A;
+    color: #16A34A;
+}
+
+.filter-btn.active {
+    background: #16A34A;
+    color: white;
+    border-color: #16A34A;
+}
+
+
+/* ========================================
+   POSTS
+   ======================================== */
+
+.community-posts {
+    display: grid;
+    gap: 18px;
+}
+
+.post-card {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+}
+
+.post-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+
+.post-category {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 6px 9px;
+    border-radius: 15px;
+}
+
+.post-category.question {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.post-category.study {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.post-category.announcement {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.post-category.resource {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+.post-subject {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.post-card h3 {
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.post-card p {
+    line-height: 1.6;
+}
+
+.post-meta {
+    margin-top: 15px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.post-actions button {
+    border: none;
+    background: #f3f4f6;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.post-actions button:hover {
+    background: #e5e7eb;
+}
+
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.empty-community {
+    text-align: center;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    color: #64748b;
+}
+
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body.dark-mode .create-post-card,
+body.dark-mode .post-card,
+body.dark-mode .empty-community {
+    background: #1f2937;
+    color: white;
+}
+
+body.dark-mode .create-post-card input,
+body.dark-mode .create-post-card textarea,
+body.dark-mode .create-post-card select {
+    background: #111827;
+    color: white;
+    border-color: #374151;
+}
+
+body.dark-mode .post-card h3 {
+    color: white;
+}
+
+body.dark-mode .post-subject,
+body.dark-mode .post-meta {
+    color: #cbd5e1;
+}
+
+body.dark-mode .filter-btn {
+    background: #1f2937;
+    color: white;
+    border-color: #374151;
+}
+
+body.dark-mode .filter-btn.active {
+    background: #16A34A;
+    border-color: #16A34A;
+}
+
+body.dark-mode .post-actions button {
+    background: #374151;
+    color: white;
+}
+
+body.dark-mode .post-actions button:hover {
+    background: #4b5563;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .community-hero h1 {
+        font-size: 32px;
+    }
+
+    .post-options {
+        grid-template-columns: 1fr;
+    }
+
+    #publishPost {
+        width: 100%;
+    }
+
+    .post-top {
+        flex-direction: column;
+    }
+
+}
