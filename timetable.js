@@ -981,72 +981,25 @@ const timetableData = {
             ]
         }
     },
-
-    // ========================================
-// FINISH TIMETABLE DATA
-// ========================================
-
 };
 
-
 // ========================================
-// TIMETABLE SETTINGS
-// ========================================
-
-const dayNames = [
-    "mon",
-    "tues",
-    "wed",
-    "thurs",
-    "fri"
-];
-
-const dayLabels = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday"
-];
-
-
-// ========================================
-// GET ELEMENTS
+// TIMETABLE RENDERER
 // ========================================
 
-const timetableContainer =
-    document.getElementById("timetable");
+// Your HTML already has:
+// #setSelect
+// #selectedSetText
+// #timetableBody
 
-const setSelector =
-    document.getElementById("setSelector");
+const setSelect =
+    document.getElementById("setSelect");
 
+const selectedSetText =
+    document.getElementById("selectedSetText");
 
-// ========================================
-// CREATE SET SELECTOR
-// ========================================
-
-function createSetSelector() {
-
-    if (!setSelector) {
-        console.warn("setSelector not found.");
-        return;
-    }
-
-    setSelector.innerHTML = "";
-
-    Object.keys(timetableData).forEach(setName => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = setName;
-        option.textContent = setName;
-
-        setSelector.appendChild(option);
-
-    });
-
-}
+const timetableBody =
+    document.getElementById("timetableBody");
 
 
 // ========================================
@@ -1055,83 +1008,38 @@ function createSetSelector() {
 
 function renderTimetable(setName) {
 
-    if (!timetableContainer) {
-        console.warn("Timetable container not found.");
-        return;
-    }
-
     const data =
         timetableData[setName];
 
     if (!data) {
-        console.warn("No timetable found for:", setName);
+        console.error("Timetable not found:", setName);
         return;
     }
 
-    timetableContainer.innerHTML = "";
+    if (!timetableBody) {
+        console.error("timetableBody not found.");
+        return;
+    }
+
+
+    // Clear old rows
+
+    timetableBody.innerHTML = "";
+
+
+    // Update selected set text
+
+    if (selectedSetText) {
+
+        selectedSetText.textContent =
+            setName;
+
+    }
 
 
     // ========================================
-    // TABLE
+    // CREATE EACH TIME ROW
     // ========================================
-
-    const table =
-        document.createElement("table");
-
-    table.className =
-        "timetable-table";
-
-
-    // ========================================
-    // HEADER
-    // ========================================
-
-    const thead =
-        document.createElement("thead");
-
-    const headerRow =
-        document.createElement("tr");
-
-
-    const timeHeader =
-        document.createElement("th");
-
-    timeHeader.textContent =
-        "Time";
-
-    timeHeader.className =
-        "time-header";
-
-    headerRow.appendChild(timeHeader);
-
-
-    dayLabels.forEach(day => {
-
-        const th =
-            document.createElement("th");
-
-        th.textContent = day;
-
-        th.className =
-            "day-header";
-
-        headerRow.appendChild(th);
-
-    });
-
-
-    thead.appendChild(headerRow);
-
-    table.appendChild(thead);
-
-
-    // ========================================
-    // BODY
-    // ========================================
-
-    const tbody =
-        document.createElement("tbody");
-
 
     data.times.forEach((time, index) => {
 
@@ -1139,21 +1047,25 @@ function renderTimetable(setName) {
             document.createElement("tr");
 
 
-        // Time column
+        // ====================================
+        // TIME
+        // ====================================
 
         const timeCell =
             document.createElement("td");
 
-        timeCell.textContent =
-            time;
-
         timeCell.className =
             "time-cell";
+
+        timeCell.textContent =
+            time;
 
         row.appendChild(timeCell);
 
 
-        // Day columns
+        // ====================================
+        // MONDAY - FRIDAY
+        // ====================================
 
         dayNames.forEach(dayName => {
 
@@ -1164,102 +1076,165 @@ function renderTimetable(setName) {
                 "class-cell";
 
 
-            const classText =
-                data.days[dayName][index];
-
-
-            // ========================================
+            // =================================
             // BREAK
-            // ========================================
+            // =================================
 
             if (index === 5) {
 
                 cell.classList.add("break-cell");
 
-                cell.textContent =
-                    "BREAK";
+                cell.innerHTML =
+                    `<span class="break-text">BREAK</span>`;
 
             }
 
 
-            // ========================================
+            // =================================
             // CLASS
-            // ========================================
+            // =================================
 
-            else if (classText) {
+            else {
 
-                cell.classList.add("has-class");
-
-                const classDiv =
-                    document.createElement("div");
-
-                classDiv.className =
-                    "class-content";
+                const classText =
+                    data.days[dayName][index];
 
 
-                // Split subject from lecturer/room
-                // when possible
+                if (classText) {
 
-                const separatorIndex =
-                    classText.indexOf(" - ");
-
-
-                if (separatorIndex !== -1) {
-
-                    const subject =
-                        classText.substring(
-                            0,
-                            separatorIndex
-                        );
-
-                    const details =
-                        classText.substring(
-                            separatorIndex + 3
-                        );
-
-
-                    const subjectElement =
-                        document.createElement("strong");
-
-                    subjectElement.textContent =
-                        subject;
-
-
-                    const detailsElement =
-                        document.createElement("span");
-
-                    detailsElement.textContent =
-                        details;
-
-
-                    classDiv.appendChild(
-                        subjectElement
+                    cell.classList.add(
+                        "has-class"
                     );
 
-                    classDiv.appendChild(
-                        detailsElement
-                    );
 
-                } else {
+                    // ---------------------------------
+                    // Work out class type
+                    // ---------------------------------
 
-                    classDiv.textContent =
-                        classText;
+                    const upperText =
+                        classText.toUpperCase();
+
+
+                    if (
+                        upperText.includes("LECTURE")
+                    ) {
+
+                        cell.classList.add(
+                            "lecture"
+                        );
+
+                    }
+                    else if (
+                        upperText.includes("LAB") ||
+                        upperText.includes("TUT")
+                    ) {
+
+                        cell.classList.add(
+                            "lab"
+                        );
+
+                    }
+                    else if (
+                        upperText.includes("RESEARCH")
+                    ) {
+
+                        cell.classList.add(
+                            "research"
+                        );
+
+                    }
+                    else if (
+                        upperText.includes("JATI") ||
+                        upperText.includes("ACTIVITY")
+                    ) {
+
+                        cell.classList.add(
+                            "activity"
+                        );
+
+                    }
+
+
+                    // ---------------------------------
+                    // Class content
+                    // ---------------------------------
+
+                    const content =
+                        document.createElement("div");
+
+                    content.className =
+                        "class-content";
+
+
+                    const separator =
+                        classText.indexOf(" - ");
+
+
+                    if (separator !== -1) {
+
+                        const subject =
+                            classText.substring(
+                                0,
+                                separator
+                            );
+
+                        const details =
+                            classText.substring(
+                                separator + 3
+                            );
+
+
+                        const subjectElement =
+                            document.createElement(
+                                "strong"
+                            );
+
+                        subjectElement.textContent =
+                            subject;
+
+
+                        const detailsElement =
+                            document.createElement(
+                                "span"
+                            );
+
+                        detailsElement.textContent =
+                            details;
+
+
+                        content.appendChild(
+                            subjectElement
+                        );
+
+                        content.appendChild(
+                            detailsElement
+                        );
+
+                    }
+                    else {
+
+                        content.textContent =
+                            classText;
+
+                    }
+
+
+                    cell.appendChild(content);
 
                 }
 
 
-                cell.appendChild(classDiv);
+                // =================================
+                // EMPTY CELL
+                // =================================
 
-            }
+                else {
 
+                    cell.classList.add(
+                        "empty-cell"
+                    );
 
-            // ========================================
-            // EMPTY
-            // ========================================
-
-            else {
-
-                cell.classList.add("empty-cell");
+                }
 
             }
 
@@ -1269,25 +1244,20 @@ function renderTimetable(setName) {
         });
 
 
-        tbody.appendChild(row);
+        timetableBody.appendChild(row);
 
     });
-
-
-    table.appendChild(tbody);
-
-    timetableContainer.appendChild(table);
 
 }
 
 
 // ========================================
-// SET SELECTOR CHANGE
+// SET SELECTOR
 // ========================================
 
-if (setSelector) {
+if (setSelect) {
 
-    setSelector.addEventListener(
+    setSelect.addEventListener(
         "change",
         function () {
 
@@ -1302,23 +1272,14 @@ if (setSelector) {
 
 
 // ========================================
-// START WITH SET 1
+// INITIAL TIMETABLE
 // ========================================
-
-createSetSelector();
-
-if (setSelector) {
-
-    setSelector.value =
-        "Set 1";
-
-}
 
 renderTimetable("Set 1");
 
 
 // ========================================
-// OPTIONAL: MOBILE SET BUTTONS
+// OPTIONAL SET SWITCH FUNCTION
 // ========================================
 
 function switchTimetableSet(setName) {
@@ -1327,15 +1288,17 @@ function switchTimetableSet(setName) {
         return;
     }
 
-    if (setSelector) {
 
-        setSelector.value =
+    if (setSelect) {
+
+        setSelect.value =
             setName;
 
     }
 
-    renderTimetable(setName);
+
+    renderTimetable(
+        setName
+    );
 
 }
-
-    
