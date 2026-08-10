@@ -36,12 +36,19 @@
     border:1px solid #ddd;
 }
 
-.day-name{
-    background:#f3f4f6;
-    padding:15px;
-    text-align:center;
-    font-weight:bold;
-    border:1px solid #ddd;
+.day-name {
+    background: #16A34A;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #15803D;
+}
+
+body.dark-mode .day-name {
+    background: #166534;
+    color: white;
+    border-color: #15803D;
 }
 
 .day{
