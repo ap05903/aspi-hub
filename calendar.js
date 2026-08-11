@@ -186,6 +186,23 @@ const events = [
         time: "00:00AM-8:00PM",
         type: "quiz",
         description: "Rmb to do before 8pm~"
+    },
+
+    {
+        date: "2026-08-14",
+        title: "Statistic Assignment Due",
+        time: "All day.",
+        type: "assignment",
+        description: "gambatehhhh"
+    },
+
+    
+    {
+        date: "2026-08-14",
+        title: "LR Assignment Due",
+        time: "All day.",
+        type: "assignment",
+        description: "You can do this!"
     }
     
 ];
