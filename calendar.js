@@ -162,6 +162,30 @@ const events = [
         time: "2PM-5PM",
         type: "event",
         description: "UNDI ASPIrasi!!!<3"
+    },
+
+      {
+        date: "2026-08-16",
+        title: "Statistic Quiz 2",
+        time: "8PM-11:59PM",
+        type: "quiz",
+        description: "50MCQ 170min"
+    },
+
+    {
+        date: "2026-08-17",
+        title: "Statistic Quiz 2",
+        time: "All day.",
+        type: "quiz",
+        description: "50MCQ 170min"
+    },
+
+    {
+        date: "2026-08-18",
+        title: "Statistic Quiz 2",
+        time: "00:00AM-8:00PM",
+        type: "quiz",
+        description: "Rmb to do before 8pm~"
     }
     
 ];
