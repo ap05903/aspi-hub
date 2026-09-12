@@ -1,5 +1,5 @@
 // ========================================
-// ASPI HUB INTERACTIVE CALENDAR
+// PINTAR@Sphere INTERACTIVE CALENDAR
 // ========================================
 
 const events = [
