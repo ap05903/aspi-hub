@@ -15,7 +15,7 @@ window.onload = function () {
 }
 
 // ========================================
-// ASPI HUB WELCOME INTRO
+// PINTAR@Sphere WELCOME INTRO
 // ========================================
 
 window.addEventListener("load", function () {
