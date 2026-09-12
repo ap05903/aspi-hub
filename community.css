@@ -5,7 +5,7 @@
 .community-hero {
     text-align: center;
     padding: 70px 20px;
-    background: linear-gradient(135deg, #16A34A, #22C55E);
+    background: linear-gradient(135deg, #1434A4, #22C55E);
     color: white;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .create-post-card h2 {
-    color: #16A34A;
+    color: #1434A4;
     margin-bottom: 18px;
 }
 
@@ -74,7 +74,7 @@
 }
 
 #publishPost {
-    background: #16A34A;
+    background: #1434A4;
     color: white;
     border: none;
     border-radius: 10px;
@@ -109,14 +109,14 @@
 }
 
 .filter-btn:hover {
-    border-color: #16A34A;
+    border-color: #1434A4;
     color: #16A34A;
 }
 
 .filter-btn.active {
-    background: #16A34A;
+    background: #1434A4;
     color: white;
-    border-color: #16A34A;
+    border-color: #1434A4;
 }
 
 
@@ -258,8 +258,8 @@ body.dark-mode .filter-btn {
 }
 
 body.dark-mode .filter-btn.active {
-    background: #16A34A;
-    border-color: #16A34A;
+    background: #1434A4;
+    border-color: #1434A4;
 }
 
 body.dark-mode .post-actions button {
