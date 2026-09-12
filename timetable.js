@@ -1,5 +1,5 @@
 // ========================================
-// ASPI HUB TIMETABLE
+// PINTAR@Sphere TIMETABLE
 // VERIFIED FROM THE ORIGINAL EXCEL FILE
 // Semester 1 · Academic Session 2026/2027
 // ========================================
