@@ -48,7 +48,7 @@ nav a:hover{
 .hero{
     text-align:center;
     padding:90px 20px;
-    background:linear-gradient(135deg,#16A34A,#22C55E);
+    background:linear-gradient(135deg,#1434A4,#22C55E);
     color:white;
 }
 
@@ -164,7 +164,7 @@ input{
 .calendar h2{
     text-align:center;
     margin-bottom:30px;
-    color:#16A34A;
+    color:#1434A4;
 }
 
 .calendar-grid{
@@ -174,7 +174,7 @@ input{
 }
 
 .day-name{
-    background:#16A34A;
+    background:#1434A4;
     color:white;
     text-align:center;
     padding:15px;
@@ -192,7 +192,7 @@ input{
 
 .day h3{
     margin-bottom:10px;
-    color:#16A34A;
+    color:#1434A4;
 }
 
 .day p{
@@ -205,7 +205,7 @@ input{
 }
 
 .highlight{
-    border:3px solid #16A34A;
+    border:3px solid #1434A4;
     background:#ECFDF5;
 }
 
@@ -243,7 +243,7 @@ input{
 
 nav button{
     background:white;
-    color:#16A34A;
+    color:#1434A4;
     border:none;
     padding:10px 18px;
     border-radius:20px;
@@ -258,7 +258,7 @@ nav button:hover{
 
 .card button{
     margin-top:18px;
-    background:#16A34A;
+    background:#1434A4;
     color:white;
     border:none;
     padding:10px 18px;
@@ -282,7 +282,7 @@ nav button:hover{
     margin-top: 15px;
     padding: 10px 18px;
 
-    background: #16A34A;
+    background: #1434A4;
     color: white;
 
     text-decoration: none;
