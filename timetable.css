@@ -27,7 +27,7 @@
 }
 
 .eyebrow {
-    color: #16a34a;
+    color: #1434A4;
     font-weight: 700;
     margin-bottom: 8px;
 }
@@ -70,7 +70,7 @@
     background: #ffffff;
     color: #1f2937;
 
-    border: 2px solid #16a34a;
+    border: 2px solid #1434A4;
     border-radius: 10px;
 
     font-size: 16px;
@@ -163,7 +163,7 @@
 .timetable-table th {
     padding: 16px 12px;
 
-    background: #16a34a;
+    background: #1434A4;
     color: #ffffff;
 
     border-right:
@@ -494,7 +494,7 @@
 }
 
 .lecture-dot {
-    background: #16a34a;
+    background: #1434A4;
 }
 
 .lab-dot {
