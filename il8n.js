@@ -1,6 +1,6 @@
 /**
  * i18n.js
- * Enjin Pengurusan Bahasa Global (BM, EN, ZH, TA)
+ * Enjin Pengurusan Bahasa Global (BM, EN, ZH, TA) berasaskan localStorage
  */
 
 export const translations = {
@@ -150,23 +150,14 @@ export const translations = {
     }
 };
 
-/**
- * Ambil bahasa yang disimpan dalam localStorage (Default: 'ms')
- */
 export function getCurrentLanguage() {
     return localStorage.getItem('pintar_lang') || 'ms';
 }
 
-/**
- * Kemas kini bahasa, simpan ke localStorage, dan kemas kini paparan DOM
- */
 export function setLanguage(lang) {
     if (!translations[lang]) return;
-    
-    // 1. Simpan bahasa pilihan dalam Storage Pelayar
     localStorage.setItem('pintar_lang', lang);
 
-    // 2. Terapkan terjemahan pada mana-mana elemen yang mempunyai 'data-i18n'
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach((el) => {
         const key = el.getAttribute('data-i18n');
@@ -175,16 +166,12 @@ export function setLanguage(lang) {
         }
     });
 
-    // 3. Selaraskan Dropdown Pilihan Bahasa sekiranya wujud di dalam halaman
     const langSelect = document.getElementById('langSelect');
     if (langSelect) {
         langSelect.value = lang;
     }
 }
 
-/**
- * Inisialisasi automatik semasa halaman dibuka
- */
 export function initI18n() {
     const savedLang = getCurrentLanguage();
     setLanguage(savedLang);
