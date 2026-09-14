@@ -1,43 +1,22 @@
-function toggleDarkMode() {
-    document.body.classList.toggle("dark-mode");
+/**
+ * script.js
+ * Logik UI Am, Pengurusan Mod Gelap (Dark Mode) & Navigasi Client
+ */
 
-    if (document.body.classList.contains("dark-mode")) {
-        localStorage.setItem("theme", "dark");
-    } else {
-        localStorage.setItem("theme", "light");
+// Semak tetapan Dark Mode daripada localStorage semasa halaman dimuatkan
+document.addEventListener('DOMContentLoaded', () => {
+    const isDarkMode = localStorage.getItem('pintar_dark_mode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
     }
-}
-
-window.onload = function () {
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-    }
-}
-
-// ========================================
-// PINTAR@Sphere WELCOME INTRO
-// ========================================
-
-window.addEventListener("load", function () {
-
-    const welcomeScreen =
-        document.getElementById("welcomeScreen");
-
-    if (!welcomeScreen) {
-        return;
-    }
-
-    setTimeout(function () {
-
-        welcomeScreen.classList.add("hide");
-
-    }, 2500);
-
-
-    setTimeout(function () {
-
-        welcomeScreen.remove();
-
-    }, 3300);
-
 });
+
+/**
+ * Tukar Mod Gelap / Cerah secara global
+ */
+window.toggleDarkMode = function () {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('pintar_dark_mode', isDark);
+};
