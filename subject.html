@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Subjek - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <a href="dashboard-student.html" style="text-decoration:none; color:var(--primary-color); font-weight:bold;">⬅️ Dashboard</a>
+    </nav>
+
+    <div style="max-width: 900px; margin: 30px auto; padding: 20px; background: var(--card-bg); border-radius: 10px; border:1px solid var(--border-color);">
+        <h1 id="subjectHeader">Memuatkan Subjek...</h1>
+        <p id="subjectDesc"></p>
+        <hr>
+        <h3>📁 Bahan Pembelajaran Bagi Subjek Ini</h3>
+        <div id="subjectResources">Memuatkan bahan...</div>
+    </div>
+
+    <script type="module">
+        import { db, collection, getDocs } from './firebase-config.js';
+        
+        // Peta Maklumat Subjek
+        const subjectDetails = {
+            biology: { title: "🧬 Biology", desc: "Modul merangkumi Cell Biology, Genetics & Ecology." },
+            chemistry: { title: "🧪 Chemistry", desc: "Modul merangkumi Organic Chemistry, Thermochemistry & Kinetics." },
+            physics: { title: "⚛️ Physics", desc: "Modul merangkumi Mechanics, Electromagnetism & Modern Physics." },
+            logical: { title: "🧠 Logical Reasoning", desc: "Kemahiran Pemikiran Logik, Deductive & Inductive." },
+            statistics: { title: "📊 Statistics", desc: "Kebarangkalian, Taburan Normal & Ujian Hipotesis." },
+            lla: { title: "📖 Language & Literary Appreciation", desc: "Penguasaan Komunikasi Bahasa Inggeris Akademik." },
+            jati_diri: { title: "🛡️ Jati Diri", desc: "Pembentukan Sahsiah & Etika Kepimpinan." },
+            research: { title: "🔍 Research Skills", desc: "Kemahiran Metodologi Penyelidikan & Penulisan Sains." }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code') || 'biology';
+        const info = subjectDetails[code] || { title: "📚 Subjek ASPI", desc: "Pembelajaran Teras Matrikulasi/ASPI." };
+
+        document.getElementById('pageTitle').textContent = `${info.title} - PINTAR@Sphere`;
+        document.getElementById('subjectHeader').textContent = info.title;
+        document.getElementById('subjectDesc').textContent = info.desc;
+
+        // Ambil bahan spesifik untuk subjek ini sahaja
+        async function fetchSubjectResources() {
+            const container = document.getElementById('subjectResources');
+            const snap = await getDocs(collection(db, "learning_resources"));
+            let html = '';
+            
+            snap.forEach(doc => {
+                const data = doc.data();
+                if (data.subject.toLowerCase().includes(code.toLowerCase()) || code === 'all') {
+                    html += `
+                        <div style="padding:10px; border-bottom:1px solid #eee; display:flex; justify-content:space-between;">
+                            <div><strong>${data.title}</strong><br><small>Pensyarah: ${data.lecturerName || 'ASPI'}</small></div>
+                            <a href="${data.driveUrl}" target="_blank" style="color:var(--primary-color); font-weight:bold;">Buka Drive 🔗</a>
+                        </div>
+                    `;
+                }
+            });
+
+            container.innerHTML = html || '<p style="color:#888;">Tiada bahan dikongsi khusus untuk subjek ini lagi.</p>';
+        }
+
+        fetchSubjectResources();
+    </script>
+    <script type="module" src="app-core.js"></script>
+</body>
+</html>
