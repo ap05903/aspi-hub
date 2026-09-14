@@ -3,17 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile - PINTAR@Sphere</title>
+    <title>Lecturer Dashboard - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .profile-container {
-            max-width: 500px;
-            margin: 40px auto;
-            padding: 30px;
-            background: var(--card-bg, #ffffff);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        .container { 
+            max-width: 900px; 
+            margin: 30px auto; 
+            padding: 0 20px; 
+        }
+        .user-card { 
+            background: var(--card-bg, #ffffff); 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            margin-bottom: 25px;
             border: 1px solid var(--border-color, #e0e0e0);
+        }
+        .upload-section {
+            background: var(--card-bg, #ffffff);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color, #e0e0e0);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         .form-group { 
             margin-bottom: 15px; 
@@ -21,7 +32,7 @@
         .form-group label { 
             display: block; 
             margin-bottom: 5px; 
-            font-weight: 600; 
+            font-weight: bold; 
         }
         .form-group input, .form-group select {
             width: 100%; 
@@ -32,146 +43,128 @@
             background: var(--bg-color, #fff); 
             color: var(--text-color, #333);
         }
-        .form-group input[disabled] {
-            background: var(--disabled-bg, #f0f0f0);
-            cursor: not-allowed;
-        }
     </style>
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <nav>
-        <div class="logo">🎓 PINTAR@Sphere</div>
+        <div class="logo">👨‍🏫 PINTAR@Sphere (Lecturer)</div>
         <div style="display: flex; gap: 15px; align-items: center;">
-            <a id="navDashboardLink" href="dashboard-student.html" style="color: white; text-decoration: none;">Dashboard</a>
+            <a href="dashboard-lecturer.html" style="color: white; text-decoration: none; font-weight: bold;">Dashboard</a>
             <a href="community.html" style="color: white; text-decoration: none;">Community</a>
-            <a href="profile.html" style="color: white; text-decoration: none; font-weight: bold;">Profile</a>
+            <a href="profile.html" style="color: white; text-decoration: none;">Profile</a>
             <button id="btnLogout" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Logout</button>
         </div>
     </nav>
 
-    <div class="profile-container">
-        <h2 style="text-align: center; margin-top:0;">Edit Profile</h2>
-        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Update your personal details below</p>
+    <div class="container">
+        <!-- Lecturer Profile Card -->
+        <div class="user-card">
+            <h2>Welcome, Dr./Lecturer <span id="lecturerName">...</span> 👨‍🏫</h2>
+            <p><strong>Email Address:</strong> <span id="lecturerEmail">-</span></p>
+        </div>
 
-        <form id="profileForm">
-            <div class="form-group">
-                <label>Email Address (Cannot be changed)</label>
-                <input type="email" id="profEmail" disabled>
-            </div>
+        <!-- Learning Resources Upload Section -->
+        <div class="upload-section">
+            <h3 style="margin-top: 0;">📤 Upload Subject Learning Resources</h3>
+            <p style="color: #666; font-size: 14px;">Share Google Drive links, lecture notes, or exercises for students based on subjects.</p>
 
-            <div class="form-group">
-                <label>Role</label>
-                <input type="text" id="profRole" disabled>
-            </div>
-
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="profName" placeholder="Enter your full name" required>
-            </div>
-
-            <div id="studentFields" style="display: none;">
+            <form id="uploadResourceForm">
                 <div class="form-group">
-                    <label>Matric No</label>
-                    <input type="text" id="profMatric" placeholder="e.g. MS24123456">
-                </div>
-                <div class="form-group">
-                    <label>Group / Set</label>
-                    <select id="profSet">
-                        <option value="Set 1">Set 1</option>
-                        <option value="Set 2">Set 2</option>
-                        <option value="Set 3">Set 3</option>
-                        <option value="Set 4">Set 4</option>
-                        <option value="Set 5">Set 5</option>
-                        <option value="Set 6">Set 6</option>
-                        <option value="Set 7">Set 7</option>
-                        <option value="Set 8">Set 8</option>
-                        <option value="Set 9">Set 9</option>
-                        <option value="Set 10">Set 10</option>
-                        <option value="Set 11">Set 11</option>
+                    <label>Select Subject</label>
+                    <select id="resSubject" required>
+                        <option value="biology">Biology</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="physics">Physics</option>
+                        <option value="mathematics">Mathematics</option>
+                        <option value="english">English</option>
+                        <option value="computing">Computer Science</option>
                     </select>
                 </div>
-            </div>
 
-            <button type="submit" id="btnSaveProfile" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer; background: #0056b3; color: white; border: none; border-radius: 6px; font-weight: bold;">Save Changes</button>
-        </form>
+                <div class="form-group">
+                    <label>Resource Title</label>
+                    <input type="text" id="resTitle" placeholder="e.g. Biology Chapter 1 Notes - Cell Structure" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Resource Link (Google Drive / URL)</label>
+                    <input type="url" id="resUrl" placeholder="https://drive.google.com/..." required>
+                </div>
+
+                <button type="submit" id="btnUploadSubmit" style="padding: 12px 20px; background: #0056b3; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">
+                    Share Resource
+                </button>
+            </form>
+        </div>
     </div>
 
+    <!-- Script Module -->
     <script type="module">
-        import { logoutUser, updateUserProfile } from './auth.js';
-        import { auth, db, doc, getDoc } from './firebase-config.js';
+        import { logoutUser } from './auth.js';
+        import { auth, db, doc, getDoc, collection, addDoc, serverTimestamp } from './firebase-config.js';
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        let currentUserUid = null;
-        let currentUserRole = 'student';
-
-        // Check authentication & load existing data
+        // Check authentication & role
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                currentUserUid = user.uid;
                 const docSnap = await getDoc(doc(db, "users", user.uid));
-                
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    currentUserRole = data.role || 'student';
-
-                    // Update dashboard nav link based on role
-                    const navDash = document.getElementById('navDashboardLink');
-                    if (navDash) {
-                        navDash.href = currentUserRole === 'lecturer' ? 'dashboard-lecturer.html' : 'dashboard-student.html';
+                    if (data.role !== 'lecturer') {
+                        // Redirect students to student dashboard
+                        window.location.href = 'dashboard-student.html';
+                        return;
                     }
-
-                    document.getElementById('profEmail').value = data.email || user.email;
-                    document.getElementById('profRole').value = currentUserRole.toUpperCase();
-                    document.getElementById('profName').value = data.name || '';
-
-                    if (currentUserRole === 'student') {
-                        document.getElementById('studentFields').style.display = 'block';
-                        document.getElementById('profMatric').value = data.matricNo || '';
-                        if (data.set) {
-                            document.getElementById('profSet').value = data.set;
-                        }
-                    }
+                    document.getElementById('lecturerName').textContent = data.name || 'Lecturer';
+                    document.getElementById('lecturerEmail').textContent = data.email || '-';
                 }
             } else {
                 window.location.href = 'login.html';
             }
         });
 
-        // Save updated profile
-        document.getElementById('profileForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!currentUserUid) return;
+        // Logout Event
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            logoutUser();
+        });
 
-            const btn = document.getElementById('btnSaveProfile');
-            const name = document.getElementById('profName').value.trim();
+        // Upload Resource to Firestore
+        document.getElementById('uploadResourceForm').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Menghalang muat semula halaman atau redirect tidak sengaja
+            
+            const subject = document.getElementById('resSubject').value;
+            const title = document.getElementById('resTitle').value.trim();
+            const url = document.getElementById('resUrl').value.trim();
+            const btn = document.getElementById('btnUploadSubmit');
 
-            const updatedData = {
-                name: name
-            };
-
-            if (currentUserRole === 'student') {
-                updatedData.matricNo = document.getElementById('profMatric').value.trim();
-                updatedData.set = document.getElementById('profSet').value;
+            if (!title || !url) {
+                alert('Please fill in all fields!');
+                return;
             }
 
             try {
                 btn.disabled = true;
-                btn.textContent = 'Saving...';
-                await updateUserProfile(currentUserUid, updatedData);
-                alert('Profile updated successfully!');
+                btn.textContent = 'Uploading...';
+
+                await addDoc(collection(db, "resources"), {
+                    subject: subject,
+                    title: title,
+                    url: url,
+                    uploadedBy: auth.currentUser.uid,
+                    createdAt: serverTimestamp()
+                });
+
+                alert('Resource shared successfully!');
+                document.getElementById('uploadResourceForm').reset();
             } catch (err) {
-                alert('Failed to update profile: ' + err.message);
+                console.error("Upload Error:", err);
+                alert('Upload failed: ' + err.message);
             } finally {
                 btn.disabled = false;
-                btn.textContent = 'Save Changes';
+                btn.textContent = 'Share Resource';
             }
-        });
-
-        // Logout Event
-        document.getElementById('btnLogout').addEventListener('click', () => {
-            logoutUser();
         });
     </script>
     <script type="module" src="app-core.js"></script>
