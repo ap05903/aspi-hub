@@ -1,65 +1,59 @@
-// firebase-config.js
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+/**
+ * firebase-config.js
+ * Konfigurasi Utama Firebase SDK untuk PINTAR@Sphere
+ */
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { 
     getAuth, 
-    createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
     signOut, 
     onAuthStateChanged 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { 
     getFirestore, 
+    collection, 
     doc, 
     setDoc, 
     getDoc, 
-    collection, 
-    query, 
-    where, 
     getDocs, 
     addDoc, 
-    updateDoc 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { 
-    getStorage, 
-    ref, 
-    uploadBytes, 
-    getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+    query, 
+    where, 
+    orderBy, 
+    serverTimestamp 
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+// Gantikan dengan kunci API Firebase Projek anda
 const firebaseConfig = {
-    apiKey: "AIzaSyBHuWIV-V65gyxxnWuP_qAIGljvoO5sJcs",
+    apiKey: "YOUR_API_KEY_HERE",
     authDomain: "pintar-sphere.firebaseapp.com",
     projectId: "pintar-sphere",
-    storageBucket: "pintar-sphere.firebasestorage.app",
-    messagingSenderId: "829082367809",
-    appId: "1:829082367809:web:50defae0288fee399cd3c0",
-    measurementId: "G-WLE5FH87LE"
+    storageBucket: "pintar-sphere.appspot.com",
+    messagingSenderId: "1234567890",
+    appId: "1:1234567890:web:abcdef123456"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 export { 
     auth, 
     db, 
-    storage, 
-    createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
     signOut, 
     onAuthStateChanged,
+    collection, 
     doc, 
     setDoc, 
     getDoc, 
-    collection, 
-    query, 
-    where, 
     getDocs, 
     addDoc, 
-    updateDoc,
-    ref, 
-    uploadBytes, 
-    getDownloadURL 
+    query, 
+    where, 
+    orderBy, 
+    serverTimestamp 
 };
