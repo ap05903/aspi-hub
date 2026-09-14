@@ -1,248 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>PINTAR@Sphere Community</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Komuniti - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="community.css">
 </head>
 
-
 <body>
 
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <ul>
+            <li><a href="dashboard-student.html" data-i18n="nav_dashboard">Dashboard</a></li>
+            <li><a href="resources.html" data-i18n="nav_resources">Bahan</a></li>
+            <li><a href="tools.html" data-i18n="nav_tools">GPA Calculator</a></li>
+            <li><a href="calender.html" data-i18n="nav_calendar">Kalendar</a></li>
+            <li><a href="community.html" data-i18n="nav_community">Komuniti</a></li>
+        </ul>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </nav>
 
-<nav>
-
-    <div class="logo">
-        🎓 PINTAR@Sphere
-    </div>
-
-    <ul>
-
-        <li><a href="index.html">Home</a></li>
-
-        <li><a href="dashboard.html">Dashboard</a></li>
-
-        <li><a href="resources.html">Resources</a></li>
-
-        <li><a href="tools.html">Tools</a></li>
-
-        <li><a href="timetable.html">Timetable</a></li>
-
-        <li><a href="calendar.html">Calendar</a></li>
-
-        <li><a href="community.html">Community</a></li>
-
-    </ul>
-
-
-    <button onclick="toggleDarkMode()">
-        🌙 Dark Mode
-    </button>
-
-</nav>
-
-
-
-<header class="community-hero">
-
-    <h1>
-        💬 ASPI Community
-    </h1>
-
-    <p>
-        Ask questions, share study tips,
-        and help other ASPI students.
-    </p>
-
-</header>
-
-
-
-<main class="community-page">
-
-
-    <!-- CREATE POST -->
-
-    <section class="create-post-card">
-
-        <h2>
-            ✍️ Create a Post
-        </h2>
-
-
-        <input
-            type="text"
-            id="postTitle"
-            placeholder="Post title"
-        >
-
-
-        <textarea
-            id="postContent"
-            placeholder="What would you like to share?"
-        ></textarea>
-
-
-        <div class="post-options">
-
-
-            <select id="postCategory">
-
-                <option value="question">
-                    ❓ Question
-                </option>
-
-                <option value="study">
-                    📚 Study Tip
-                </option>
-
-                <option value="announcement">
-                    📢 Announcement
-                </option>
-
-                <option value="resource">
-                    🔗 Resource
-                </option>
-
+    <div class="community-container">
+        
+        <!-- Pilihan Bahasa -->
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+            <select id="langSelect" onchange="changeLanguage(this.value)" style="padding: 6px; border-radius: 5px;">
+                <option value="ms">🇲🇾 BM</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="zh">🇨🇳 ZH</option>
+                <option value="ta">🇮🇳 TA</option>
             </select>
-
-
-            <select id="postSubject">
-
-                <option value="General">
-                    General
-                </option>
-
-                <option value="Biology">
-                    Biology
-                </option>
-
-                <option value="Physics">
-                    Physics
-                </option>
-
-                <option value="Chemistry">
-                    Chemistry
-                </option>
-
-                <option value="LLA">
-                    LLA
-                </option>
-
-                <option value="Logical Reasoning">
-                    Logical Reasoning
-                </option>
-
-                <option value="Statistics">
-                    Statistics
-                </option>
-
-                <option value="Research">
-                    Research
-                </option>
-
-                <option value="Jati Diri">
-                    Jati Diri
-                </option>
-
-            </select>
-
-
-            <button id="publishPost">
-                Publish
-            </button>
-
         </div>
 
-    </section>
+        <!-- BORANG CIPTA POSTING BAHARU -->
+        <div class="post-box">
+            <h3>💬 Cipta Perbincangan Baharu (Nama Nyata)</h3>
+            <form id="createPostForm">
+                <input type="text" id="postTitle" placeholder="Tajuk perbincangan..." required style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:6px;">
+                <textarea id="postContent" rows="3" placeholder="Apa yang ingin anda tanyakan atau kongsikan?" required style="width:100%; padding:10px; border:1px solid #ccc; border-radius:6px;"></textarea>
+                <button type="submit" style="background:#0056b3; color:white; border:none; padding:10px 20px; border-radius:6px; margin-top:10px; font-weight:bold; cursor:pointer;">Hantar Perbincangan</button>
+            </form>
+        </div>
 
+        <!-- SENARAI POSTING KOMUNITI -->
+        <div id="postsFeed">
+            <p style="text-align: center; color: #777;">Memuatkan perbincangan komuniti...</p>
+        </div>
 
+    </div>
 
-    <!-- FILTERS -->
+    <script type="module">
+        import { auth, onAuthStateChanged, db, collection, addDoc, getDocs, query, orderBy, serverTimestamp, doc, getDoc } from './firebase-config.js';
+        import { setLanguage, initI18n, getCurrentLanguage } from './i18n.js';
 
-    <section class="community-filters">
+        let currentUser = null;
 
-        <button
-            class="filter-btn active"
-            data-filter="all"
-        >
-            All
-        </button>
+        initI18n();
+        document.getElementById('langSelect').value = getCurrentLanguage();
 
+        window.changeLanguage = function (lang) {
+            setLanguage(lang);
+        };
 
-        <button
-            class="filter-btn"
-            data-filter="question"
-        >
-            ❓ Questions
-        </button>
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const snap = await getDoc(doc(db, "users", user.uid));
+                if (snap.exists()) {
+                    currentUser = snap.data();
+                    loadPosts();
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
 
+        async function loadPosts() {
+            const feed = document.getElementById('postsFeed');
+            try {
+                const postsRef = collection(db, "community_posts");
+                const q = query(postsRef, orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
 
-        <button
-            class="filter-btn"
-            data-filter="study"
-        >
-            📚 Study Tips
-        </button>
+                if (querySnapshot.empty) {
+                    feed.innerHTML = '<p style="text-align:center; color:#888;">Belum ada perbincangan. Jadilah yang pertama bermula!</p>';
+                    return;
+                }
 
+                feed.innerHTML = '';
+                querySnapshot.forEach(docSnap => {
+                    const post = docSnap.data();
+                    const postCard = document.createElement('div');
+                    postCard.className = 'post-card';
+                    postCard.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <div>
+                                <strong style="color:#0056b3;">${post.authorName}</strong> 
+                                <span class="role-badge">${post.authorRole === 'LECTURER' ? '👨‍🏫 Pensyarah' : '🎓 Pelajar (' + (post.authorSet || 'Set 1') + ')'}</span>
+                            </div>
+                            <small style="color:#888;">${post.createdAt ? new Date(post.createdAt.seconds * 1000).toLocaleDateString() : 'Baru sahaja'}</small>
+                        </div>
+                        <h4 style="margin:5px 0; color:#333;">${post.title}</h4>
+                        <p style="color:#555; line-height:1.5;">${post.content}</p>
+                    `;
+                    feed.appendChild(postCard);
+                });
+            } catch (err) {
+                console.error("Ralat memuatkan kiriman:", err);
+            }
+        }
 
-        <button
-            class="filter-btn"
-            data-filter="announcement"
-        >
-            📢 Announcements
-        </button>
+        document.getElementById('createPostForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('postTitle').value.trim();
+            const content = document.getElementById('postContent').value.trim();
 
+            try {
+                await addDoc(collection(db, "community_posts"), {
+                    title: title,
+                    content: content,
+                    authorName: currentUser.name,
+                    authorRole: currentUser.role,
+                    authorSet: currentUser.set || '',
+                    createdAt: serverTimestamp()
+                });
 
-        <button
-            class="filter-btn"
-            data-filter="resource"
-        >
-            🔗 Resources
-        </button>
+                document.getElementById('createPostForm').reset();
+                loadPosts();
+            } catch (err) {
+                alert('Gagal menghantar perbincangan: ' + err.message);
+            }
+        });
+    </script>
 
-    </section>
-
-
-
-    <!-- COMMUNITY POSTS -->
-
-    <section
-        id="communityPosts"
-        class="community-posts"
-    >
-
-        <!-- community.js adds posts here -->
-
-    </section>
-
-
-</main>
-
-
-
-<footer>
-
-    <p>
-        © 2026 PINTAR@Sphere | Built for ASPI Students
-    </p>
-
-</footer>
-
-
-
-<script src="script.js"></script>
-
-<script src="community.js"></script>
-
-
+    <script src="script.js"></script>
 </body>
 
 </html>
