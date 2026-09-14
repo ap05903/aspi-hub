@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pelajar - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .student-header { background: #0056b3; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .set-badge { background: #ffc107; color: #000; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .resource-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        .btn-drive { background: #28a745; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <ul>
+            <li><a href="dashboard-student.html">Dashboard</a></li>
+            <li><a href="timetable.html">Jadual Waktu</a></li>
+            <li><a href="tools.html">Kalkulator GPA</a></li>
+            <li><a href="community.html">Komuniti</a></li>
+        </ul>
+        <button id="logoutBtn">Log Keluar</button>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Header Selamat Datang -->
+        <div class="student-header">
+            <h2>Selamat Datang, <span id="studentName">Pelajar</span>! 👋</h2>
+            <p>No. Matrik: <b id="studentMatric">-</b> | Kumpulan: <span id="studentSetBadge" class="set-badge">Set -</span></p>
+        </div>
+
+        <div class="grid-layout">
+            <!-- Ruang Utama: Bahan Pembelajaran -->
+            <div>
+                <div class="card">
+                    <h3>📚 Bahan Pembelajaran (Learning Resources)</h3>
+                    <p style="font-size: 13px; color: #666;">Bahan yang disediakan khusus untuk <b id="currentSetText">Set anda</b>.</p>
+                    
+                    <div style="margin: 15px 0;">
+                        <label>Tapis Subjek: </label>
+                        <select id="subjectFilter">
+                            <option value="ALL">Semua Subjek</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Logical Reasoning">Logical Reasoning</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
+                            <option value="Jati Diri">Jati Diri</option>
+                            <option value="Research Skills">Research Skills</option>
+                        </select>
+                    </div>
+
+                    <div id="resourcesList">
+                        <p>Memuatkan bahan pembelajaran...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Sisi: Peringatan & Quiz Due Date -->
+            <div>
+                <div class="card">
+                    <h3>⏰ Peringatan Tugasan / Quiz</h3>
+                    <div id="deadlinesList">
+                        <p style="font-size: 13px; color: #777;">Tiada tugasan mendesak minggu ini.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, onAuthStateChanged } from './firebase-config.js';
+        import { logoutUser } from './auth.js';
+        import { getStudentProfile, getStudentResources } from './student-core.js';
+
+        document.getElementById('logoutBtn').addEventListener('click', () => logoutUser());
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const profile = await getStudentProfile(user.uid);
+                    document.getElementById('studentName').textContent = profile.name;
+                    document.getElementById('studentMatric').textContent = profile.matricNo || 'N/A';
+                    document.getElementById('studentSetBadge').textContent = profile.set || 'Set 1';
+                    document.getElementById('currentSetText').textContent = profile.set || 'Set 1';
+
+                    // Load Bahan Pembelajaran
+                    loadResources(profile.set, 'ALL');
+
+                    document.getElementById('subjectFilter').addEventListener('change', (e) => {
+                        loadResources(profile.set, e.target.value);
+                    });
+
+                } catch (err) {
+                    console.error(err);
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        async function loadResources(studentSet, subject) {
+            const listDiv = document.getElementById('resourcesList');
+            listDiv.innerHTML = '<p>Memuatkan...</p>';
+
+            try {
+                const materials = await getStudentResources(studentSet, subject);
+                if (materials.length === 0) {
+                    listDiv.innerHTML = '<p style="color:#888;">Tiada bahan pembelajaran ditemui untuk subjek ini.</p>';
+                    return;
+                }
+
+                listDiv.innerHTML = '';
+                materials.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'resource-item';
+                    div.innerHTML = `
+                        <div>
+                            <b>${item.title}</b> <br>
+                            <small style="color: #666;">${item.subject} • Oleh ${item.uploadedByName}</small>
+                        </div>
+                        <a href="${item.driveUrl}" target="_blank" class="btn-drive">📁 Buka Link</a>
+                    `;
+                    listDiv.appendChild(div);
+                });
+            } catch (err) {
+                listDiv.innerHTML = '<p style="color:red;">Ralat memuatkan bahan.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
