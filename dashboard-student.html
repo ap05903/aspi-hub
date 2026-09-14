@@ -1,86 +1,145 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Pelajar - PINTAR@Sphere</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .subject-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 15px; }
-        .subject-card { background: var(--secondary-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; text-align: center; text-decoration: none; color: var(--text-color); font-weight: bold; }
-        .subject-card:hover { border-color: var(--primary-color); }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .user-card { 
+            background: var(--card-bg, #ffffff); 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color, #e0e0e0);
+        }
+        .grid-subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .subject-card {
+            background: var(--card-bg, #fff);
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color, #e0e0e0);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color, #333);
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: bold;
+        }
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border-color: var(--primary-color, #0056b3);
+        }
+        .gpa-card {
+            background: var(--card-bg, #fff);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color, #e0e0e0);
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Navigation Bar -->
     <nav>
-        <div class="logo">🎓 PINTAR@Sphere</div>
-        <ul>
-            <li><a href="dashboard-student.html">Dashboard</a></li>
-            <li><a href="community.html">Komuniti</a></li>
-        </ul>
-        <button onclick="logout()">Log Keluar</button>
-        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <div class="logo">🎓 PINTAR@Sphere (Student)</div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <a href="dashboard-student.html" style="color: white; text-decoration: none;">Dashboard</a>
+            <a href="community.html" style="color: white; text-decoration: none;">Community</a>
+            <a href="profile.html" style="color: white; text-decoration: none;">Profile</a>
+            <button id="btnLogout" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Logout</button>
+        </div>
     </nav>
 
-    <div style="max-width: 1100px; margin: 30px auto; padding: 0 20px;">
-        <div style="background: linear-gradient(135deg, #0056b3, #002d5e); color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-            <h1 id="stdName" style="margin:0;">Memuatkan...</h1>
-            <p style="margin:5px 0 0 0;">No Matrik: <b id="stdMatric">-</b> | Kumpulan: <b id="stdSet">-</b></p>
+    <div class="container">
+        <!-- Student Profile Card -->
+        <div class="user-card">
+            <h2>Welcome back, <span id="studentName">Student</span> 👋</h2>
+            <p><strong>Matric No:</strong> <span id="studentMatric">-</span></p>
+            <p><strong>Group/Set:</strong> <span id="studentSet">-</span></p>
         </div>
 
-        <div class="grid-3">
-            <div style="background:var(--card-bg); padding:20px; border-radius:10px; border:1px solid var(--border-color); grid-column: span 2;">
-                <h3>📚 Subjek Teras ASPI</h3>
-                <!-- Pautan Dinamik Menggunakan 1 Fail subject.html -->
-                <div class="subject-grid">
-                    <a href="subject.html?code=biology" class="subject-card">🧬 Biology</a>
-                    <a href="subject.html?code=chemistry" class="subject-card">🧪 Chemistry</a>
-                    <a href="subject.html?code=physics" class="subject-card">⚛️ Physics</a>
-                    <a href="subject.html?code=logical" class="subject-card">🧠 Logical</a>
-                    <a href="subject.html?code=statistics" class="subject-card">📊 Statistics</a>
-                    <a href="subject.html?code=lla" class="subject-card">📖 LLA</a>
-                    <a href="subject.html?code=jati_diri" class="subject-card">🛡️ Jati Diri</a>
-                    <a href="subject.html?code=research" class="subject-card">🔍 Research</a>
-                </div>
-            </div>
+        <!-- Core Subjects -->
+        <h3>📚 ASPI Core Subjects</h3>
+        <div class="grid-subjects">
+            <a href="subject.html?code=biology" class="subject-card">🧬 Biology</a>
+            <a href="subject.html?code=chemistry" class="subject-card">🧪 Chemistry</a>
+            <a href="subject.html?code=physics" class="subject-card">⚡ Physics</a>
+            <a href="subject.html?code=mathematics" class="subject-card">📐 Mathematics</a>
+            <a href="subject.html?code=english" class="subject-card">📖 English</a>
+            <a href="subject.html?code=computing" class="subject-card">💻 Computer Science</a>
+        </div>
 
-            <div style="background:var(--card-bg); padding:20px; border-radius:10px; border:1px solid var(--border-color);">
-                <h3>🎯 Kalkulator Anggaran GPA</h3>
-                <label>Purata Target Markah (%)</label>
-                <input type="number" id="targetScore" placeholder="e.g. 80" style="width:100%; padding:8px; margin:8px 0;">
-                <button onclick="calculateGPA()" style="width:100%;">Kira Anggaran GPA</button>
-                <h2 id="gpaResult" style="text-align:center; margin-top:15px; color:var(--primary-color);">-</h2>
+        <!-- GPA Calculator -->
+        <div class="gpa-card">
+            <h3>🎯 GPA Target Calculator</h3>
+            <div style="margin-bottom: 15px;">
+                <label>Average Target Score (%)</label>:
+                <input type="number" id="targetScore" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; width: 120px;" placeholder="e.g. 80">
             </div>
+            <button id="btnCalcGpa" style="padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Calculate Estimated GPA</button>
+            <h4 style="margin-top: 15px;">Estimated GPA: <span id="gpaResult" style="color: #0056b3;">-</span></h4>
         </div>
     </div>
 
     <script type="module">
-        import { auth, onAuthStateChanged } from './firebase-config.js';
-        import { getStudentProfile } from './app-core.js';
         import { logoutUser } from './auth.js';
+        import { auth, db, doc, getDoc } from './firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        window.logout = logoutUser;
-        window.calculateGPA = function() {
-            const val = parseFloat(document.getElementById('targetScore').value);
-            if (!val) return;
-            let gpa = 0.0;
-            if (val >= 80) gpa = 4.0;
-            else if (val >= 75) gpa = 3.67;
-            else if (val >= 70) gpa = 3.33;
-            else if (val >= 65) gpa = 3.00;
-            else gpa = 2.50;
-            document.getElementById('gpaResult').textContent = `Est. GPA: ${gpa.toFixed(2)}`;
-        };
-
+        // Check authentication state
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const profile = await getStudentProfile(user.uid);
-                document.getElementById('stdName').textContent = profile.name;
-                document.getElementById('stdMatric').textContent = profile.matricNo || 'N/A';
-                document.getElementById('stdSet').textContent = profile.set || 'Set 1';
+                const docSnap = await getDoc(doc(db, "users", user.uid));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.role !== 'student') {
+                        window.location.href = 'dashboard-lecturer.html';
+                        return;
+                    }
+                    document.getElementById('studentName').textContent = data.name || 'Student';
+                    document.getElementById('studentMatric').textContent = data.matricNo || 'N/A';
+                    document.getElementById('studentSet').textContent = data.set || 'N/A';
+                }
             } else {
                 window.location.href = 'login.html';
             }
+        });
+
+        // Logout Event
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            logoutUser();
+        });
+
+        // GPA Calculator Logic
+        document.getElementById('btnCalcGpa').addEventListener('click', () => {
+            const score = parseFloat(document.getElementById('targetScore').value);
+            const resultElement = document.getElementById('gpaResult');
+            
+            if (isNaN(score) || score < 0 || score > 100) {
+                alert('Please enter a valid score between 0 and 100!');
+                return;
+            }
+
+            let gpa = 0.0;
+            if (score >= 80) gpa = 4.00;
+            else if (score >= 75) gpa = 3.67;
+            else if (score >= 70) gpa = 3.33;
+            else if (score >= 65) gpa = 3.00;
+            else if (score >= 60) gpa = 2.67;
+            else if (score >= 55) gpa = 2.33;
+            else if (score >= 50) gpa = 2.00;
+            else gpa = 1.00;
+
+            resultElement.textContent = gpa.toFixed(2);
         });
     </script>
     <script type="module" src="app-core.js"></script>
