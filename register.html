@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="register_title">Daftar Akaun - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .register-container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 10px; border: 1px solid var(--border-color);
+            border-radius: 6px; box-sizing: border-box;
+            background: var(--bg-color); color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </nav>
+
+    <div class="register-container">
+        <h2 style="text-align: center; margin-top:0;">Daftar Akaun Baharu</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Isi maklumat di bawah untuk mendaftar</p>
+
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Nama Penuh</label>
+                <input type="text" id="regName" placeholder="Contoh: Ali bin Ahmad" required>
+            </div>
+
+            <div class="form-group">
+                <label>Peranan / Role</label>
+                <select id="regRole" required onchange="toggleStudentFields(this.value)">
+                    <option value="student">Pelajar (Student)</option>
+                    <option value="lecturer">Pensyarah (Lecturer)</option>
+                </select>
+            </div>
+
+            <div id="studentFields">
+                <div class="form-group">
+                    <label>No Matrik</label>
+                    <input type="text" id="regMatric" placeholder="Contoh: MS24123456">
+                </div>
+                <div class="form-group">
+                    <label>Kumpulan / Set</label>
+                    <select id="regSet">
+                        <option value="Set 1">Set 1</option>
+                        <option value="Set 2">Set 2</option>
+                        <option value="Set 3">Set 3</option>
+                        <option value="Set 4">Set 4</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>E-mel</label>
+                <input type="email" id="regEmail" placeholder="contoh@siswa.um.edu.my" required>
+            </div>
+
+            <div class="form-group">
+                <label>Kata Laluan</label>
+                <input type="password" id="regPassword" placeholder="Minimum 6 aksara" required>
+            </div>
+
+            <button type="submit" style="width: 100%; padding: 12px; margin-top: 10px;">Daftar Akaun</button>
+        </form>
+
+        <p style="text-align: center; font-size: 13px; margin-top: 20px;">
+            Sudah mempunyai akaun? 
+            <a href="login.html" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Log masuk di sini</a>
+        </p>
+    </div>
+
+    <script type="module">
+        import { registerUser } from './auth.js';
+
+        window.toggleStudentFields = function(role) {
+            const studentFields = document.getElementById('studentFields');
+            studentFields.style.display = role === 'student' ? 'block' : 'none';
+        };
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const role = document.getElementById('regRole').value;
+            const matricNo = document.getElementById('regMatric').value;
+            const set = document.getElementById('regSet').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            try {
+                await registerUser(email, password, name, role, matricNo, set);
+                alert('Pendaftaran berjaya! Sila log masuk.');
+                window.location.href = 'login.html';
+            } catch (error) {
+                alert('Pendaftaran Gagal: ' + error.message);
+            }
+        });
+    </script>
+    <script type="module" src="app-core.js"></script>
+</body>
+</html>
