@@ -1,39 +1,69 @@
-// student-core.js
-import { db, doc, getDoc, collection, query, where, getDocs } from "./firebase-config.js";
+/**
+ * student-core.js
+ * Modul Pengurusan Data Pelajar (Profil, Bahan Pembelajaran, dan GPA)
+ */
 
-// 1. Dapatkan Profil Pelajar yang Log Masuk
+import { 
+    db, 
+    doc, 
+    getDoc, 
+    collection, 
+    getDocs, 
+    query, 
+    where 
+} from './firebase-config.js';
+
 export async function getStudentProfile(uid) {
-    const userDoc = await getDoc(doc(db, "users", uid));
-    if (userDoc.exists()) {
-        return userDoc.data();
+    try {
+        const docRef = doc(db, "users", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            throw new Error("Profil pelajar tidak dijumpai!");
+        }
+    } catch (error) {
+        console.error("Ralat mendapatkan profil pelajar:", error);
+        throw error;
     }
-    throw new Error("Profil pelajar tidak dijumpai.");
 }
 
-// 2. Ambil Bahan Pembelajaran (Filtered by Set & All Sets)
-export async function getStudentResources(studentSet, subject = "ALL") {
-    const resourcesRef = collection(db, "resources");
-    let q;
+export async function getStudentResources(studentSet) {
+    try {
+        const resourcesRef = collection(db, "learning_resources");
+        const querySnapshot = await getDocs(resourcesRef);
 
-    if (subject === "ALL") {
-        q = query(resourcesRef, where("targetSets", "array-contains-any", [studentSet, "ALL"]));
-    } else {
-        q = query(resourcesRef, where("subject", "==", subject), where("targetSets", "array-contains-any", [studentSet, "ALL"]));
+        const list = [];
+        querySnapshot.forEach(docSnap => {
+            const data = docSnap.data();
+            if (data.targetSets.includes('ALL') || data.targetSets.includes(studentSet)) {
+                list.push({
+                    id: docSnap.id,
+                    ...data
+                });
+            }
+        });
+
+        return list;
+    } catch (error) {
+        console.error("Ralat mengambil bahan pembelajaran:", error);
+        return [];
     }
-
-    const querySnapshot = await getDocs(q);
-    const resources = [];
-    querySnapshot.forEach(doc => {
-        resources.push({ id: doc.id, ...doc.data() });
-    });
-    return resources;
 }
 
-// 3. Ambil Markah & GPA Pelajar
-export async function getStudentGPAData(studentUid) {
-    const gradeDoc = await getDoc(doc(db, "grades", studentUid));
-    if (gradeDoc.exists()) {
-        return gradeDoc.data();
+export async function getStudentGPAData(uid) {
+    try {
+        const gradeDocRef = doc(db, "grades", uid);
+        const docSnap = await getDoc(gradeDocRef);
+
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            return { subjects: {} };
+        }
+    } catch (error) {
+        console.error("Ralat mengambil markah GPA:", error);
+        return { subjects: {} };
     }
-    return null; // Belum diisi oleh lecturer
 }
