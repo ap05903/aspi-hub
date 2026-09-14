@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="register_title">Daftar Akaun - PINTAR@Sphere</title>
+    <title>Register Account - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .register-container {
             max-width: 450px;
             margin: 40px auto;
             padding: 30px;
-            background: var(--card-bg);
+            background: var(--card-bg, #ffffff);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color, #e0e0e0);
         }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
         .form-group input, .form-group select {
-            width: 100%; padding: 10px; border: 1px solid var(--border-color);
+            width: 100%; padding: 10px; border: 1px solid var(--border-color, #ccc);
             border-radius: 6px; box-sizing: border-box;
-            background: var(--bg-color); color: var(--text-color);
+            background: var(--bg-color, #fff); color: var(--text-color, #333);
         }
     </style>
 </head>
@@ -28,85 +28,103 @@
 
     <nav>
         <div class="logo">🎓 PINTAR@Sphere</div>
-        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <button id="btnDarkMode">🌙 Dark Mode</button>
     </nav>
 
     <div class="register-container">
-        <h2 style="text-align: center; margin-top:0;">Daftar Akaun Baharu</h2>
-        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Isi maklumat di bawah untuk mendaftar</p>
+        <h2 style="text-align: center; margin-top:0;">Create New Account</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Please fill in your details below</p>
 
         <form id="registerForm">
             <div class="form-group">
-                <label>Nama Penuh</label>
-                <input type="text" id="regName" placeholder="Contoh: Ali bin Ahmad" required>
+                <label>Full Name</label>
+                <input type="text" id="regName" placeholder="e.g. John Doe" required>
             </div>
 
             <div class="form-group">
-                <label>Peranan / Role</label>
-                <select id="regRole" required onchange="toggleStudentFields(this.value)">
-                    <option value="student">Pelajar (Student)</option>
-                    <option value="lecturer">Pensyarah (Lecturer)</option>
+                <label>Role</label>
+                <select id="regRole" required>
+                    <option value="student">Student</option>
+                    <option value="lecturer">Lecturer</option>
                 </select>
             </div>
 
             <div id="studentFields">
                 <div class="form-group">
-                    <label>No Matrik</label>
-                    <input type="text" id="regMatric" placeholder="Contoh: MS24123456">
+                    <label>Matric No</label>
+                    <input type="text" id="regMatric" placeholder="e.g. MS24123456">
                 </div>
                 <div class="form-group">
-                    <label>Kumpulan / Set</label>
+                    <label>Group / Set</label>
                     <select id="regSet">
                         <option value="Set 1">Set 1</option>
                         <option value="Set 2">Set 2</option>
                         <option value="Set 3">Set 3</option>
                         <option value="Set 4">Set 4</option>
+                        <option value="Set 5">Set 5</option>
+                        <option value="Set 6">Set 6</option>
+                        <option value="Set 7">Set 7</option>
+                        <option value="Set 8">Set 8</option>
+                        <option value="Set 9">Set 9</option>
+                        <option value="Set 10">Set 10</option>
+                        <option value="Set 11">Set 11</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>E-mel</label>
-                <input type="email" id="regEmail" placeholder="contoh@siswa.um.edu.my" required>
+                <label>Email Address</label>
+                <input type="email" id="regEmail" placeholder="student@siswa.um.edu.my" required>
             </div>
 
             <div class="form-group">
-                <label>Kata Laluan</label>
-                <input type="password" id="regPassword" placeholder="Minimum 6 aksara" required>
+                <label>Password</label>
+                <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
             </div>
 
-            <button type="submit" style="width: 100%; padding: 12px; margin-top: 10px;">Daftar Akaun</button>
+            <button type="submit" id="btnRegisterSubmit" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer;">Register Account</button>
         </form>
 
         <p style="text-align: center; font-size: 13px; margin-top: 20px;">
-            Sudah mempunyai akaun? 
-            <a href="login.html" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Log masuk di sini</a>
+            Already have an account? 
+            <a href="login.html" style="color: var(--primary-color, #0056b3); text-decoration: none; font-weight: bold;">Login here</a>
         </p>
     </div>
 
     <script type="module">
         import { registerUser } from './auth.js';
 
-        window.toggleStudentFields = function(role) {
-            const studentFields = document.getElementById('studentFields');
-            studentFields.style.display = role === 'student' ? 'block' : 'none';
-        };
+        // Toggle student fields based on selected role
+        const roleSelect = document.getElementById('regRole');
+        const studentFields = document.getElementById('studentFields');
 
+        roleSelect.addEventListener('change', (e) => {
+            studentFields.style.display = e.target.value === 'student' ? 'block' : 'none';
+        });
+
+        // Form Submission
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const name = document.getElementById('regName').value;
+            
+            const btn = document.getElementById('btnRegisterSubmit');
+            const name = document.getElementById('regName').value.trim();
             const role = document.getElementById('regRole').value;
-            const matricNo = document.getElementById('regMatric').value;
+            const matricNo = document.getElementById('regMatric').value.trim();
             const set = document.getElementById('regSet').value;
-            const email = document.getElementById('regEmail').value;
+            const email = document.getElementById('regEmail').value.trim();
             const password = document.getElementById('regPassword').value;
 
             try {
+                btn.disabled = true;
+                btn.textContent = 'Creating Account...';
                 await registerUser(email, password, name, role, matricNo, set);
-                alert('Pendaftaran berjaya! Sila log masuk.');
+                alert('Registration successful! Please login.');
                 window.location.href = 'login.html';
             } catch (error) {
-                alert('Pendaftaran Gagal: ' + error.message);
+                alert('Registration Failed: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Register Account';
             }
         });
     </script>
