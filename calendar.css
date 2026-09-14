@@ -1,286 +1,32 @@
-.calendar-container{
-    max-width:1200px;
-    margin:40px auto;
-    padding:20px;
+/* calender.css - Takwim Akademik */
+.calendar-container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-.calendar-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.calendar-header h2{
-    color:#1434A4;
-    font-size:32px;
-}
-
-.calendar-header button{
-    background:#1434A4;
-    color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:18px;
-}
-
-.calendar-header button:hover{
-    background:#15803D;
-}
-
-.calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    border:1px solid #ddd;
-}
-
-.day-name {
-    background: #1434A4;
-    color: white;
-    padding: 14px;
-    text-align: center;
-    font-weight: bold;
-    border: 1px solid #15803D;
-}
-
-body.dark-mode .day-name {
-    background: #166534;
-    color: white;
-    border-color: #15803D;
-}
-
-.day{
-    min-height:120px;
-    border:1px solid #ddd;
-    padding:8px;
-    position:relative;
-    background:white;
-    transition:.2s;
-}
-
-.day:hover{
-    background:#f9fafb;
-}
-
-.day-number{
-    font-weight:bold;
-}
-
-.today{
-    background:#DCFCE7;
-}
-
-.event{
-    margin-top:8px;
-    padding:5px;
-    border-radius:5px;
-    font-size:13px;
-    color:white;
-    cursor:pointer;
-
-    /* Default event colour */
-    background:#9333EA;
-}
-
-.assignment{
-    background:#1434A4;
-}
-
-.quiz{
-    background:#F59E0B;
-}
-
-.exam{
-    background:#DC2626;
-}
-
-.holidays{
-    background:#2563EB;
-}
-
-/* =========================
-   EVENT POPUP
-   ========================= */
-
-.event-modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.event-modal-content {
-    background: white;
-    width: 100%;
-    max-width: 450px;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+.timeline {
     position: relative;
+    padding: 20px 0;
 }
 
-.event-modal-content h2 {
-    color: #1434A4;
-    margin-bottom: 20px;
-}
-
-.event-modal-content p {
-    margin: 12px 0;
-    line-height: 1.6;
-}
-
-.close-button {
-    position: absolute;
-    top: 12px;
-    right: 15px;
-    border: none;
-    background: transparent;
-    font-size: 28px;
-    cursor: pointer;
-    color: #555;
-}
-
-.event-modal-content button:last-child {
-    background: #1434A4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+.event-card {
+    background: var(--card-bg);
+    border-left: 5px solid var(--primary-color);
     border-radius: 8px;
-    cursor: pointer;
-    margin-top: 15px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.event-modal-content button:last-child:hover {
-    background: #15803D;
-}
-
-/* Dark mode calendar popup */
-
-.dark-mode .event-modal-content {
-    background: #1f1f1f;
-    color: white;
-}
-
-.dark-mode .event-modal-content h2 {
-    color: #22C55E;
-}
-
-.dark-mode .close-button {
-    color: white;
-}
-
-/* Calendar popup - dark mode */
-
-html.dark-mode .event-modal-content,
-body.dark-mode .event-modal-content {
-    background-color: #1f1f1f !important;
-    color: #ffffff !important;
-}
-
-html.dark-mode .event-modal-content h2,
-body.dark-mode .event-modal-content h2 {
-    color: #22C55E !important;
-}
-
-html.dark-mode .event-modal-content p,
-body.dark-mode .event-modal-content p {
-    color: #ffffff !important;
-}
-
-html.dark-mode .close-button,
-body.dark-mode .close-button {
-    color: #ffffff !important;
-    background: transparent !important;
-}
-
-#todayButton {
-    background: white;
-    color: #1434A4;
-    border: 1px solid #16A34A;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: bold;
 }
 
-#todayButton:hover {
-    background: #DCFCE7;
-}
-
-/* =========================
-   CALENDAR LEGEND
-   ========================= */
-
-.calendar-legend {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin: 15px 0 20px;
-    padding: 12px 0;
-}
-
-.calendar-legend span {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 14px;
-}
-
-.legend-color {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    display: inline-block;
-}
-
-.legend-color.assignment {
-    background: #1434A4;
-}
-
-.legend-color.quiz {
-    background: #F59E0B;
-}
-
-.legend-color.lab {
-    background: #2563EB;
-}
-
-.legend-color.exam {
-    background: #DC2626;
-}
-
-.legend-color.campus {
-    background: #9333EA;
-}
-
-.campus {
-    background: #9333EA;
-}
-
-/* Force weekday headers to be visible */
-
-.calendar-grid .day-name {
-    background-color: #1434A4!important;
-    color: #FFFFFF !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    font-weight: 700 !important;
-    text-align: center;
-    padding: 14px;
-    border: 1px solid #15803D !important;
-}
-
-
-body.dark-mode .calendar-grid .day-name {
-    background-color: #166534 !important;
-    color: #FFFFFF !important;
-}
+.badge-academic { background: #d1e7dd; color: #0f5132; }
+.badge-break { background: #fff3cd; color: #664d03; }
+.badge-final { background: #f8d7da; color: #842029; }
