@@ -42,13 +42,13 @@ nav a{
 }
 
 nav a:hover{
-    color:#d1fae5;
+    color:#A7C7E7;
 }
 
 .hero{
     text-align:center;
     padding:90px 20px;
-    background:linear-gradient(135deg,#1434A4,#22C55E);
+    background:linear-gradient(135deg,#1434A4,#6F8FAF);
     color:white;
 }
 
@@ -206,7 +206,7 @@ input{
 
 .highlight{
     border:3px solid #1434A4;
-    background:#ECFDF5;
+    background:#ADD8E6;
 }
 
 @media(max-width:768px){
@@ -376,7 +376,7 @@ nav button:hover{
 
     margin-top: 5px;
 
-    color: #dcfce7;
+    color: #A7C7E7;
 }
 
 
