@@ -1,6 +1,6 @@
 /**
  * notification-core.js
- * Handles Academic Calendar Events and Class Schedule Change Notifications
+ * Modul Notifikasi Tukar Kelas & Kalendar Akademik
  */
 
 import { 
@@ -8,15 +8,9 @@ import {
     collection, 
     addDoc, 
     getDocs, 
-    query, 
-    where, 
-    orderBy, 
     serverTimestamp 
 } from './firebase-config.js';
 
-/**
- * Broadcast a new Class Schedule Change / Notification (Lecturers)
- */
 export async function broadcastClassNotice(data) {
     try {
         const { title, subject, originalTime, newTime, venue, targetSets, lecturerName, note } = data;
@@ -32,7 +26,7 @@ export async function broadcastClassNotice(data) {
             originalTime: originalTime || "Jadual Asal",
             newTime,
             venue: venue || "Bilik Kuliah Asal",
-            targetSets, // e.g. ['Set 1', 'Set 2'] or ['ALL']
+            targetSets,
             lecturerName: lecturerName || "Pensyarah Subjek",
             note: note || "",
             createdAt: serverTimestamp()
@@ -45,9 +39,6 @@ export async function broadcastClassNotice(data) {
     }
 }
 
-/**
- * Fetch Class Schedule Change Notices for a Student's Set
- */
 export async function getStudentClassNotices(studentSet) {
     try {
         const noticesRef = collection(db, "class_notices");
@@ -56,7 +47,6 @@ export async function getStudentClassNotices(studentSet) {
         const list = [];
         querySnapshot.forEach(docSnap => {
             const data = docSnap.data();
-            // Filter by target set or 'ALL'
             if (data.targetSets.includes('ALL') || data.targetSets.includes(studentSet)) {
                 list.push({
                     id: docSnap.id,
@@ -65,35 +55,11 @@ export async function getStudentClassNotices(studentSet) {
             }
         });
 
-        // Sort by newest first
         list.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
 
         return list;
     } catch (err) {
         console.error("Ralat mengambil pemberitahuan kelas:", err);
-        return [];
-    }
-}
-
-/**
- * Fetch Academic Calendar Events
- */
-export async function getAcademicEvents() {
-    try {
-        const eventsRef = collection(db, "academic_events");
-        const querySnapshot = await getDocs(eventsRef);
-
-        const events = [];
-        querySnapshot.forEach(docSnap => {
-            events.push({
-                id: docSnap.id,
-                ...docSnap.data()
-            });
-        });
-
-        return events;
-    } catch (err) {
-        console.error("Ralat mengambil kalendar akademik:", err);
         return [];
     }
 }
