@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pensyarah - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .lecturer-header { background: #28a745; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px; }
+        .checkbox-group label { font-weight: normal; background: #f0f0f0; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .btn-submit { background: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere (Lecturer Portal)</div>
+        <button id="logoutBtn">Log Keluar</button>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="lecturer-header">
+            <h2>Portal Pensyarah: <span id="lecturerName">Dr.</span> 👋</h2>
+            <p>E-mel: <b id="lecturerEmail">-</b></p>
+        </div>
+
+        <!-- Borang Muat Naik Bahan Pembelajaran (Google Drive Link) -->
+        <div class="card">
+            <h3>➕ Muat Naik Bahan Pembelajaran Baru</h3>
+            <form id="uploadResourceForm">
+                <div class="form-group">
+                    <label>Tajuk Bahan / Slide</label>
+                    <input type="text" id="resTitle" placeholder="Contoh: Slide Chapter 1 - Physics Kinetics" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Subjek</label>
+                    <select id="resSubject" required>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Logical Reasoning">Logical Reasoning</option>
+                        <option value="Statistics">Statistics</option>
+                        <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
+                        <option value="Jati Diri">Jati Diri</option>
+                        <option value="Research Skills">Research Skills</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Pautan Google Drive / OneDrive (URL Link)</label>
+                    <input type="url" id="resDriveUrl" placeholder="https://drive.google.com/file/d/..." required>
+                </div>
+
+                <div class="form-group">
+                    <label>Hantar Ke Kumpulan Set Mana?</label>
+                    <div style="margin-bottom: 8px;">
+                        <input type="checkbox" id="selectAllSets"> <b>Pilih Semua Set (All 11 Sets)</b>
+                    </div>
+                    <div class="checkbox-group" id="setCheckboxes">
+                        <!-- Set 1 hingga Set 11 -->
+                        <label><input type="checkbox" class="set-check" value="Set 1"> Set 1</label>
+                        <label><input type="checkbox" class="set-check" value="Set 2"> Set 2</label>
+                        <label><input type="checkbox" class="set-check" value="Set 3"> Set 3</label>
+                        <label><input type="checkbox" class="set-check" value="Set 4"> Set 4</label>
+                        <label><input type="checkbox" class="set-check" value="Set 5"> Set 5</label>
+                        <label><input type="checkbox" class="set-check" value="Set 6"> Set 6</label>
+                        <label><input type="checkbox" class="set-check" value="Set 7"> Set 7</label>
+                        <label><input type="checkbox" class="set-check" value="Set 8"> Set 8</label>
+                        <label><input type="checkbox" class="set-check" value="Set 9"> Set 9</label>
+                        <label><input type="checkbox" class="set-check" value="Set 10"> Set 10</label>
+                        <label><input type="checkbox" class="set-check" value="Set 11"> Set 11</label>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitResBtn" class="btn-submit">Hantar Bahan Pembelajaran</button>
+                <span id="statusMsg" style="margin-left: 10px; font-weight: bold;"></span>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, onAuthStateChanged, db, doc, getDoc } from './firebase-config.js';
+        import { logoutUser } from './auth.js';
+        import { uploadLearningResource } from './lecturer-core.js';
+
+        let currentLecturer = null;
+
+        document.getElementById('logoutBtn').addEventListener('click', () => logoutUser());
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists()) {
+                    currentLecturer = userDoc.data();
+                    document.getElementById('lecturerName').textContent = currentLecturer.name;
+                    document.getElementById('lecturerEmail').textContent = currentLecturer.email;
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        // Toggle Select All Sets
+        document.getElementById('selectAllSets').addEventListener('change', (e) => {
+            document.querySelectorAll('.set-check').forEach(cb => cb.checked = e.target.checked);
+        });
+
+        // Form Submit
+        document.getElementById('uploadResourceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const statusMsg = document.getElementById('statusMsg');
+            statusMsg.style.color = 'black';
+            statusMsg.textContent = 'Menghantar...';
+
+            const title = document.getElementById('resTitle').value.trim();
+            const subject = document.getElementById('resSubject').value;
+            const driveUrl = document.getElementById('resDriveUrl').value.trim();
+
+            // Kumpul Set
+            const selectedSets = [];
+            if (document.getElementById('selectAllSets').checked) {
+                selectedSets.push('ALL');
+            } else {
+                document.querySelectorAll('.set-check:checked').forEach(cb => {
+                    selectedSets.push(cb.value);
+                });
+            }
+
+            if (selectedSets.length === 0) {
+                statusMsg.style.color = 'red';
+                statusMsg.textContent = 'Sila pilih sekurang-kurangnya 1 Set!';
+                return;
+            }
+
+            try {
+                await uploadLearningResource(title, subject, driveUrl, selectedSets, currentLecturer.name, currentLecturer.email);
+                statusMsg.style.color = 'green';
+                statusMsg.textContent = 'Bahan berjaya dihantar ke Dashboard Pelajar!';
+                document.getElementById('uploadResourceForm').reset();
+            } catch (err) {
+                statusMsg.style.color = 'red';
+                statusMsg.textContent = err.message;
+            }
+        });
+    </script>
+</body>
+</html>
