@@ -1,83 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
 
-<title>PINTAR@Sphere Login</title>
+        .lang-select-box {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
 
-<link rel="stylesheet" href="style.css">
+        .lang-select-box select {
+            padding: 5px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+        }
 
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .auth-btn:hover {
+            background: #003d80;
+        }
+
+        .toggle-mode {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .toggle-mode a {
+            color: #0056b3;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error-msg {
+            color: #d9534f;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </nav>
 
-<nav>
+    <div class="auth-container">
+        <!-- Pilihan 4 Bahasa -->
+        <div class="lang-select-box">
+            <select id="languageSelector">
+                <option value="ms">🇲🇾 Bahasa Melayu</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="zh">🇨🇳 简体中文</option>
+                <option value="ta">🇮🇳 தமிழ்</option>
+            </select>
+        </div>
 
-<div class="logo">🎓 PINTAR@Sphere</div>
+        <h2 id="formTitle" data-i18n="login_title">Log Masuk Portal UKM</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 20px;">
+            Gunakan e-mel <b>@siswa.ukm.edu.my</b> (Pelajar) atau <b>@ukm.edu.my</b> (Pensyarah).
+        </p>
 
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="resources.html">Resources</a></li>
-<li><a href="tools.html">Tools</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-<li><a href="login.html">Login</a></li>
-  <li><a href="calendar.html">Calendar</a></li>
-</ul>
+        <form id="authForm">
+            <!-- Medan Tambahan Pendaftaran -->
+            <div id="registerFields" class="hidden">
+                <div class="form-group">
+                    <label>Nama Penuh / Full Name</label>
+                    <input type="text" id="userName" placeholder="Contoh: Ali bin Ahmad">
+                </div>
 
-<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  
-</nav>
+                <div class="form-group" id="studentFields">
+                    <label>No. Matrik / Matric No</label>
+                    <input type="text" id="userMatric" placeholder="Contoh: A181234">
 
+                    <label style="margin-top: 10px;">Set Kumpulan / Assigned Set</label>
+                    <select id="userSet">
+                        <option value="Set 1">Set 1</option>
+                        <option value="Set 2">Set 2</option>
+                        <option value="Set 3">Set 3</option>
+                        <option value="Set 4">Set 4</option>
+                        <option value="Set 5">Set 5</option>
+                        <option value="Set 6">Set 6</option>
+                        <option value="Set 7">Set 7</option>
+                        <option value="Set 8">Set 8</option>
+                        <option value="Set 9">Set 9</option>
+                        <option value="Set 10">Set 10</option>
+                        <option value="Set 11">Set 11</option>
+                    </select>
+                </div>
+            </div>
 
+            <!-- Email & Password -->
+            <div class="form-group">
+                <label>E-mel UKM / Email</label>
+                <input type="email" id="userEmail" data-i18n="email_placeholder" placeholder="masukkan @siswa.ukm.edu.my atau @ukm.edu.my" required>
+            </div>
 
-<section class="hero">
+            <div class="form-group">
+                <label>Kata Laluan / Password</label>
+                <input type="password" id="userPassword" placeholder="••••••••" required>
+            </div>
 
-<h1>Student Login</h1>
+            <button type="submit" id="submitBtn" class="auth-btn">Log Masuk</button>
+            <div id="errorMessage" class="error-msg"></div>
+        </form>
 
-<p>Access your PINTAR@Sphere dashboard.</p>
+        <div class="toggle-mode">
+            <span id="toggleText">Belum ada akaun?</span>
+            <a id="toggleAuthBtn">Daftar Akaun</a>
+        </div>
+    </div>
 
-</section>
+    <footer>
+        <p>© 2026 PINTAR@Sphere | Built for ASPI Students & Lecturers</p>
+    </footer>
 
+    <!-- Script Modul Firebase & Auth -->
+    <script type="module">
+        import { loginUser, registerUser } from './auth.js';
+        import { initI18n, setLanguage } from './i18n.js';
 
+        // Inisialisasi Bahasa
+        initI18n();
 
-<section class="features">
+        const langSelect = document.getElementById('languageSelector');
+        langSelect.addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
 
+        let isRegisterMode = false;
 
-<div class="card">
+        const formTitle = document.getElementById('formTitle');
+        const registerFields = document.getElementById('registerFields');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleAuthBtn = document.getElementById('toggleAuthBtn');
+        const toggleText = document.getElementById('toggleText');
+        const errorMessage = document.getElementById('errorMessage');
+        const userEmailInput = document.getElementById('userEmail');
+        const studentFields = document.getElementById('studentFields');
 
-<h2>🔐 Login</h2>
+        // Tukar Mod Login <-> Register
+        toggleAuthBtn.addEventListener('click', () => {
+            isRegisterMode = !isRegisterMode;
+            errorMessage.textContent = '';
 
+            if (isRegisterMode) {
+                formTitle.textContent = 'Daftar Akaun PINTAR@Sphere';
+                registerFields.classList.remove('hidden');
+                submitBtn.textContent = 'Daftar Akaun';
+                toggleText.textContent = 'Sudah ada akaun?';
+                toggleAuthBtn.textContent = 'Log Masuk';
+            } else {
+                formTitle.textContent = 'Log Masuk Portal UKM';
+                registerFields.classList.add('hidden');
+                submitBtn.textContent = 'Log Masuk';
+                toggleText.textContent = 'Belum ada akaun?';
+                toggleAuthBtn.textContent = 'Daftar Akaun';
+            }
+        });
 
-<input type="text" placeholder="Student ID">
+        // Tunjuk/Sembunyi Pilihan Set Berdasarkan Domain E-mel apabila taip email
+        userEmailInput.addEventListener('input', () => {
+            const email = userEmailInput.value.trim().toLowerCase();
+            if (email.endsWith('@ukm.edu.my')) {
+                studentFields.classList.add('hidden'); // Lecturers tak perlu Set
+            } else {
+                studentFields.classList.remove('hidden');
+            }
+        });
 
+        // Kendalikan Submit Form
+        document.getElementById('authForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorMessage.textContent = '';
+            
+            const email = document.getElementById('userEmail').value.trim();
+            const password = document.getElementById('userPassword').value;
 
-<input type="password" placeholder="Password">
+            try {
+                if (isRegisterMode) {
+                    const name = document.getElementById('userName').value.trim();
+                    const matricNo = document.getElementById('userMatric').value.trim();
+                    const assignedSet = document.getElementById('userSet').value;
 
+                    if (!name) {
+                        errorMessage.textContent = 'Sila masukkan nama penuh anda.';
+                        return;
+                    }
 
-<a href="dashboard.html">
-<button>Login</button>
-</a>
+                    submitBtn.textContent = 'Mendaftar...';
+                    await registerUser(email, password, name, matricNo, assignedSet);
+                    alert('Pendaftaran berjaya!');
+                    
+                    // Terus Log Masuk selepas daftar
+                    await loginUser(email, password);
+                } else {
+                    submitBtn.textContent = 'Mengesahkan...';
+                    await loginUser(email, password);
+                }
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                submitBtn.textContent = isRegisterMode ? 'Daftar Akaun' : 'Log Masuk';
+            }
+        });
+    </script>
 
-
-</div>
-
-
-</section>
-
-
-
-<footer>
-
-<p>© 2026 PINTAR@Sphere | Built for ASPI Students</p>
-
-</footer>
-
-  <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 
 </html>
