@@ -3,111 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard - PINTAR@Sphere</title>
+    <title>PINTAR@Sphere - Student Portal</title>
     <link rel="stylesheet" href="style.css">
+    
     <style>
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .user-card { 
-            background: var(--card-bg, #ffffff); 
-            padding: 20px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
-            margin-bottom: 25px;
-            border: 1px solid var(--border-color, #e0e0e0);
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
-        .grid-subjects {
+        .card-box {
+            background: var(--card-bg, #ffffff);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color, #e0e0e0);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .user-badge {
+            background: #f8f9fa;
+            border-left: 4px solid #0056b3;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+        .subject-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
         .subject-card {
-            background: var(--card-bg, #fff);
-            padding: 18px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color, #e0e0e0);
+            background: var(--bg-color, #fff);
+            border: 1px solid var(--border-color, #ddd);
+            border-radius: 8px;
+            padding: 15px;
             text-align: center;
-            text-decoration: none;
-            color: var(--text-color, #333);
             transition: transform 0.2s, box-shadow 0.2s;
-            font-weight: bold;
         }
         .subject-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-            border-color: var(--primary-color, #0056b3);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .gpa-card {
-            background: var(--card-bg, #fff);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color, #e0e0e0);
-            margin-top: 30px;
+        .btn-subject {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .calc-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .calc-row select, .calc-row input {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="logo">🎓 PINTAR@Sphere (Student)</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <a href="dashboard-student.html" style="color: white; text-decoration: none;">Dashboard</a>
-            <a href="community.html" style="color: white; text-decoration: none;">Community</a>
-            <a href="profile.html" style="color: white; text-decoration: none;">Profile</a>
-            <button id="btnLogout" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Logout</button>
+    <!-- Header & Navigation Bar -->
+    <header class="navbar">
+        <div class="logo" style="text-align: center; padding: 15px 0; background: #0056b3; color: white;">
+            <h1 style="margin: 0;">PINTAR<span>@Sphere</span></h1>
+            <p style="color: #e0e0e0; font-size: 0.85em; margin: 4px 0 0 0;">ASASI PINTAR Academic Portal</p>
         </div>
-    </nav>
-
-    <div class="container">
-        <!-- Student Profile Card -->
-        <div class="user-card">
-            <h2>Welcome back, <span id="studentName">Student</span> 👋</h2>
-            <p><strong>Matric No:</strong> <span id="studentMatric">-</span></p>
-            <p><strong>Group/Set:</strong> <span id="studentSet">-</span></p>
-        </div>
-
-        <!-- Core Subjects -->
-        <h3>📚 ASPI Core Subjects</h3>
-        <div class="grid-subjects">
-            <a href="subject.html?code=biology" class="subject-card">🧬 Biology</a>
-            <a href="subject.html?code=chemistry" class="subject-card">🧪 Chemistry</a>
-            <a href="subject.html?code=physics" class="subject-card">⚡ Physics</a>
-            <a href="subject.html?code=mathematics" class="subject-card">📐 Mathematics</a>
-            <a href="subject.html?code=english" class="subject-card">📖 English</a>
-            <a href="subject.html?code=computing" class="subject-card">💻 Computer Science</a>
-        </div>
-
-        <!-- GPA Calculator -->
-        <div class="gpa-card">
-            <h3>🎯 GPA Target Calculator</h3>
-            <div style="margin-bottom: 15px;">
-                <label>Average Target Score (%)</label>:
-                <input type="number" id="targetScore" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; width: 120px;" placeholder="e.g. 80">
+        <div id="user-profile-badge" style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background: #004085; color: white;">
+            <div>
+                <span id="student-name-display" style="font-weight: bold;">Loading...</span> 
+                <span id="student-set-badge" style="background: #17a2b8; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin-left: 8px;">Set -</span>
             </div>
-            <button id="btnCalcGpa" style="padding: 10px 15px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Calculate Estimated GPA</button>
-            <h4 style="margin-top: 15px;">Estimated GPA: <span id="gpaResult" style="color: #0056b3;">-</span></h4>
+            <div>
+                <a href="profile.html" style="color: white; text-decoration: none; margin-right: 15px; font-size: 0.9em;">Profile</a>
+                <a href="community.html" style="color: white; text-decoration: none; margin-right: 15px; font-size: 0.9em;">Community</a>
+                <button id="btnLogout" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Log Out</button>
+            </div>
         </div>
-    </div>
+    </header>
 
+    <main class="container">
+
+        <!-- 1. STUDENT PROFILE SUMMARY -->
+        <section class="card-box">
+            <h3>🎓 Student Profile Overview</h3>
+            <div class="user-badge">
+                <p style="margin: 4px 0;"><strong>Full Name:</strong> <span id="dispName">-</span></p>
+                <p style="margin: 4px 0;"><strong>Matric Number:</strong> <span id="dispMatric">-</span></p>
+                <p style="margin: 4px 0;"><strong>Email Address:</strong> <span id="dispEmail">-</span></p>
+                <p style="margin: 4px 0;"><strong>Assigned Group:</strong> <span id="dispSet" style="color: #0056b3; font-weight: bold;">-</span></p>
+            </div>
+        </section>
+
+        <!-- 2. CORE ACADEMIC SUBJECTS -->
+        <section class="card-box">
+            <h3>📚 Core Learning Subjects</h3>
+            <p style="color: #666; font-size: 0.9em;">Select a subject to view lecture notes, tutorials, and shared resources from lecturers.</p>
+            
+            <div class="subject-grid">
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">🧬 Biology</h4>
+                    <p style="font-size: 0.8em; color: #666;">Cell Biology, Genetics & Physiology</p>
+                    <a href="subject.html?code=biology" class="btn-subject">View Materials</a>
+                </div>
+
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">🧪 Chemistry</h4>
+                    <p style="font-size: 0.8em; color: #666;">Organic & Physical Chemistry</p>
+                    <a href="subject.html?code=chemistry" class="btn-subject">View Materials</a>
+                </div>
+
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">⚡ Physics</h4>
+                    <p style="font-size: 0.8em; color: #666;">Mechanics, Waves & Modern Physics</p>
+                    <a href="subject.html?code=physics" class="btn-subject">View Materials</a>
+                </div>
+
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">📐 Mathematics</h4>
+                    <p style="font-size: 0.8em; color: #666;">Calculus, Algebra & Statistics</p>
+                    <a href="subject.html?code=mathematics" class="btn-subject">View Materials</a>
+                </div>
+
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">🔤 English</h4>
+                    <p style="font-size: 0.8em; color: #666;">Academic Writing & Communication</p>
+                    <a href="subject.html?code=english" class="btn-subject">View Materials</a>
+                </div>
+
+                <div class="subject-card">
+                    <h4 style="margin: 5px 0; color: #0056b3;">💻 Computer Science</h4>
+                    <p style="font-size: 0.8em; color: #666;">Algorithms & Web Development</p>
+                    <a href="subject.html?code=computing" class="btn-subject">View Materials</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ESTIMATED GPA CALCULATOR TOOL -->
+        <section class="card-box">
+            <h3>🧮 Target GPA Estimator</h3>
+            <p style="color: #666; font-size: 0.85em;">Quickly estimate your GPA for the current semester.</p>
+            
+            <div id="gpa-calc-container">
+                <div class="calc-row">
+                    <span style="width: 120px; font-weight: bold;">Biology:</span>
+                    <select class="gpa-grade" data-credit="4">
+                        <option value="4.00">A (4.00)</option>
+                        <option value="3.67">A- (3.67)</option>
+                        <option value="3.33">B+ (3.33)</option>
+                        <option value="3.00">B (3.00)</option>
+                        <option value="2.67">B- (2.67)</option>
+                        <option value="2.00">C (2.00)</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <span style="width: 120px; font-weight: bold;">Chemistry:</span>
+                    <select class="gpa-grade" data-credit="4">
+                        <option value="4.00">A (4.00)</option>
+                        <option value="3.67">A- (3.67)</option>
+                        <option value="3.33">B+ (3.33)</option>
+                        <option value="3.00">B (3.00)</option>
+                        <option value="2.67">B- (2.67)</option>
+                        <option value="2.00">C (2.00)</option>
+                    </select>
+                </div>
+                <div class="calc-row">
+                    <span style="width: 120px; font-weight: bold;">Mathematics:</span>
+                    <select class="gpa-grade" data-credit="4">
+                        <option value="4.00">A (4.00)</option>
+                        <option value="3.67">A- (3.67)</option>
+                        <option value="3.33">B+ (3.33)</option>
+                        <option value="3.00">B (3.00)</option>
+                        <option value="2.67">B- (2.67)</option>
+                        <option value="2.00">C (2.00)</option>
+                    </select>
+                </div>
+
+                <div style="margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc;">
+                    <strong>Estimated GPA: <span id="estimated-gpa-val" style="color: #28a745; font-size: 1.3em;">4.00</span></strong>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Firebase (Modular v10 SDK) & Script Integration -->
     <script type="module">
         import { logoutUser } from './auth.js';
         import { auth, db, doc, getDoc } from './firebase-config.js';
         import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Check authentication state
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const docSnap = await getDoc(doc(db, "users", user.uid));
                 if (docSnap.exists()) {
                     const data = docSnap.data();
-                    if (data.role !== 'student') {
+                    
+                    if (data.role === 'lecturer') {
                         window.location.href = 'dashboard-lecturer.html';
                         return;
                     }
-                    document.getElementById('studentName').textContent = data.name || 'Student';
-                    document.getElementById('studentMatric').textContent = data.matricNo || 'N/A';
-                    document.getElementById('studentSet').textContent = data.set || 'N/A';
+
+                    // Display User Information
+                    document.getElementById('student-name-display').textContent = data.name || 'Student';
+                    document.getElementById('student-set-badge').textContent = data.set || 'Set N/A';
+                    
+                    document.getElementById('dispName').textContent = data.name || '-';
+                    document.getElementById('dispMatric').textContent = data.matricNo || '-';
+                    document.getElementById('dispEmail').textContent = data.email || user.email;
+                    document.getElementById('dispSet').textContent = data.set || '-';
                 }
             } else {
                 window.location.href = 'login.html';
@@ -119,28 +231,26 @@
             logoutUser();
         });
 
-        // GPA Calculator Logic
-        document.getElementById('btnCalcGpa').addEventListener('click', () => {
-            const score = parseFloat(document.getElementById('targetScore').value);
-            const resultElement = document.getElementById('gpaResult');
-            
-            if (isNaN(score) || score < 0 || score > 100) {
-                alert('Please enter a valid score between 0 and 100!');
-                return;
-            }
-
-            let gpa = 0.0;
-            if (score >= 80) gpa = 4.00;
-            else if (score >= 75) gpa = 3.67;
-            else if (score >= 70) gpa = 3.33;
-            else if (score >= 65) gpa = 3.00;
-            else if (score >= 60) gpa = 2.67;
-            else if (score >= 55) gpa = 2.33;
-            else if (score >= 50) gpa = 2.00;
-            else gpa = 1.00;
-
-            resultElement.textContent = gpa.toFixed(2);
+        // Dynamic GPA Calculation
+        const selects = document.querySelectorAll('.gpa-grade');
+        selects.forEach(select => {
+            select.addEventListener('change', calculateGPA);
         });
+
+        function calculateGPA() {
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            selects.forEach(select => {
+                const credit = parseFloat(select.getAttribute('data-credit'));
+                const gradeValue = parseFloat(select.value);
+                totalPoints += gradeValue * credit;
+                totalCredits += credit;
+            });
+
+            const gpa = (totalPoints / totalCredits).toFixed(2);
+            document.getElementById('estimated-gpa-val').textContent = gpa;
+        }
     </script>
     <script type="module" src="app-core.js"></script>
 </body>
