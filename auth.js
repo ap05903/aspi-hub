@@ -1,81 +1,93 @@
 /**
- * auth.js
- * Modul Pengesahan Pengguna (Login/Register) berasaskan Domain UKM
+ * auth.js - Pengurusan Autentikasi Utama (Log Masuk, Daftar & Log Keluar)
+ * PINTAR@Sphere System
  */
-
 import { 
     auth, 
     db, 
-    signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
     signOut, 
     doc, 
     setDoc, 
-    getDoc, 
-    serverTimestamp 
+    getDoc 
 } from './firebase-config.js';
 
-/**
- * Mendaftar Pengguna Baharu (Pelajar atau Pensyarah)
- */
-export async function registerUser(email, password, name, matricNo, role, setGroup) {
+// ==========================================
+// 1. FUNGSI DAFTAR AKAUN BAHARU (REGISTER)
+// ==========================================
+export async function registerUser(email, password, name, role, matricNo = '', set = '') {
     try {
-        const isUkmEmail = email.toLowerCase().endsWith('@ukm.edu.my') || email.toLowerCase().endsWith('@siswa.ukm.edu.my');
-        if (!isUkmEmail) {
-            throw new Error("Sila gunakan e-mel rasmi UKM (@ukm.edu.my atau @siswa.ukm.edu.my)!");
-        }
-
+        // Cipta akaun pengguna baharu di Firebase Auth
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Simpan data profil pengguna dalam Firestore
+        // Simpan perincian profil pengguna ke dalam Firestore Database
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: name,
             email: email,
-            matricNo: matricNo || '',
-            role: role, // 'STUDENT' atau 'LECTURER'
-            set: setGroup || 'Set 1',
-            createdAt: serverTimestamp()
+            role: role,
+            matricNo: role === 'student' ? matricNo : '',
+            set: role === 'student' ? set : '',
+            createdAt: new Date().toISOString()
         });
 
-        return { success: true, user: user };
+        return user;
     } catch (error) {
-        console.error("Ralat Pendaftaran:", error);
+        console.error("Ralat semasa pendaftaran:", error.message);
         throw error;
     }
 }
 
-/**
- * Log Masuk Pengguna
- */
+// ==========================================
+// 2. FUNGSI LOG MASUK (LOGIN)
+// ==========================================
 export async function loginUser(email, password) {
     try {
+        // Log masuk pengguna menggunakan Firebase Auth
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Ambil maklumat peranan (role) dari Firestore
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        // Semak rekod dan peranan (Role) pengguna dari Firestore
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        
         if (userDoc.exists()) {
             const userData = userDoc.data();
-            return { success: true, user: user, role: userData.role };
+            alert(`Log masuk berjaya! Selamat datang, ${userData.name}.`);
+
+            // Dihala (Redirect) ke halaman dashboard mengikut peranan
+            if (userData.role === 'lecturer') {
+                window.location.href = 'dashboard-lecturer.html';
+            } else {
+                window.location.href = 'dashboard-student.html';
+            }
         } else {
-            throw new Error("Rekod profil pengguna tidak dijumpai!");
+            alert('Maklumat profil pengguna tidak wujud dalam database!');
         }
     } catch (error) {
-        console.error("Ralat Log Masuk:", error);
-        throw error;
+        console.error("Ralat log masuk:", error);
+        let errorMsg = "Log Masuk Gagal: Sila semak e-mel dan kata laluan anda.";
+        if (error.code === 'auth/user-not-found') errorMsg = "Akaun tidak dijumpai. Sila daftar terlebih dahulu.";
+        if (error.code === 'auth/wrong-password') errorMsg = "Kata laluan salah. Sila cuba lagi.";
+        alert(errorMsg);
     }
 }
 
-/**
- * Log Keluar Sistem
- */
+// ==========================================
+// 3. FUNGSI LOG KELUAR (LOGOUT)
+// ==========================================
 export async function logoutUser() {
     try {
         await signOut(auth);
         window.location.href = 'login.html';
     } catch (error) {
-        console.error("Ralat Log Keluar:", error);
+        console.error("Ralat semasa log keluar:", error);
+        alert("Gagal untuk log keluar. Sila cuba lagi.");
     }
 }
+
+// Menjadikan fungsi boleh dipanggil terus dari HTML jika perlu
+window.loginUser = loginUser;
+window.logoutUser = logoutUser;
