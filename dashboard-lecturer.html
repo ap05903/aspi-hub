@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papan Pemuka Pensyarah - PINTAR@Sphere</title>
+    <title>Lecturer Dashboard - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .container {
@@ -81,29 +81,29 @@
             <li><a href="calender.html">Notifikasi Kelas</a></li>
             <li><a href="community.html">Komuniti</a></li>
         </ul>
-        <button onclick="logout()">Log Keluar</button>
+        <button onclick="logout()">Log Out</button>
         <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
     </nav>
 
     <div class="container">
         
         <div class="header-card">
-            <h1 id="lecturerName" style="margin: 0;">Portal Pensyarah</h1>
-            <p style="margin: 5px 0 0 0;" id="lecturerEmail">Memuatkan maklumat akaun...</p>
+            <h1 id="lecturerName" style="margin: 0;">Lecturer Portal</h1>
+            <p style="margin: 5px 0 0 0;" id="lecturerEmail">Load account information...</p>
         </div>
 
         <div class="grid-2">
             
             <!-- BAHAGIAN 1: MUAT NAIK PAUTAN DRIVE BAHAN -->
             <div class="card">
-                <h3>📤 Muat Naik Bahan Pembelajaran (Drive Link)</h3>
+                <h3>📤 Upload Learning Materials (Drive Link)</h3>
                 <form id="uploadResourceForm">
                     <div class="form-group">
-                        <label>Tajuk Bahan</label>
+                        <label>Tittle</label>
                         <input type="text" id="resTitle" placeholder="e.g. Slide Chapter 3 - Organic Chemistry" required>
                     </div>
                     <div class="form-group">
-                        <label>Subjek</label>
+                        <label>Subject</label>
                         <select id="resSubject" required>
                             <option value="Biology">Biology</option>
                             <option value="Chemistry">Chemistry</option>
@@ -116,11 +116,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Pautan Google Drive / OneDrive</label>
+                        <label>Google Drive Link / OneDrive</label>
                         <input type="url" id="resUrl" placeholder="https://drive.google.com/..." required>
                     </div>
                     <div class="form-group">
-                        <label>Sasaran Set Pelajar</label>
+                        <label>Student Set Target</label>
                         <select id="resTargetSet" required>
                             <option value="ALL">Semua Set (ALL)</option>
                             <option value="Set 1">Set 1</option>
@@ -128,35 +128,48 @@
                             <option value="Set 3">Set 3</option>
                             <option value="Set 4">Set 4</option>
                             <option value="Set 5">Set 5</option>
+                             <option value="Set 6">Set 6</option>
+                             <option value="Set 7">Set 7</option>
+                             <option value="Set 8">Set 8</option>
+                             <option value="Set 9">Set 9</option>
+                             <option value="Set 10">Set 10</option>
+                             <option value="Set 11">Set 11</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-action">Kongsi Bahan</button>
+                    <button type="submit" class="btn-action">Share Materials</button>
                 </form>
             </div>
 
             <!-- BAHAGIAN 2: KEMAS KINI MARKAH PELAJAR -->
             <div class="card">
-                <h3>📝 Kemas Kini Markah Pelajar</h3>
+                <h3>📝 Update Student Marks r</h3>
                 <div class="form-group">
-                    <label>Pilih Set Pelajar</label>
+                    <label>Select Student Set</label>
                     <select id="gradeSetSelect" onchange="fetchStudentsForGrading(this.value)">
                         <option value="">-- Pilih Set --</option>
                         <option value="Set 1">Set 1</option>
                         <option value="Set 2">Set 2</option>
                         <option value="Set 3">Set 3</option>
                         <option value="Set 4">Set 4</option>
+                        <option value="Set 5">Set 5</option>
+                        <option value="Set 6">Set 6</option>
+                        <option value="Set 7">Set 7</option>
+                        <option value="Set 8">Set 8</option>
+                        <option value="Set 9">Set 9</option>
+                        <option value="Set 10">Set 10</option>
+                        <option value="Set 11">Set 11</option>
                     </select>
                 </div>
 
                 <form id="gradeForm">
                     <div class="form-group">
-                        <label>Pilih Pelajar</label>
+                        <label>Select Student</label>
                         <select id="gradeStudentSelect" required>
-                            <option value="">-- Sila Pilih Set Terlebih Dahulu --</option>
+                            <option value="">-- Please Select A Set First--</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Subjek</label>
+                        <label>Subjject</label>
                         <select id="gradeSubject" required>
                             <option value="Biology">Biology</option>
                             <option value="Chemistry">Chemistry</option>
@@ -210,7 +223,7 @@
                     document.getElementById('lecturerName').textContent = currentLecturer.name;
                     document.getElementById('lecturerEmail').textContent = currentLecturer.email;
                 } else {
-                    alert('Capaian dinafikan! Halaman ini untuk pensyarah sahaja.');
+                    alert('Access Denied!');
                     window.location.href = 'dashboard-student.html';
                 }
             } else {
@@ -230,7 +243,7 @@
                     currentLecturer.name,
                     currentLecturer.email
                 );
-                alert('Bahan pembelajaran berjaya dikongsi!');
+                alert('Learning materials successfully shared!');
                 document.getElementById('uploadResourceForm').reset();
             } catch (err) {
                 alert(err.message);
@@ -240,16 +253,16 @@
         // Fetch Pelajar Mengikut Set
         window.fetchStudentsForGrading = async function (setName) {
             const select = document.getElementById('gradeStudentSelect');
-            select.innerHTML = '<option value="">Memuatkan pelajar...</option>';
+            select.innerHTML = '<option value="">Loading Students...</option>';
             if (!setName) return;
 
             try {
                 const students = await getStudentsBySet(setName);
-                select.innerHTML = '<option value="">-- Pilih Pelajar --</option>';
+                select.innerHTML = '<option value="">-- Select Student --</option>';
                 students.forEach(std => {
                     const opt = document.createElement('option');
                     opt.value = std.uid;
-                    opt.textContent = `${std.name} (${std.matricNo || 'Tiada Matrik'})`;
+                    opt.textContent = `${std.name} (${std.matricNo || 'No matrix'})`;
                     select.appendChild(opt);
                 });
             } catch (err) {
@@ -272,7 +285,7 @@
 
             try {
                 await updateStudentGrades(studentUid, subject, scores);
-                alert('Markah gred berjaya disimpan!');
+                alert('The garde has been successfully saved!');
             } catch (err) {
                 alert(err.message);
             }
