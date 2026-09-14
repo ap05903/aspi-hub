@@ -7,15 +7,97 @@
     <title>Dashboard Pensyarah - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .dashboard-container { padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .lecturer-header { background: #28a745; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
-        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px; }
-        .checkbox-group label { font-weight: normal; background: #f0f0f0; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
-        .btn-submit { background: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .lecturer-header {
+            background: #28a745;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-submit {
+            background: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background: #003d80;
+        }
+
+        .score-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 
@@ -27,75 +109,169 @@
     </nav>
 
     <div class="dashboard-container">
+        <!-- Header Selamat Datang -->
         <div class="lecturer-header">
             <h2>Portal Pensyarah: <span id="lecturerName">Dr.</span> 👋</h2>
             <p>E-mel: <b id="lecturerEmail">-</b></p>
         </div>
 
-        <!-- Borang Muat Naik Bahan Pembelajaran (Google Drive Link) -->
-        <div class="card">
-            <h3>➕ Muat Naik Bahan Pembelajaran Baru</h3>
-            <form id="uploadResourceForm">
+        <div class="grid-layout">
+            <!-- BAHAGIAN KIRI: Muat Naik Bahan Pembelajaran -->
+            <div class="card">
+                <h3>📚 Muat Naik Bahan Pembelajaran (Google Drive Link)</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                    Muat naik pautan bahan pengajaran mengikut subjek dan pilih Set pelajar.
+                </p>
+
+                <form id="uploadResourceForm">
+                    <div class="form-group">
+                        <label>Tajuk Bahan / Slide</label>
+                        <input type="text" id="resTitle" placeholder="Contoh: Slide Chapter 1 - Physics Kinetics" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subjek</label>
+                        <select id="resSubject" required>
+                            <option value="Biology">Biology</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Logical Reasoning">Logical Reasoning</option>
+                            <option value="Statistics">Statistics</option>
+                            <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
+                            <option value="Jati Diri">Jati Diri</option>
+                            <option value="Research Skills">Research Skills</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pautan Google Drive / OneDrive (URL Link)</label>
+                        <input type="url" id="resDriveUrl" placeholder="https://drive.google.com/file/d/..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hantar Ke Kumpulan Set Mana?</label>
+                        <div style="margin-bottom: 8px;">
+                            <input type="checkbox" id="selectAllSets"> <b>Pilih Semua Set (All 11 Sets)</b>
+                        </div>
+                        <div class="checkbox-group" id="setCheckboxes">
+                            <label><input type="checkbox" class="set-check" value="Set 1"> Set 1</label>
+                            <label><input type="checkbox" class="set-check" value="Set 2"> Set 2</label>
+                            <label><input type="checkbox" class="set-check" value="Set 3"> Set 3</label>
+                            <label><input type="checkbox" class="set-check" value="Set 4"> Set 4</label>
+                            <label><input type="checkbox" class="set-check" value="Set 5"> Set 5</label>
+                            <label><input type="checkbox" class="set-check" value="Set 6"> Set 6</label>
+                            <label><input type="checkbox" class="set-check" value="Set 7"> Set 7</label>
+                            <label><input type="checkbox" class="set-check" value="Set 8"> Set 8</label>
+                            <label><input type="checkbox" class="set-check" value="Set 9"> Set 9</label>
+                            <label><input type="checkbox" class="set-check" value="Set 10"> Set 10</label>
+                            <label><input type="checkbox" class="set-check" value="Set 11"> Set 11</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitResBtn" class="btn-submit">Hantar Bahan Pembelajaran</button>
+                    <div id="statusMsg" style="margin-top: 10px; font-weight: bold; text-align: center;"></div>
+                </form>
+            </div>
+
+            <!-- BAHAGIAN KANAN: Masukkan Markah Pelajar -->
+            <div class="card">
+                <h3>📊 Kemas Kini Gred & Markah Pelajar</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                    Pilih Set dan Pelajar untuk memasukkan markah komponen subjek.
+                </p>
+
                 <div class="form-group">
-                    <label>Tajuk Bahan / Slide</label>
-                    <input type="text" id="resTitle" placeholder="Contoh: Slide Chapter 1 - Physics Kinetics" required>
+                    <label>1. Pilih Set Pelajar</label>
+                    <select id="gradeSetSelect">
+                        <option value="">-- Pilih Set --</option>
+                        <option value="Set 1">Set 1</option>
+                        <option value="Set 2">Set 2</option>
+                        <option value="Set 3">Set 3</option>
+                        <option value="Set 4">Set 4</option>
+                        <option value="Set 5">Set 5</option>
+                        <option value="Set 6">Set 6</option>
+                        <option value="Set 7">Set 7</option>
+                        <option value="Set 8">Set 8</option>
+                        <option value="Set 9">Set 9</option>
+                        <option value="Set 10">Set 10</option>
+                        <option value="Set 11">Set 11</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Subjek</label>
-                    <select id="resSubject" required>
-                        <option value="Biology">Biology</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Physics">Physics</option>
+                    <label>2. Pilih Pelajar</label>
+                    <select id="studentSelect" disabled>
+                        <option value="">-- Pilih Set Terlebih Dahulu --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>3. Pilih Subjek</label>
+                    <select id="gradeSubjectSelect">
+                        <option value="Biology">Biology (Bio)</option>
+                        <option value="Chemistry">Chemistry (Chem)</option>
+                        <option value="Physics">Physics (Phys)</option>
                         <option value="Logical Reasoning">Logical Reasoning</option>
                         <option value="Statistics">Statistics</option>
-                        <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
+                        <option value="Language and Literary Appreciation">Language & Literary Appreciation (LLA)</option>
                         <option value="Jati Diri">Jati Diri</option>
                         <option value="Research Skills">Research Skills</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>Pautan Google Drive / OneDrive (URL Link)</label>
-                    <input type="url" id="resDriveUrl" placeholder="https://drive.google.com/file/d/..." required>
+                <!-- Input Komponen Markah Dinamik -->
+                <div class="score-box" id="gradeInputsContainer">
+                    <div class="form-group">
+                        <label>Kuiz / Quiz (%)</label>
+                        <input type="number" id="scoreQuiz" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group">
+                        <label>Tugasan / Assignment (%)</label>
+                        <input type="number" id="scoreAssignment" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group" id="groupPresentation" style="display:block;">
+                        <label>Pembentangan / Presentation (%) - Bio Only</label>
+                        <input type="number" id="scorePresentation" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group" id="groupLabReport" style="display:block;">
+                        <label>Laporan Makmal / Lab Report (%) - Bio/Chem/Phys</label>
+                        <input type="number" id="scoreLab" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group" id="groupMiniProject" style="display:none;">
+                        <label>Mini Projek (%) - Statistics Only</label>
+                        <input type="number" id="scoreMiniProject" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group" id="groupTheater" style="display:none;">
+                        <label>Teater / Theater Performance (%) - LLA Only</label>
+                        <input type="number" id="scoreTheater" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group">
+                        <label>Peperiksaan Pertengahan Semester / Mid-Sem (%)</label>
+                        <input type="number" id="scoreMidSem" min="0" max="100" placeholder="0 - 100">
+                    </div>
+                    <div class="form-group">
+                        <label>Peperiksaan Akhir / Final Exam (%)</label>
+                        <input type="number" id="scoreFinal" min="0" max="100" placeholder="0 - 100">
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Hantar Ke Kumpulan Set Mana?</label>
-                    <div style="margin-bottom: 8px;">
-                        <input type="checkbox" id="selectAllSets"> <b>Pilih Semua Set (All 11 Sets)</b>
-                    </div>
-                    <div class="checkbox-group" id="setCheckboxes">
-                        <!-- Set 1 hingga Set 11 -->
-                        <label><input type="checkbox" class="set-check" value="Set 1"> Set 1</label>
-                        <label><input type="checkbox" class="set-check" value="Set 2"> Set 2</label>
-                        <label><input type="checkbox" class="set-check" value="Set 3"> Set 3</label>
-                        <label><input type="checkbox" class="set-check" value="Set 4"> Set 4</label>
-                        <label><input type="checkbox" class="set-check" value="Set 5"> Set 5</label>
-                        <label><input type="checkbox" class="set-check" value="Set 6"> Set 6</label>
-                        <label><input type="checkbox" class="set-check" value="Set 7"> Set 7</label>
-                        <label><input type="checkbox" class="set-check" value="Set 8"> Set 8</label>
-                        <label><input type="checkbox" class="set-check" value="Set 9"> Set 9</label>
-                        <label><input type="checkbox" class="set-check" value="Set 10"> Set 10</label>
-                        <label><input type="checkbox" class="set-check" value="Set 11"> Set 11</label>
-                    </div>
-                </div>
-
-                <button type="submit" id="submitResBtn" class="btn-submit">Hantar Bahan Pembelajaran</button>
-                <span id="statusMsg" style="margin-left: 10px; font-weight: bold;"></span>
-            </form>
+                <button type="button" id="saveGradeBtn" class="btn-submit" style="background:#28a745;">Simpan Markah Pelajar</button>
+                <div id="gradeStatusMsg" style="margin-top: 10px; font-weight: bold; text-align: center;"></div>
+            </div>
         </div>
     </div>
 
+    <!-- Script Integrasi Firestore & Logik -->
     <script type="module">
         import { auth, onAuthStateChanged, db, doc, getDoc } from './firebase-config.js';
         import { logoutUser } from './auth.js';
-        import { uploadLearningResource } from './lecturer-core.js';
+        import { uploadLearningResource, getStudentsBySet, updateStudentGrades } from './lecturer-core.js';
 
         let currentLecturer = null;
 
         document.getElementById('logoutBtn').addEventListener('click', () => logoutUser());
 
+        // Semakan Pengesahan Pengguna
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const userDoc = await getDoc(doc(db, "users", user.uid));
@@ -109,12 +285,12 @@
             }
         });
 
-        // Toggle Select All Sets
+        // 1. Logik Pilih Semua Set (Muat Naik Bahan)
         document.getElementById('selectAllSets').addEventListener('change', (e) => {
             document.querySelectorAll('.set-check').forEach(cb => cb.checked = e.target.checked);
         });
 
-        // Form Submit
+        // 2. Submit Muat Naik Bahan Pembelajaran
         document.getElementById('uploadResourceForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const statusMsg = document.getElementById('statusMsg');
@@ -125,7 +301,6 @@
             const subject = document.getElementById('resSubject').value;
             const driveUrl = document.getElementById('resDriveUrl').value.trim();
 
-            // Kumpul Set
             const selectedSets = [];
             if (document.getElementById('selectAllSets').checked) {
                 selectedSets.push('ALL');
@@ -151,6 +326,83 @@
                 statusMsg.textContent = err.message;
             }
         });
+
+        // 3. Logik Pilih Set -> Papar Senarai Pelajar
+        const gradeSetSelect = document.getElementById('gradeSetSelect');
+        const studentSelect = document.getElementById('studentSelect');
+        const gradeSubjectSelect = document.getElementById('gradeSubjectSelect');
+
+        gradeSetSelect.addEventListener('change', async (e) => {
+            const setName = e.target.value;
+            studentSelect.innerHTML = '<option value="">-- Memuatkan Pelajar... --</option>';
+            studentSelect.disabled = true;
+
+            if (!setName) return;
+
+            try {
+                const students = await getStudentsBySet(setName);
+                if (students.length === 0) {
+                    studentSelect.innerHTML = '<option value="">Tiada pelajar berdaftar dalam set ini</option>';
+                    return;
+                }
+
+                studentSelect.innerHTML = '<option value="">-- Pilih Pelajar --</option>';
+                students.forEach(st => {
+                    const opt = document.createElement('option');
+                    opt.value = st.uid;
+                    opt.textContent = `${st.name} (${st.matricNo || 'No Matrik N/A'})`;
+                    studentSelect.appendChild(opt);
+                });
+                studentSelect.disabled = false;
+            } catch (err) {
+                alert("Ralat memuatkan senarai pelajar: " + err.message);
+            }
+        });
+
+        // 4. Papar / Sembunyi Komponen Mengikut Subjek
+        gradeSubjectSelect.addEventListener('change', (e) => {
+            const subj = e.target.value;
+            document.getElementById('groupPresentation').style.display = (subj === 'Biology') ? 'block' : 'none';
+            document.getElementById('groupLabReport').style.display = (['Biology', 'Chemistry', 'Physics'].includes(subj)) ? 'block' : 'none';
+            document.getElementById('groupMiniProject').style.display = (subj === 'Statistics') ? 'block' : 'none';
+            document.getElementById('groupTheater').style.display = (subj === 'Language and Literary Appreciation') ? 'block' : 'none';
+        });
+
+        // 5. Simpan Markah Pelajar
+        document.getElementById('saveGradeBtn').addEventListener('click', async () => {
+            const studentUid = studentSelect.value;
+            const subject = gradeSubjectSelect.value;
+            const gradeStatusMsg = document.getElementById('gradeStatusMsg');
+
+            if (!studentUid) {
+                alert('Sila pilih pelajar terlebih dahulu!');
+                return;
+            }
+
+            const breakdownScores = {
+                quiz: parseFloat(document.getElementById('scoreQuiz').value) || 0,
+                assignment: parseFloat(document.getElementById('scoreAssignment').value) || 0,
+                presentation: parseFloat(document.getElementById('scorePresentation').value) || 0,
+                labReport: parseFloat(document.getElementById('scoreLab').value) || 0,
+                miniProject: parseFloat(document.getElementById('scoreMiniProject').value) || 0,
+                theater: parseFloat(document.getElementById('scoreTheater').value) || 0,
+                midSem: parseFloat(document.getElementById('scoreMidSem').value) || 0,
+                finalExam: parseFloat(document.getElementById('scoreFinal').value) || 0
+            };
+
+            gradeStatusMsg.style.color = 'black';
+            gradeStatusMsg.textContent = 'Menyimpan...';
+
+            try {
+                await updateStudentGrades(studentUid, subject, breakdownScores);
+                gradeStatusMsg.style.color = 'green';
+                gradeStatusMsg.textContent = 'Markah berjaya dikemas kini!';
+            } catch (err) {
+                gradeStatusMsg.style.color = 'red';
+                gradeStatusMsg.textContent = 'Ralat: ' + err.message;
+            }
+        });
     </script>
 </body>
+
 </html>
