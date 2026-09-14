@@ -1,152 +1,84 @@
 <!DOCTYPE html>
-<html lang="ms">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecturer Dashboard - PINTAR@Sphere</title>
+    <title>My Profile - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .header-card {
-            background: linear-gradient(135deg, #28a745, #1e7e34);
-            color: white;
-            padding: 25px;
+        .profile-container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--card-bg, #ffffff);
             border-radius: 12px;
-            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color, #e0e0e0);
         }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        .form-group { 
+            margin-bottom: 15px; 
         }
-
-        @media (max-width: 850px) {
-            .grid-2 {
-                grid-template-columns: 1fr;
-            }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 5px; 
+            font-weight: 600; 
         }
-
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
         .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid var(--border-color, #ccc);
+            border-radius: 6px; 
             box-sizing: border-box;
+            background: var(--bg-color, #fff); 
+            color: var(--text-color, #333);
         }
-
-        .btn-action {
-            width: 100%;
-            background: #28a745;
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
+        .form-group input[disabled] {
+            background: var(--disabled-bg, #f0f0f0);
+            cursor: not-allowed;
         }
     </style>
 </head>
-
 <body>
 
+    <!-- Navigation Bar -->
     <nav>
-        <div class="logo">🎓 PINTAR@Sphere (Pensyarah)</div>
-        <ul>
-            <li><a href="dashboard-lecturer.html">Dashboard</a></li>
-            <li><a href="calender.html">Notifikasi Kelas</a></li>
-            <li><a href="community.html">Komuniti</a></li>
-        </ul>
-        <button onclick="logout()">Log Out</button>
-        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <a id="navDashboardLink" href="dashboard-student.html" style="color: white; text-decoration: none;">Dashboard</a>
+            <a href="community.html" style="color: white; text-decoration: none;">Community</a>
+            <a href="profile.html" style="color: white; text-decoration: none; font-weight: bold;">Profile</a>
+            <button id="btnLogout" style="background: #dc3545; color: white; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Logout</button>
+        </div>
     </nav>
 
-    <div class="container">
-        
-        <div class="header-card">
-            <h1 id="lecturerName" style="margin: 0;">Lecturer Portal</h1>
-            <p style="margin: 5px 0 0 0;" id="lecturerEmail">Load account information...</p>
-        </div>
+    <div class="profile-container">
+        <h2 style="text-align: center; margin-top:0;">Edit Profile</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Update your personal details below</p>
 
-        <div class="grid-2">
-            
-            <!-- BAHAGIAN 1: MUAT NAIK PAUTAN DRIVE BAHAN -->
-            <div class="card">
-                <h3>📤 Upload Learning Materials (Drive Link)</h3>
-                <form id="uploadResourceForm">
-                    <div class="form-group">
-                        <label>Tittle</label>
-                        <input type="text" id="resTitle" placeholder="e.g. Slide Chapter 3 - Organic Chemistry" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Subject</label>
-                        <select id="resSubject" required>
-                            <option value="Biology">Biology</option>
-                            <option value="Chemistry">Chemistry</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Logical Reasoning">Logical Reasoning</option>
-                            <option value="Statistics">Statistics</option>
-                            <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
-                            <option value="Jati Diri">Jati Diri</option>
-                            <option value="Research Skills">Research Skills</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Google Drive Link / OneDrive</label>
-                        <input type="url" id="resUrl" placeholder="https://drive.google.com/..." required>
-                    </div>
-                    <div class="form-group">
-                        <label>Student Set Target</label>
-                        <select id="resTargetSet" required>
-                            <option value="ALL">Semua Set (ALL)</option>
-                            <option value="Set 1">Set 1</option>
-                            <option value="Set 2">Set 2</option>
-                            <option value="Set 3">Set 3</option>
-                            <option value="Set 4">Set 4</option>
-                            <option value="Set 5">Set 5</option>
-                             <option value="Set 6">Set 6</option>
-                             <option value="Set 7">Set 7</option>
-                             <option value="Set 8">Set 8</option>
-                             <option value="Set 9">Set 9</option>
-                             <option value="Set 10">Set 10</option>
-                             <option value="Set 11">Set 11</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn-action">Share Materials</button>
-                </form>
+        <form id="profileForm">
+            <div class="form-group">
+                <label>Email Address (Cannot be changed)</label>
+                <input type="email" id="profEmail" disabled>
             </div>
 
-            <!-- BAHAGIAN 2: KEMAS KINI MARKAH PELAJAR -->
-            <div class="card">
-                <h3>📝 Update Student Marks r</h3>
+            <div class="form-group">
+                <label>Role</label>
+                <input type="text" id="profRole" disabled>
+            </div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="profName" placeholder="Enter your full name" required>
+            </div>
+
+            <div id="studentFields" style="display: none;">
                 <div class="form-group">
-                    <label>Select Student Set</label>
-                    <select id="gradeSetSelect" onchange="fetchStudentsForGrading(this.value)">
-                        <option value="">-- Pilih Set --</option>
+                    <label>Matric No</label>
+                    <input type="text" id="profMatric" placeholder="e.g. MS24123456">
+                </div>
+                <div class="form-group">
+                    <label>Group / Set</label>
+                    <select id="profSet">
                         <option value="Set 1">Set 1</option>
                         <option value="Set 2">Set 2</option>
                         <option value="Set 3">Set 3</option>
@@ -160,139 +92,88 @@
                         <option value="Set 11">Set 11</option>
                     </select>
                 </div>
-
-                <form id="gradeForm">
-                    <div class="form-group">
-                        <label>Select Student</label>
-                        <select id="gradeStudentSelect" required>
-                            <option value="">-- Please Select A Set First--</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Subjject</label>
-                        <select id="gradeSubject" required>
-                            <option value="Biology">Biology</option>
-                            <option value="Chemistry">Chemistry</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Logical Reasoning">Logical Reasoning</option>
-                            <option value="Statistics">Statistics</option>
-                        </select>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                        <div class="form-group">
-                            <label>Quiz (%)</label>
-                            <input type="number" id="scoreQuiz" min="0" max="100" value="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Assignment (%)</label>
-                            <input type="number" id="scoreAssignment" min="0" max="100" value="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Mid-Sem (%)</label>
-                            <input type="number" id="scoreMidSem" min="0" max="100" value="0">
-                        </div>
-                        <div class="form-group">
-                            <label>Final Exam (%)</label>
-                            <input type="number" id="scoreFinal" min="0" max="100" value="0">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-action" style="background:#0056b3;">Simpan Markah</button>
-                </form>
             </div>
 
-        </div>
-
+            <button type="submit" id="btnSaveProfile" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer; background: #0056b3; color: white; border: none; border-radius: 6px; font-weight: bold;">Save Changes</button>
+        </form>
     </div>
 
     <script type="module">
-        import { auth, onAuthStateChanged, db, doc, getDoc } from './firebase-config.js';
-        import { uploadLearningResource, getStudentsBySet, updateStudentGrades } from './lecturer-core.js';
-        import { logoutUser } from './auth.js';
+        import { logoutUser, updateUserProfile } from './auth.js';
+        import { auth, db, doc, getDoc } from './firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        let currentLecturer = null;
+        let currentUserUid = null;
+        let currentUserRole = 'student';
 
-        window.logout = function () {
-            logoutUser();
-        };
-
+        // Check authentication & load existing data
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const userSnap = await getDoc(doc(db, "users", user.uid));
-                if (userSnap.exists() && userSnap.data().role === 'LECTURER') {
-                    currentLecturer = userSnap.data();
-                    document.getElementById('lecturerName').textContent = currentLecturer.name;
-                    document.getElementById('lecturerEmail').textContent = currentLecturer.email;
-                } else {
-                    alert('Access Denied!');
-                    window.location.href = 'dashboard-student.html';
+                currentUserUid = user.uid;
+                const docSnap = await getDoc(doc(db, "users", user.uid));
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    currentUserRole = data.role || 'student';
+
+                    // Update dashboard nav link based on role
+                    const navDash = document.getElementById('navDashboardLink');
+                    if (navDash) {
+                        navDash.href = currentUserRole === 'lecturer' ? 'dashboard-lecturer.html' : 'dashboard-student.html';
+                    }
+
+                    document.getElementById('profEmail').value = data.email || user.email;
+                    document.getElementById('profRole').value = currentUserRole.toUpperCase();
+                    document.getElementById('profName').value = data.name || '';
+
+                    if (currentUserRole === 'student') {
+                        document.getElementById('studentFields').style.display = 'block';
+                        document.getElementById('profMatric').value = data.matricNo || '';
+                        if (data.set) {
+                            document.getElementById('profSet').value = data.set;
+                        }
+                    }
                 }
             } else {
                 window.location.href = 'login.html';
             }
         });
 
-        // Form Muat Naik Bahan
-        document.getElementById('uploadResourceForm').addEventListener('submit', async (e) => {
+        // Save updated profile
+        document.getElementById('profileForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            try {
-                await uploadLearningResource(
-                    document.getElementById('resTitle').value.trim(),
-                    document.getElementById('resSubject').value,
-                    document.getElementById('resUrl').value.trim(),
-                    [document.getElementById('resTargetSet').value],
-                    currentLecturer.name,
-                    currentLecturer.email
-                );
-                alert('Learning materials successfully shared!');
-                document.getElementById('uploadResourceForm').reset();
-            } catch (err) {
-                alert(err.message);
-            }
-        });
+            if (!currentUserUid) return;
 
-        // Fetch Pelajar Mengikut Set
-        window.fetchStudentsForGrading = async function (setName) {
-            const select = document.getElementById('gradeStudentSelect');
-            select.innerHTML = '<option value="">Loading Students...</option>';
-            if (!setName) return;
+            const btn = document.getElementById('btnSaveProfile');
+            const name = document.getElementById('profName').value.trim();
 
-            try {
-                const students = await getStudentsBySet(setName);
-                select.innerHTML = '<option value="">-- Select Student --</option>';
-                students.forEach(std => {
-                    const opt = document.createElement('option');
-                    opt.value = std.uid;
-                    opt.textContent = `${std.name} (${std.matricNo || 'No matrix'})`;
-                    select.appendChild(opt);
-                });
-            } catch (err) {
-                alert(err.message);
-            }
-        };
-
-        // Simpan Gred Pelajar
-        document.getElementById('gradeForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const studentUid = document.getElementById('gradeStudentSelect').value;
-            const subject = document.getElementById('gradeSubject').value;
-
-            const scores = {
-                quiz: document.getElementById('scoreQuiz').value,
-                assignment: document.getElementById('scoreAssignment').value,
-                midSem: document.getElementById('scoreMidSem').value,
-                finalExam: document.getElementById('scoreFinal').value
+            const updatedData = {
+                name: name
             };
 
+            if (currentUserRole === 'student') {
+                updatedData.matricNo = document.getElementById('profMatric').value.trim();
+                updatedData.set = document.getElementById('profSet').value;
+            }
+
             try {
-                await updateStudentGrades(studentUid, subject, scores);
-                alert('The garde has been successfully saved!');
+                btn.disabled = true;
+                btn.textContent = 'Saving...';
+                await updateUserProfile(currentUserUid, updatedData);
+                alert('Profile updated successfully!');
             } catch (err) {
-                alert(err.message);
+                alert('Failed to update profile: ' + err.message);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Save Changes';
             }
         });
+
+        // Logout Event
+        document.getElementById('btnLogout').addEventListener('click', () => {
+            logoutUser();
+        });
     </script>
-
-    <script src="script.js"></script>
+    <script type="module" src="app-core.js"></script>
 </body>
-
 </html>
