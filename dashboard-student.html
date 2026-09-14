@@ -4,16 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Pelajar - PINTAR@Sphere</title>
+    <title>Papan Pemuka Pelajar - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .dashboard-container { padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .student-header { background: #0056b3; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .set-badge { background: #ffc107; color: #000; padding: 4px 12px; border-radius: 20px; font-weight: bold; }
-        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .resource-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
-        .btn-drive { background: #28a745; color: white; padding: 6px 12px; border-radius: 5px; text-decoration: none; font-size: 14px; }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .header-card {
+            background: linear-gradient(135deg, #0056b3, #002d5e);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .subject-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-3px);
+            border-color: #0056b3;
+        }
+
+        .resource-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -22,84 +76,109 @@
     <nav>
         <div class="logo">🎓 PINTAR@Sphere</div>
         <ul>
-            <li><a href="dashboard-student.html">Dashboard</a></li>
-            <li><a href="timetable.html">Jadual Waktu</a></li>
-            <li><a href="tools.html">Kalkulator GPA</a></li>
-            <li><a href="community.html">Komuniti</a></li>
+            <li><a href="dashboard-student.html" data-i18n="nav_dashboard">Dashboard</a></li>
+            <li><a href="resources.html" data-i18n="nav_resources">Bahan</a></li>
+            <li><a href="tools.html" data-i18n="nav_tools">GPA Calculator</a></li>
+            <li><a href="calender.html" data-i18n="nav_calendar">Kalendar</a></li>
+            <li><a href="community.html" data-i18n="nav_community">Komuniti</a></li>
         </ul>
-        <button id="logoutBtn">Log Keluar</button>
+        <button onclick="logout()">Log Keluar</button>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
     </nav>
 
-    <div class="dashboard-container">
-        <!-- Header Selamat Datang -->
-        <div class="student-header">
-            <h2>Selamat Datang, <span id="studentName">Pelajar</span>! 👋</h2>
-            <p>No. Matrik: <b id="studentMatric">-</b> | Kumpulan: <span id="studentSetBadge" class="set-badge">Set -</span></p>
+    <div class="container">
+        
+        <!-- HEADER PROFIL -->
+        <div class="header-card">
+            <div>
+                <h1 id="stdName" style="margin: 0;">Memuatkan Profil...</h1>
+                <p style="margin: 5px 0 0 0;">No. Matrik: <b id="stdMatric">-</b> | Kumpulan: <b id="stdSet">-</b></p>
+            </div>
+            <div>
+                <select id="langSelect" onchange="changeLanguage(this.value)" style="padding: 6px; border-radius: 5px;">
+                    <option value="ms">🇲🇾 BM</option>
+                    <option value="en">🇬🇧 EN</option>
+                    <option value="zh">🇨🇳 ZH</option>
+                    <option value="ta">🇮🇳 TA</option>
+                </select>
+            </div>
         </div>
 
-        <div class="grid-layout">
-            <!-- Ruang Utama: Bahan Pembelajaran -->
-            <div>
-                <div class="card">
-                    <h3>📚 Bahan Pembelajaran (Learning Resources)</h3>
-                    <p style="font-size: 13px; color: #666;">Bahan yang disediakan khusus untuk <b id="currentSetText">Set anda</b>.</p>
-                    
-                    <div style="margin: 15px 0;">
-                        <label>Tapis Subjek: </label>
-                        <select id="subjectFilter">
-                            <option value="ALL">Semua Subjek</option>
-                            <option value="Biology">Biology</option>
-                            <option value="Chemistry">Chemistry</option>
-                            <option value="Physics">Physics</option>
-                            <option value="Logical Reasoning">Logical Reasoning</option>
-                            <option value="Statistics">Statistics</option>
-                            <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
-                            <option value="Jati Diri">Jati Diri</option>
-                            <option value="Research Skills">Research Skills</option>
-                        </select>
-                    </div>
-
-                    <div id="resourcesList">
-                        <p>Memuatkan bahan pembelajaran...</p>
-                    </div>
+        <div class="grid-3">
+            
+            <!-- SUBJEK TERAS ASPI -->
+            <div class="card" style="grid-column: span 2;">
+                <h3>📚 Subjek Teras ASPI</h3>
+                <div class="subject-grid">
+                    <a href="biology.html" class="subject-card">🧬 Biology</a>
+                    <a href="chemistry.html" class="subject-card">🧪 Chemistry</a>
+                    <a href="physics.html" class="subject-card">⚛️ Physics</a>
+                    <a href="logical.html" class="subject-card">🧠 Logical Reasoning</a>
+                    <a href="statistics.html" class="subject-card">📊 Statistics</a>
+                    <a href="lla.html" class="subject-card">📖 LLA</a>
+                    <a href="jati diri.html" class="subject-card">🛡️ Jati Diri</a>
+                    <a href="research.html" class="subject-card">🔍 Research Skills</a>
                 </div>
             </div>
 
-            <!-- Panel Sisi: Peringatan & Quiz Due Date -->
-            <div>
-                <div class="card">
-                    <h3>⏰ Peringatan Tugasan / Quiz</h3>
-                    <div id="deadlinesList">
-                        <p style="font-size: 13px; color: #777;">Tiada tugasan mendesak minggu ini.</p>
-                    </div>
+            <!-- BAHAN PEMBELAJARAN TERKINI -->
+            <div class="card">
+                <h3>📁 Bahan Pembelajaran Terkini</h3>
+                <div id="latestResources">
+                    <p style="font-size: 13px; color: #666;">Memuatkan bahan...</p>
                 </div>
             </div>
+
         </div>
+
     </div>
 
     <script type="module">
         import { auth, onAuthStateChanged } from './firebase-config.js';
-        import { logoutUser } from './auth.js';
         import { getStudentProfile, getStudentResources } from './student-core.js';
+        import { logoutUser } from './auth.js';
+        import { setLanguage, initI18n, getCurrentLanguage } from './i18n.js';
 
-        document.getElementById('logoutBtn').addEventListener('click', () => logoutUser());
+        initI18n();
+        document.getElementById('langSelect').value = getCurrentLanguage();
+
+        window.changeLanguage = function (lang) {
+            setLanguage(lang);
+        };
+
+        window.logout = function () {
+            logoutUser();
+        };
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 try {
                     const profile = await getStudentProfile(user.uid);
-                    document.getElementById('studentName').textContent = profile.name;
-                    document.getElementById('studentMatric').textContent = profile.matricNo || 'N/A';
-                    document.getElementById('studentSetBadge').textContent = profile.set || 'Set 1';
-                    document.getElementById('currentSetText').textContent = profile.set || 'Set 1';
+                    document.getElementById('stdName').textContent = profile.name;
+                    document.getElementById('stdMatric').textContent = profile.matricNo || 'N/A';
+                    document.getElementById('stdSet').textContent = profile.set || 'Set 1';
 
-                    // Load Bahan Pembelajaran
-                    loadResources(profile.set, 'ALL');
+                    // Fetch Resources
+                    const resources = await getStudentResources(profile.set || 'Set 1');
+                    const resContainer = document.getElementById('latestResources');
 
-                    document.getElementById('subjectFilter').addEventListener('change', (e) => {
-                        loadResources(profile.set, e.target.value);
-                    });
-
+                    if (resources.length === 0) {
+                        resContainer.innerHTML = '<p style="font-size:13px; color:#888;">Tiada bahan dikongsi lagi.</p>';
+                    } else {
+                        resContainer.innerHTML = '';
+                        resources.slice(0, 5).forEach(item => {
+                            const div = document.createElement('div');
+                            div.className = 'resource-item';
+                            div.innerHTML = `
+                                <div>
+                                    <strong style="font-size:14px;">${item.title}</strong><br>
+                                    <small style="color:#666;">${item.subject}</small>
+                                </div>
+                                <a href="${item.driveUrl}" target="_blank" style="color:#0056b3; font-weight:bold; text-decoration:none; font-size:13px;">Buka 🔗</a>
+                            `;
+                            resContainer.appendChild(div);
+                        });
+                    }
                 } catch (err) {
                     console.error(err);
                 }
@@ -107,35 +186,9 @@
                 window.location.href = 'login.html';
             }
         });
-
-        async function loadResources(studentSet, subject) {
-            const listDiv = document.getElementById('resourcesList');
-            listDiv.innerHTML = '<p>Memuatkan...</p>';
-
-            try {
-                const materials = await getStudentResources(studentSet, subject);
-                if (materials.length === 0) {
-                    listDiv.innerHTML = '<p style="color:#888;">Tiada bahan pembelajaran ditemui untuk subjek ini.</p>';
-                    return;
-                }
-
-                listDiv.innerHTML = '';
-                materials.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'resource-item';
-                    div.innerHTML = `
-                        <div>
-                            <b>${item.title}</b> <br>
-                            <small style="color: #666;">${item.subject} • Oleh ${item.uploadedByName}</small>
-                        </div>
-                        <a href="${item.driveUrl}" target="_blank" class="btn-drive">📁 Buka Link</a>
-                    `;
-                    listDiv.appendChild(div);
-                });
-            } catch (err) {
-                listDiv.innerHTML = '<p style="color:red;">Ralat memuatkan bahan.</p>';
-            }
-        }
     </script>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
