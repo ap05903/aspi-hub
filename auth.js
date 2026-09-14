@@ -1,126 +1,81 @@
-// auth.js
+/**
+ * auth.js
+ * Modul Pengesahan Pengguna (Login/Register) berasaskan Domain UKM
+ */
+
 import { 
     auth, 
     db, 
-    createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
     signOut, 
-    onAuthStateChanged,
     doc, 
     setDoc, 
-    getDoc 
-} from "./firebase-config.js";
+    getDoc, 
+    serverTimestamp 
+} from './firebase-config.js';
 
-// Penentu Peranan Berdasarkan E-mel UKM
-function getRoleFromEmail(email) {
-    const cleanEmail = email.trim().toLowerCase();
-    if (cleanEmail.endsWith("@siswa.ukm.edu.my")) {
-        return { role: "STUDENT", domainValid: true };
-    } else if (cleanEmail.endsWith("@ukm.edu.my")) {
-        return { role: "LECTURER", domainValid: true };
-    }
-    return { role: null, domainValid: false };
-}
-
-// 1. Fungsi Pendaftaran (Register)
-export async function registerUser(email, password, name, matricNo = "", assignedSet = "Set 1", subjectsTaught = []) {
-    const { role, domainValid } = getRoleFromEmail(email);
-
-    if (!domainValid) {
-        throw new Error("E-mel tidak sah! Gunakan @siswa.ukm.edu.my (Pelajar) atau @ukm.edu.my (Pensyarah).");
-    }
-
+/**
+ * Mendaftar Pengguna Baharu (Pelajar atau Pensyarah)
+ */
+export async function registerUser(email, password, name, matricNo, role, setGroup) {
     try {
+        const isUkmEmail = email.toLowerCase().endsWith('@ukm.edu.my') || email.toLowerCase().endsWith('@siswa.ukm.edu.my');
+        if (!isUkmEmail) {
+            throw new Error("Sila gunakan e-mel rasmi UKM (@ukm.edu.my atau @siswa.ukm.edu.my)!");
+        }
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Simpan Profil Pengguna ke Cloud Firestore
-        const userData = {
+        // Simpan data profil pengguna dalam Firestore
+        await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             name: name,
             email: email,
-            role: role,
-            createdAt: new Date().toISOString()
-        };
+            matricNo: matricNo || '',
+            role: role, // 'STUDENT' atau 'LECTURER'
+            set: setGroup || 'Set 1',
+            createdAt: serverTimestamp()
+        });
 
-        if (role === "STUDENT") {
-            userData.matricNo = matricNo;
-            userData.set = assignedSet; // Penetapan Set (Contoh: Set 3)
-        } else if (role === "LECTURER") {
-            userData.subjectsTaught = subjectsTaught; // Senarai Subjek Diajar
-        }
-
-        await setDoc(doc(db, "users", user.uid), userData);
-        return { user, role };
+        return { success: true, user: user };
     } catch (error) {
+        console.error("Ralat Pendaftaran:", error);
         throw error;
     }
 }
 
-// 2. Fungsi Log Masuk (Login)
+/**
+ * Log Masuk Pengguna
+ */
 export async function loginUser(email, password) {
-    const { role, domainValid } = getRoleFromEmail(email);
-
-    if (!domainValid) {
-        throw new Error("E-mel mesti berakhir dengan @siswa.ukm.edu.my atau @ukm.edu.my");
-    }
-
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Ambil Data Profil dari Firestore
+        // Ambil maklumat peranan (role) dari Firestore
         const userDoc = await getDoc(doc(db, "users", user.uid));
-        
         if (userDoc.exists()) {
-            const profile = userDoc.data();
-            localStorage.setItem("userRole", profile.role);
-            localStorage.setItem("userName", profile.name);
-            if (profile.set) localStorage.setItem("userSet", profile.set);
-            
-            // Redirect Mengikut Peranan
-            redirectUserByRole(profile.role);
-            return profile;
+            const userData = userDoc.data();
+            return { success: true, user: user, role: userData.role };
         } else {
-            throw new Error("Profil pengguna tidak dijumpai dalam rekod Firestore.");
+            throw new Error("Rekod profil pengguna tidak dijumpai!");
         }
     } catch (error) {
+        console.error("Ralat Log Masuk:", error);
         throw error;
     }
 }
 
-// 3. Fungsi Log Keluar (Logout)
+/**
+ * Log Keluar Sistem
+ */
 export async function logoutUser() {
-    await signOut(auth);
-    localStorage.clear();
-    window.location.href = "login.html";
-}
-
-// 4. Semakan Akses & Protection Halaman
-export function checkAuthProtection(requiredRole = null) {
-    onAuthStateChanged(auth, async (user) => {
-        if (!user) {
-            if (!window.location.pathname.endsWith("login.html")) {
-                window.location.href = "login.html";
-            }
-        } else {
-            const userDoc = await getDoc(doc(db, "users", user.uid));
-            if (userDoc.exists()) {
-                const profile = userDoc.data();
-                if (requiredRole && profile.role !== requiredRole) {
-                    alert("Akses dilarang! Anda tidak mempunyai kebenaran untuk halaman ini.");
-                    redirectUserByRole(profile.role);
-                }
-            }
-        }
-    });
-}
-
-// Redirect Helper
-function redirectUserByRole(role) {
-    if (role === "STUDENT") {
-        window.location.href = "dashboard-student.html";
-    } else if (role === "LECTURER") {
-        window.location.href = "dashboard-lecturer.html";
+    try {
+        await signOut(auth);
+        window.location.href = 'login.html';
+    } catch (error) {
+        console.error("Ralat Log Keluar:", error);
     }
 }
