@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="login_title">Log Masuk - PINTAR@Sphere</title>
+    <title>Login - PINTAR@Sphere</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .login-container {
@@ -32,22 +32,6 @@
             background: var(--bg-color, #fff);
             color: var(--text-color, #333);
         }
-        .lang-picker {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-        .lang-picker select {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color, #ccc);
-            background: var(--card-bg, #fff);
-            color: var(--text-color, #333);
-            cursor: pointer;
-            font-weight: 500;
-        }
     </style>
 </head>
 <body>
@@ -58,64 +42,35 @@
     </nav>
 
     <div class="login-container">
-        <!-- Menu Pilihan Bahasa (Paling Atas) -->
-        <div class="lang-picker">
-            <span style="font-size: 14px;">🌐</span>
-            <select id="langSelect">
-                <option value="ms">Bahasa Melayu</option>
-                <option value="en">English</option>
-                <option value="zh">中文 (Chinese)</option>
-                <option value="ta">தமிழ் (Tamil)</option>
-            </select>
-        </div>
-
-        <h2 style="text-align: center; margin-top: 0;" data-i18n="welcome_header">Selamat Datang</h2>
-        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;" data-i18n="welcome_sub">Sila log masuk ke akaun anda</p>
+        <h2 style="text-align: center; margin-top: 0;">Welcome Back</h2>
+        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Please login to your PINTAR@Sphere account</p>
         
-        <!-- Form Log Masuk -->
+        <!-- Login Form -->
         <form id="loginForm">
             <div class="form-group">
-                <label data-i18n="label_email">E-mel</label>
-                <input type="email" id="email" placeholder="contoh@siswa.um.edu.my" required>
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="student@siswa.um.edu.my" required>
             </div>
             
             <div class="form-group">
-                <label data-i18n="label_password">Kata Laluan</label>
+                <label>Password</label>
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" id="btnLoginSubmit" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer;" data-i18n="btn_login">Log Masuk</button>
+            <button type="submit" id="btnLoginSubmit" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer;">Login</button>
         </form>
 
-        <!-- Pautan Ke Halaman Pendaftaran -->
+        <!-- Register Link -->
         <p style="text-align: center; font-size: 13px; margin-top: 20px;">
-            <span data-i18n="no_account">Belum mempunyai akaun?</span> 
-            <a href="register.html" style="color: var(--primary-color, #0056b3); text-decoration: none; font-weight: bold;" data-i18n="register_here">Daftar di sini</a>
+            Don't have an account? 
+            <a href="register.html" style="color: var(--primary-color, #0056b3); text-decoration: none; font-weight: bold;">Register here</a>
         </p>
     </div>
 
-    <!-- Skrip Modul Autentikasi & Bahasa -->
+    <!-- Main Module Script -->
     <script type="module">
-        import { currentLang, setLanguage, applyTranslations } from './il8n.js';
         import { loginUser } from './auth.js';
 
-        // 1. Tetapkan pilihan asal pada dropdown mengikut bahasa terkini
-        const langSelect = document.getElementById('langSelect');
-        if (langSelect) {
-            langSelect.value = currentLang;
-
-            // Tukar bahasa serta-merta apabila pengguna memilih pilihan baharu
-            langSelect.addEventListener('change', (e) => {
-                const selectedLang = e.target.value;
-                setLanguage(selectedLang);
-                applyTranslations();
-            });
-        }
-
-        // 2. Terjemahkan teks pada halaman sebaik sahaja load
-        applyTranslations();
-
-        // 3. Kendalikan penghantaran form log masuk
         const loginForm = document.getElementById('loginForm');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
@@ -126,19 +81,19 @@
                 const password = document.getElementById('password').value;
 
                 if (!email || !password) {
-                    alert('Sila isi e-mel dan kata laluan!');
+                    alert('Please enter both email and password!');
                     return;
                 }
 
                 try {
                     btn.disabled = true;
-                    btn.textContent = 'Memuatkan...';
+                    btn.textContent = 'Logging in...';
                     await loginUser(email, password);
                 } catch (err) {
-                    console.error("Ralat Log Masuk:", err);
+                    console.error("Login Error:", err);
                 } finally {
                     btn.disabled = false;
-                    applyTranslations(); // Kembalikan teks button mengikut bahasa
+                    btn.textContent = 'Login';
                 }
             });
         }
