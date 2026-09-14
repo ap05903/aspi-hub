@@ -1,139 +1,407 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academic Calendar - PINTAR@Sphere</title>
-<link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="calendar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalendar Akademik & Notifikasi - PINTAR@Sphere</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Banner Notifikasi PENTING */
+        .alert-banner {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .alert-banner h3 {
+            margin: 0 0 10px 0;
+            color: #856404;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notice-card {
+            background: #ffffff;
+            border: 1px solid #ffeeba;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .notice-tag {
+            background: #dc3545;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* Grid Kalendar */
+        .calendar-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 900px) {
+            .calendar-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 20px;
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            gap: 15px;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .event-date {
+            background: #0056b3;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .event-date .day {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .event-date .month {
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .badge-exam { background: #dc3545; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; }
+        .badge-academic { background: #0056b3; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; }
+        .badge-holiday { background: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; }
+
+        .btn-post-notice {
+            background: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 
 <body>
 
-<nav>
+    <nav>
+        <div class="logo">🎓 PINTAR@Sphere</div>
+        <ul>
+            <li><a href="dashboard-student.html">Dashboard</a></li>
+            <li><a href="resources.html">Bahan</a></li>
+            <li><a href="tools.html">GPA Calculator</a></li>
+            <li><a href="calender.html">Kalendar</a></li>
+            <li><a href="community.html">Komuniti</a></li>
+        </ul>
+        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </nav>
 
-<div class="logo">🎓 PINTAR@Sphere</div>
+    <div class="container">
 
-<ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="dashboard.html">Dashboard</a></li>
-<li><a href="resources.html">Resources</a></li>
-<li><a href="tools.html">Tools</a></li>
-<li><a href="timetable.html">Timetable</a></li>
-</ul>
+        <!-- BANNER NOTIFIKASI TUKAR KELAS / KELAS GANTI -->
+        <div class="alert-banner">
+            <h3>⚠️ Notifikasi Perubahan Jadual Kelas (<span id="userSetTitle">Set Anda</span>)</h3>
+            <div id="classNoticesList">
+                <p style="font-size: 13px; color: #666; margin: 0;">Memuatkan pemberitahuan jadual...</p>
+            </div>
+        </div>
 
-  <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
-  
-</nav>
+        <div class="calendar-layout">
+            
+            <!-- BAHAGIAN KIRI: Senarai Acara Akademik & Peristiwa -->
+            <div class="card">
+                <h3>📅 Takwim Akademik ASPI (2026)</h3>
+                <p style="font-size: 13px; color: #666; margin-bottom: 20px;">
+                    Tarikh-tarikh penting sepanjang semester merangkumi peperiksaan, cuti, dan tarikh akhir tugasan.
+                </p>
 
-<header class="hero">
+                <div id="academicEventsList">
+                    <!-- Event Items -->
+                    <div class="event-item">
+                        <div class="event-date">
+                            <div class="day">28</div>
+                            <div class="month">Sep</div>
+                        </div>
+                        <div>
+                            <span class="badge-academic">Akademik</span>
+                            <h4 style="margin: 5px 0 2px 0;">Peperiksaan Pertengahan Semester (Mid-Sem)</h4>
+                            <p style="font-size: 12px; color: #666; margin: 0;">Ujian bagi semua subjek Teras ASPI</p>
+                        </div>
+                    </div>
 
-<h1>📅 Academic Calendar</h1>
+                    <div class="event-item">
+                        <div class="event-date" style="background:#28a745;">
+                            <div class="day">12</div>
+                            <div class="month">Okt</div>
+                        </div>
+                        <div>
+                            <span class="badge-holiday">Cuti</span>
+                            <h4 style="margin: 5px 0 2px 0;">Cuti Pertengahan Semester</h4>
+                            <p style="font-size: 12px; color: #666; margin: 0;">Cuti perkuliahan selama 1 minggu</p>
+                        </div>
+                    </div>
 
-<p>Stay updated with important academic dates.</p>
+                    <div class="event-item">
+                        <div class="event-date" style="background:#dc3545;">
+                            <div class="day">23</div>
+                            <div class="month">Nov</div>
+                        </div>
+                        <div>
+                            <span class="badge-exam">Peperiksaan Final</span>
+                            <h4 style="margin: 5px 0 2px 0;">Peperiksaan Akhir Semester ASPI</h4>
+                            <p style="font-size: 12px; color: #666; margin: 0;">Dewan Peperiksaan Utama UKM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-</header>
+            <!-- BAHAGIAN KANAN: Panel Kawalan Pensyarah & Ringkasan -->
+            <div>
+                <!-- Butang Khas Pensyarah -->
+                <div id="lecturerControlBox" style="display: none;">
+                    <button class="btn-post-notice" onclick="openNoticeModal()">📢 Hantar Notifikasi Tukar Kelas</button>
+                </div>
 
-<section class="calendar-container">
+                <div class="card">
+                    <h3>📌 Ringkasan Peringatan</h3>
+                    <ul style="padding-left: 20px; font-size: 14px; color: #444; line-height: 1.6;">
+                        <li><b>Tugasan Lab Physics:</b> Hantar sebelum Jumaat ini.</li>
+                        <li><b>Laporan Mini Project Stats:</b> Tarikh tutup 5 Oktober.</li>
+                        <li><b>Persembahan Teater LLA:</b> Minggu ke-10.</li>
+                    </ul>
+                </div>
+            </div>
 
-    <div class="calendar-header">
-
-    <button id="previousMonth">◀</button>
-
-    <h2 id="monthTitle"></h2>
-
-    <button id="todayButton">Today</button>
-
-    <button id="nextMonth">▶</button>
-
-</div>
-
-  <div class="calendar-legend">
-
-    <span>
-        <i class="legend-color assignment"></i>
-        Assignment
-    </span>
-
-    <span>
-        <i class="legend-color quiz"></i>
-        Quiz
-    </span>
-
-    <span>
-        <i class="legend-color lab"></i>
-        Holiday
-    </span>
-
-    <span>
-        <i class="legend-color exam"></i>
-        Examination
-    </span>
-
-    <span>
-        <i class="legend-color campus"></i>
-        Campus Event
-    </span>
-
-</div>
-
-<div class="calendar-grid">
-
-    <div class="day-name">Sun</div>
-    <div class="day-name">Mon</div>
-    <div class="day-name">Tue</div>
-    <div class="day-name">Wed</div>
-    <div class="day-name">Thu</div>
-    <div class="day-name">Fri</div>
-    <div class="day-name">Sat</div>
-
-    <div id="calendarGrid" style="display: contents;"></div>
-
-</div>
-
-</section>
-
-
-<!-- EVENT POPUP -->
-
-<div id="eventModal" class="event-modal">
-
-    <div class="event-modal-content">
-
-        <button class="close-button"
-                onclick="closeEvent()">
-            ×
-        </button>
-
-        <h2 id="eventTitle">
-            Event
-        </h2>
-
-        <p>
-            🕐 <strong>Time:</strong>
-            <span id="eventTime"></span>
-        </p>
-
-        <p id="eventDescription"></p>
-
-        <button onclick="closeEvent()">
-            Close
-        </button>
-
+        </div>
     </div>
 
-</div>
+    <!-- MODAL BORANG HANTAR NOTIFIKASI (PENSYARAH) -->
+    <div id="noticeModal" class="modal">
+        <div class="modal-content">
+            <h3>📢 Hantar Perubahan Jadual Kelas</h3>
+            <form id="noticeForm">
+                <div class="form-group">
+                    <label>Tajuk Notifikasi</label>
+                    <input type="text" id="noticeTitle" placeholder="Contoh: Penundaan Kuliah Biology" required>
+                </div>
+                <div class="form-group">
+                    <label>Subjek</label>
+                    <select id="noticeSubject" required>
+                        <option value="Biology">Biology</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Logical Reasoning">Logical Reasoning</option>
+                        <option value="Statistics">Statistics</option>
+                        <option value="Language and Literary Appreciation">Language & Literary Appreciation</option>
+                        <option value="Jati Diri">Jati Diri</option>
+                        <option value="Research Skills">Research Skills</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Masa Asal</label>
+                    <input type="text" id="originalTime" placeholder="Contoh: Isnin 9:00 AM">
+                </div>
+                <div class="form-group">
+                    <label>Masa Baharu / Tarikh Ganti</label>
+                    <input type="text" id="newTime" placeholder="Contoh: Rabu 2:00 PM (Bilik BS02)" required>
+                </div>
+                <div class="form-group">
+                    <label>Pilih Set Pelajar Involved</label>
+                    <select id="targetSetSelect" required>
+                        <option value="ALL">Semua Set (All Sets)</option>
+                        <option value="Set 1">Set 1</option>
+                        <option value="Set 2">Set 2</option>
+                        <option value="Set 3">Set 3</option>
+                        <option value="Set 4">Set 4</option>
+                        <option value="Set 5">Set 5</option>
+                        <option value="Set 6">Set 6</option>
+                        <option value="Set 7">Set 7</option>
+                        <option value="Set 8">Set 8</option>
+                        <option value="Set 9">Set 9</option>
+                        <option value="Set 10">Set 10</option>
+                        <option value="Set 11">Set 11</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Catatan Tambahan</label>
+                    <textarea id="noticeNote" rows="2" placeholder="Sebab penundaan atau arahan tambahan..."></textarea>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button type="submit" style="background:#28a745; color:white; padding:10px; border:none; border-radius:5px; flex:1; cursor:pointer;">Hantar</button>
+                    <button type="button" onclick="closeNoticeModal()" style="background:#6c757d; color:white; padding:10px; border:none; border-radius:5px; flex:1; cursor:pointer;">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<footer>
+    <footer>
+        <p>© 2026 PINTAR@Sphere | Built for ASPI Students & Lecturers</p>
+    </footer>
 
-<p>© 2026 PINTAR@Sphere | Built for ASPI Students</p>
+    <!-- Script Integrasi Firestore & Notifikasi -->
+    <script type="module">
+        import { auth, onAuthStateChanged, db, doc, getDoc } from './firebase-config.js';
+        import { broadcastClassNotice, getStudentClassNotices } from './notification-core.js';
 
-</footer>
+        let currentUserProfile = null;
 
-<script src="script.js"></script>
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const userSnap = await getDoc(doc(db, "users", user.uid));
+                if (userSnap.exists()) {
+                    currentUserProfile = userSnap.data();
 
-<script src="calendar.js"></script>
-  
+                    // Paparkan butang jika peranan Pensyarah
+                    if (currentUserProfile.role === 'LECTURER' || currentUserProfile.role === 'LECTURER') {
+                        document.getElementById('lecturerControlBox').style.display = 'block';
+                    }
+
+                    const userSet = currentUserProfile.set || 'Set 1';
+                    document.getElementById('userSetTitle').textContent = currentUserProfile.role === 'LECTURER' ? 'Semua Set' : userSet;
+
+                    // Muat naik pemberitahuan kelas
+                    loadNotices(userSet);
+                }
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        async function loadNotices(studentSet) {
+            const listDiv = document.getElementById('classNoticesList');
+            listDiv.innerHTML = '<p style="font-size:13px;">Memuatkan pemberitahuan...</p>';
+
+            const notices = await getStudentClassNotices(studentSet);
+
+            if (notices.length === 0) {
+                listDiv.innerHTML = '<p style="font-size:13px; color:#28a745; margin:0;">✅ Tiada sebarang perubahan jadual atau kelas ganti terkini.</p>';
+                return;
+            }
+
+            listDiv.innerHTML = '';
+            notices.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'notice-card';
+                div.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span class="notice-tag">${item.subject}</span>
+                        <small style="color:#666;">Sasaran: <b>${item.targetSets ? item.targetSets.join(', ') : 'ALL'}</b></small>
+                    </div>
+                    <h4 style="margin: 8px 0 4px 0; color:#856404;">${item.title}</h4>
+                    <p style="margin:0; font-size:13px;"><b>Masa Asal:</b> ${item.originalTime} ➔ <b>Masa Baharu:</b> <span style="color:#d9534f; font-weight:bold;">${item.newTime}</span></p>
+                    ${item.note ? `<p style="margin:4px 0 0 0; font-size:12px; color:#555;"><i>"${item.note}"</i> - ${item.lecturerName}</p>` : ''}
+                `;
+                listDiv.appendChild(div);
+            });
+        }
+
+        // Modal Controls
+        window.openNoticeModal = function() {
+            document.getElementById('noticeModal').style.display = 'flex';
+        };
+
+        window.closeNoticeModal = function() {
+            document.getElementById('noticeModal').style.display = 'none';
+        };
+
+        // Form Submit
+        document.getElementById('noticeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const noticeData = {
+                title: document.getElementById('noticeTitle').value.trim(),
+                subject: document.getElementById('noticeSubject').value,
+                originalTime: document.getElementById('originalTime').value.trim(),
+                newTime: document.getElementById('newTime').value.trim(),
+                targetSets: [document.getElementById('targetSetSelect').value],
+                lecturerName: currentUserProfile.name,
+                note: document.getElementById('noticeNote').value.trim()
+            };
+
+            try {
+                await broadcastClassNotice(noticeData);
+                alert('Pemberitahuan berjaya dihantar!');
+                closeNoticeModal();
+                loadNotices(currentUserProfile.set || 'Set 1');
+            } catch (err) {
+                alert('Ralat menghantar notifikasi: ' + err.message);
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
