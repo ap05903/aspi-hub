@@ -10,10 +10,10 @@
             max-width: 400px;
             margin: 60px auto;
             padding: 30px;
-            background: var(--card-bg);
+            background: var(--card-bg, #ffffff);
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color, #e0e0e0);
         }
         .form-group {
             margin-bottom: 15px;
@@ -26,11 +26,11 @@
         .form-group input {
             width: 100%;
             padding: 10px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color, #ccc);
             border-radius: 6px;
             box-sizing: border-box;
-            background: var(--bg-color);
-            color: var(--text-color);
+            background: var(--bg-color, #fff);
+            color: var(--text-color, #333);
         }
         .lang-picker {
             display: flex;
@@ -42,9 +42,9 @@
         .lang-picker select {
             padding: 6px 10px;
             border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            color: var(--text-color);
+            border: 1px solid var(--border-color, #ccc);
+            background: var(--card-bg, #fff);
+            color: var(--text-color, #333);
             cursor: pointer;
             font-weight: 500;
         }
@@ -54,14 +54,14 @@
 
     <nav>
         <div class="logo">🎓 PINTAR@Sphere</div>
-        <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+        <button id="btnDarkMode">🌙 Dark Mode</button>
     </nav>
 
     <div class="login-container">
-        <!-- Menu Pilih Bahasa (Sebelum Log Masuk) -->
+        <!-- Menu Pilihan Bahasa (Paling Atas) -->
         <div class="lang-picker">
             <span style="font-size: 14px;">🌐</span>
-            <select id="langSelect" onchange="changeLanguage(this.value)">
+            <select id="langSelect">
                 <option value="ms">Bahasa Melayu</option>
                 <option value="en">English</option>
                 <option value="zh">中文 (Chinese)</option>
@@ -84,52 +84,64 @@
                 <input type="password" id="password" placeholder="••••••••" required>
             </div>
 
-            <button type="submit" id="btnLoginSubmit" style="width: 100%; padding: 12px; margin-top: 10px;" data-i18n="btn_login">Log Masuk</button>
+            <button type="submit" id="btnLoginSubmit" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer;" data-i18n="btn_login">Log Masuk</button>
         </form>
 
-        <!-- Pautan Pendaftaran Ke register.html -->
+        <!-- Pautan Ke Halaman Pendaftaran -->
         <p style="text-align: center; font-size: 13px; margin-top: 20px;">
             <span data-i18n="no_account">Belum mempunyai akaun?</span> 
-            <a href="register.html" style="color: var(--primary-color); text-decoration: none; font-weight: bold;" data-i18n="register_here">Daftar di sini</a>
+            <a href="register.html" style="color: var(--primary-color, #0056b3); text-decoration: none; font-weight: bold;" data-i18n="register_here">Daftar di sini</a>
         </p>
     </div>
 
-    <!-- Skrip Modul Utama -->
+    <!-- Skrip Modul Autentikasi & Bahasa -->
     <script type="module">
-        import { currentLang, setLanguage } from './i18n.js';
+        import { currentLang, setLanguage, applyTranslations } from './il8n.js';
         import { loginUser } from './auth.js';
 
-        // Set pilihan dropdown mengikut bahasa semasa
-        document.getElementById('langSelect').value = currentLang;
+        // 1. Tetapkan pilihan asal pada dropdown mengikut bahasa terkini
+        const langSelect = document.getElementById('langSelect');
+        if (langSelect) {
+            langSelect.value = currentLang;
 
-        // Penukaran bahasa dinamik
-        window.changeLanguage = function(lang) {
-            setLanguage(lang);
-        };
+            // Tukar bahasa serta-merta apabila pengguna memilih pilihan baharu
+            langSelect.addEventListener('change', (e) => {
+                const selectedLang = e.target.value;
+                setLanguage(selectedLang);
+                applyTranslations();
+            });
+        }
 
-        // Mengendalikan Event Submit Form Log Masuk
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btnLoginSubmit');
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+        // 2. Terjemahkan teks pada halaman sebaik sahaja load
+        applyTranslations();
 
-            if (!email || !password) {
-                alert('Sila isi e-mel dan kata laluan!');
-                return;
-            }
+        // 3. Kendalikan penghantaran form log masuk
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const btn = document.getElementById('btnLoginSubmit');
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
 
-            try {
-                btn.disabled = true;
-                btn.textContent = 'Memuatkan...';
-                await loginUser(email, password);
-            } catch (err) {
-                console.error(err);
-            } finally {
-                btn.disabled = false;
-                btn.setAttribute('data-i18n', 'btn_login');
-            }
-        });
+                if (!email || !password) {
+                    alert('Sila isi e-mel dan kata laluan!');
+                    return;
+                }
+
+                try {
+                    btn.disabled = true;
+                    btn.textContent = 'Memuatkan...';
+                    await loginUser(email, password);
+                } catch (err) {
+                    console.error("Ralat Log Masuk:", err);
+                } finally {
+                    btn.disabled = false;
+                    applyTranslations(); // Kembalikan teks button mengikut bahasa
+                }
+            });
+        }
     </script>
     <script type="module" src="app-core.js"></script>
 </body>
