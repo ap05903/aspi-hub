@@ -1,82 +1,507 @@
-/* style.css - Gaya Utama & Komuniti & Kalendar */
-:root {
-    --primary-color: #0056b3;
-    --primary-dark: #003d80;
-    --secondary-color: #f8f9fa;
-    --text-color: #333333;
-    --bg-color: #f4f6f9;
-    --card-bg: #ffffff;
-    --border-color: #e0e0e0;
+style.css *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-body.dark-mode {
-    --primary-color: #4da3ff;
-    --primary-dark: #0056b3;
-    --secondary-color: #1e1e1e;
-    --text-color: #e0e0e0;
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
-    --border-color: #333333;
+body{
+    background:#f5f7fa;
+    color:#333;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#1434A4;
+    color:white;
+    padding:18px 8%;
+    position:sticky;
+    top:0;
 }
 
-nav {
-    background-color: var(--card-bg);
-    border-bottom: 1px solid var(--border-color);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+.logo{
+    font-size:28px;
+    font-weight:bold;
 }
 
-nav .logo {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--primary-color);
+nav ul{
+    display:flex;
+    list-style:none;
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
+nav ul li{
+    margin-left:25px;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:.3s;
 }
 
-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
+nav a:hover{
+    color:#A7C7E7;
 }
 
-button:hover { background-color: var(--primary-dark); }
+.hero{
+    text-align:center;
+    padding:90px 20px;
+    background:linear-gradient(135deg,#1434A4,#6F8FAF);
+    color:white;
+}
 
-/* Komuniti */
-.community-container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-.post-box, .post-card { background: var(--card-bg); border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); }
-.role-badge { font-size: 11px; padding: 3px 8px; border-radius: 12px; background: #e9ecef; color: #495057; }
+.hero h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
 
-/* Kalendar & Badges */
-.badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-.badge-academic { background: #d1e7dd; color: #0f5132; }
-.badge-break { background: #fff3cd; color: #664d03; }
-.badge-final { background: #f8d7da; color: #842029; }
+.hero p{
+    font-size:20px;
+    margin-bottom:35px;
+}
+
+.hero button{
+    background:white;
+    color:#1434A4;
+    border:none;
+    padding:15px 35px;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.hero button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(0,0,0,.2);
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    padding:70px 8%;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:30px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card h2{
+    margin-bottom:15px;
+    color:#1434A4;
+}
+
+.announcement{
+    background:white;
+    margin:50px 8%;
+    padding:35px;
+    border-left:8px solid #1434A4;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.announcement h2{
+    margin-bottom:15px;
+}
+
+footer{
+    background:#1434A4;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:60px;
+}
+
+@media(max-width:768px){
+
+nav{
+    flex-direction:column;
+}
+
+nav ul{
+    margin-top:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+nav ul li{
+    margin:8px 12px;
+}
+
+.hero h1{
+    font-size:34px;
+}
+
+.hero p{
+    font-size:18px;
+}
+
+}
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:8px;
+    border:1px solid #ddd;
+    font-size:16px;
+}
+
+.calendar{
+    padding:60px 8%;
+}
+
+.calendar h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#1434A4;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.day-name{
+    background:#1434A4;
+    color:white;
+    text-align:center;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.day{
+    background:white;
+    min-height:110px;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+.day h3{
+    margin-bottom:10px;
+    color:#1434A4;
+}
+
+.day p{
+    font-size:14px;
+}
+
+.empty{
+    background:transparent;
+    box-shadow:none;
+}
+
+.highlight{
+    border:3px solid #1434A4;
+    background:#ADD8E6;
+}
+
+@media(max-width:768px){
+    .calendar-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* Dark Mode */
+
+.dark-mode{
+    background:#121212;
+    color:white;
+}
+
+.dark-mode nav{
+    background:#0F7A35;
+}
+
+.dark-mode .card,
+.dark-mode .announcement,
+.dark-mode .day{
+    background:#1f1f1f;
+    color:white;
+}
+
+.dark-mode footer{
+    background:#0F7A35;
+}
+
+.dark-mode a{
+    color:white;
+}
+
+nav button{
+    background:white;
+    color:#1434A4;
+    border:none;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+nav button:hover{
+    transform:scale(1.05);
+}
+
+.card button{
+    margin-top:18px;
+    background:#1434A4;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#15803D;
+    transform:translateY(-2px);
+}
+
+.card a{
+    text-decoration:none;
+}
+
+.calendar-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+
+    background: #1434A4;
+    color: white;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 8px;
+
+    transition: 0.2s;
+}
+
+.calendar-link:hover {
+    background: #15803D;
+    transform: translateY(-2px);
+}
+
+/* ========================================
+   PINTAR@Sphere WELCOME INTRO
+   ======================================== */
+
+.welcome-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: #0F7A35;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 99999;
+
+    transition:
+        opacity 0.7s ease,
+        visibility 0.7s ease;
+}
+
+
+/* Hide intro */
+
+.welcome-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* Center content */
+
+.welcome-content {
+    text-align: center;
+    color: white;
+
+    padding: 30px;
+
+    animation:
+        welcomeAppear 0.8s ease forwards;
+}
+
+
+/* Graduation cap */
+
+.welcome-icon {
+    font-size: 75px;
+
+    margin-bottom: 20px;
+
+    animation:
+        capBounce 1.2s ease;
+}
+
+
+/* Welcome text */
+
+.welcome-content h1 {
+    font-size:
+        clamp(36px, 7vw, 70px);
+
+    margin: 0;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+
+.welcome-content h1 span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #A7C7E7;
+}
+
+
+/* Subtitle */
+
+.welcome-content p {
+    margin-top: 18px;
+
+    font-size:
+        clamp(15px, 2vw, 20px);
+
+    opacity: 0;
+
+    animation:
+        subtitleAppear
+        0.7s ease
+        0.7s forwards;
+}
+
+
+/* Loading line */
+
+.welcome-loader {
+    width: 220px;
+    height: 4px;
+
+    margin:
+        30px auto 0;
+
+    background:
+        rgba(255,255,255,0.25);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.welcome-loader-bar {
+    width: 0;
+    height: 100%;
+
+    background: white;
+
+    border-radius: 20px;
+
+    animation:
+        welcomeLoading
+        2.3s ease forwards;
+}
+
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes welcomeAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(25px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes subtitleAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes capBounce {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(-50px)
+            rotate(-15deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform:
+            translateY(8px)
+            rotate(5deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0);
+    }
+
+}
+
+
+@keyframes welcomeLoading {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+
+}
