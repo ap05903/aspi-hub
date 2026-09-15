@@ -1,103 +1,83 @@
-<!DOCTYPE html>
+login.html <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - PINTAR@Sphere</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .login-container {
-            max-width: 400px;
-            margin: 60px auto;
-            padding: 30px;
-            background: var(--card-bg, #ffffff);
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color, #e0e0e0);
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color, #ccc);
-            border-radius: 6px;
-            box-sizing: border-box;
-            background: var(--bg-color, #fff);
-            color: var(--text-color, #333);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PINTAR@Sphere Login</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
+
 <body>
 
-    <nav>
-        <div class="logo">🎓 PINTAR@Sphere</div>
-        <button id="btnDarkMode">🌙 Dark Mode</button>
-    </nav>
 
-    <div class="login-container">
-        <h2 style="text-align: center; margin-top: 0;">Welcome Back</h2>
-        <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">Please login to your PINTAR@Sphere account</p>
-        
-        <!-- Login Form -->
-        <form id="loginForm">
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="enter your email address" required>
-            </div>
-            
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="••••••••" required>
-            </div>
+<nav>
 
-            <button type="submit" id="btnLoginSubmit" style="width: 100%; padding: 12px; margin-top: 10px; cursor: pointer;">Login</button>
-        </form>
+<div class="logo">🎓 PINTAR@Sphere</div>
 
-        <!-- Register Link -->
-        <p style="text-align: center; font-size: 13px; margin-top: 20px;">
-            Don't have an account? 
-            <a href="register.html" style="color: var(--primary-color, #0056b3); text-decoration: none; font-weight: bold;">Register here</a>
-        </p>
-    </div>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="resources.html">Resources</a></li>
+<li><a href="tools.html">Tools</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+<li><a href="login.html">Login</a></li>
+  <li><a href="calendar.html">Calendar</a></li>
+</ul>
 
-    <!-- Main Module Script -->
-    <script type="module">
-        import { loginUser } from './auth.js';
+<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  
+</nav>
 
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            loginForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const btn = document.getElementById('btnLoginSubmit');
-                const email = document.getElementById('email').value.trim();
-                const password = document.getElementById('password').value;
 
-                if (!email || !password) {
-                    alert('Please enter both email and password!');
-                    return;
-                }
 
-                try {
-                    btn.disabled = true;
-                    btn.textContent = 'Logging in...';
-                    await loginUser(email, password);
-                } catch (err) {
-                    console.error("Login Error:", err);
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = 'Login';
-                }
-            });
-        }
-    </script>
-    <script type="module" src="app-core.js"></script>
+<section class="hero">
+
+<h1>Student Login</h1>
+
+<p>Access your PINTAR@Sphere dashboard.</p>
+
+</section>
+
+
+
+<section class="features">
+
+
+<div class="card">
+
+<h2>🔐 Login</h2>
+
+
+<input type="text" placeholder="Student ID">
+
+
+<input type="password" placeholder="Password">
+
+
+<a href="dashboard.html">
+<button>Login</button>
+</a>
+
+
+</div>
+
+
+</section>
+
+
+
+<footer>
+
+<p>© 2026 PINTAR@Sphere | Built for ASPI Students</p>
+
+</footer>
+
+  <script src="script.js"></script>
+
 </body>
+
 </html>
