@@ -1,0 +1,139 @@
+calender.html <!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Calendar - PINTAR@Sphere</title>
+<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="calendar.css">
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">🎓 PINTAR@Sphere</div>
+
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="dashboard.html">Dashboard</a></li>
+<li><a href="resources.html">Resources</a></li>
+<li><a href="tools.html">Tools</a></li>
+<li><a href="timetable.html">Timetable</a></li>
+</ul>
+
+  <button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  
+</nav>
+
+<header class="hero">
+
+<h1>📅 Academic Calendar</h1>
+
+<p>Stay updated with important academic dates.</p>
+
+</header>
+
+<section class="calendar-container">
+
+    <div class="calendar-header">
+
+    <button id="previousMonth">◀</button>
+
+    <h2 id="monthTitle"></h2>
+
+    <button id="todayButton">Today</button>
+
+    <button id="nextMonth">▶</button>
+
+</div>
+
+  <div class="calendar-legend">
+
+    <span>
+        <i class="legend-color assignment"></i>
+        Assignment
+    </span>
+
+    <span>
+        <i class="legend-color quiz"></i>
+        Quiz
+    </span>
+
+    <span>
+        <i class="legend-color lab"></i>
+        Holiday
+    </span>
+
+    <span>
+        <i class="legend-color exam"></i>
+        Examination
+    </span>
+
+    <span>
+        <i class="legend-color campus"></i>
+        Campus Event
+    </span>
+
+</div>
+
+<div class="calendar-grid">
+
+    <div class="day-name">Sun</div>
+    <div class="day-name">Mon</div>
+    <div class="day-name">Tue</div>
+    <div class="day-name">Wed</div>
+    <div class="day-name">Thu</div>
+    <div class="day-name">Fri</div>
+    <div class="day-name">Sat</div>
+
+    <div id="calendarGrid" style="display: contents;"></div>
+
+</div>
+
+</section>
+
+
+<!-- EVENT POPUP -->
+
+<div id="eventModal" class="event-modal">
+
+    <div class="event-modal-content">
+
+        <button class="close-button"
+                onclick="closeEvent()">
+            ×
+        </button>
+
+        <h2 id="eventTitle">
+            Event
+        </h2>
+
+        <p>
+            🕐 <strong>Time:</strong>
+            <span id="eventTime"></span>
+        </p>
+
+        <p id="eventDescription"></p>
+
+        <button onclick="closeEvent()">
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+<footer>
+
+<p>© 2026 PINTAR@Sphere | Built for ASPI Students</p>
+
+</footer>
+
+<script src="script.js"></script>
+
+<script src="calendar.js"></script>
+  
+</body>
+</html>
