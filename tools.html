@@ -1,0 +1,129 @@
+tools.html <!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PINTAR@Sphere Tools</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">🎓 PINTAR@Sphere</div>
+
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="resources.html">Resources</a></li>
+<li><a href="tools.html">Tools</a></li>
+<li><a href="community.html">Community</a></li>
+<li><a href="login.html">Login</a></li>
+  <li><a href="calendar.html">Calendar</a></li>
+</ul>
+
+<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+  
+</nav>
+
+
+<header class="hero">
+
+<h1>Student Tools</h1>
+
+<p>Useful tools to help ASPI students manage their studies.</p>
+
+</header>
+
+
+<section class="features">
+
+<div class="card">
+
+<h2>🧮 GPA Calculator</h2>
+
+<p>Enter your grades:</p>
+
+<input id="grade1" placeholder="Grade 1 (A, B, C)">
+<input id="grade2" placeholder="Grade 2 (A, B, C)">
+
+<button onclick="calculateGPA()">Calculate GPA</button>
+
+<h3 id="result"></h3>
+
+</div>
+
+
+<div class="card">
+
+<h2>📅 Timetable</h2>
+
+<p>
+Organise your classes and deadlines.
+</p>
+
+<a href="timetable.html">
+<button>View Timetable</button>
+</a>
+
+</div>
+
+
+<div class="card">
+
+<h2>✅ Assignment Tracker</h2>
+
+<p>
+Track assignments and submission dates.
+</p>
+
+  <a href="calendar.html" class="calendar-link">
+    📅 View Calendar
+  </a>
+
+</div>
+
+
+</section>
+
+
+<footer>
+
+<p>© 2026 PINTAR@Sphere | Built for ASPI Students</p>
+
+</footer>
+
+<script>
+
+function calculateGPA(){
+
+let grade1 = document.getElementById("grade1").value;
+let grade2 = document.getElementById("grade2").value;
+
+let points = {
+"A+":4.00,
+"A":4.00,
+"A-":3.67,
+"B+":3.33,
+"B":3.00,
+"B-":2.67,
+"C+":2.33,
+"C":2.00,
+"D":1.00,
+"F":0
+};
+
+let gpa = (points[grade1] + points[grade2]) / 2;
+
+document.getElementById("result").innerHTML =
+"Your GPA: " + gpa.toFixed(2);
+
+}
+
+</script>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
